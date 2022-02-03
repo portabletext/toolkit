@@ -1,0 +1,7 @@
+{
+  "entryPoints": ["./src/index.ts"],
+  "includeVersion": true,
+  "disableSources": true,
+  "hideLegend": true,
+  "sort": ["required-first", "source-order"]
+}

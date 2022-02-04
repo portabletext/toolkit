@@ -1,6 +1,6 @@
 {
   "name": "@portabletext/toolkit",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Toolkit of handy utility functions for dealing with Portable Text",
   "main": "./dist/portable-text-toolkit.cjs.js",
   "module": "./dist/portable-text-toolkit.esm.js",

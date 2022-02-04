@@ -49,6 +49,10 @@ export function nestLists<T extends TypedObject = PortableTextBlock | TypedObjec
 ): (T | ToolkitPortableTextHtmlList)[]
 export function nestLists<T extends TypedObject = PortableTextBlock | TypedObject>(
   blocks: T[],
+  mode: 'direct' | 'html'
+): (T | ToolkitPortableTextHtmlList | ToolkitPortableTextDirectList)[]
+export function nestLists<T extends TypedObject = PortableTextBlock | TypedObject>(
+  blocks: T[],
   mode: ToolkitListNestMode
 ): ToolkitNestListsOutputNode<T>[] {
   const tree: ToolkitNestListsOutputNode<T>[] = []

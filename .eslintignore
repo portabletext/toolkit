@@ -1,4 +1,5 @@
 /dist
 /coverage
 /tap-snapshots
+/docs
 .nyc_output

@@ -5,15 +5,20 @@ import type {
   PortableTextSpan,
 } from '@portabletext/types'
 
-/* eslint-disable no-shadow, no-unused-vars */
+/**
+ * List nesting mode for HTML, see the {@link nestLists | `nestLists()` function}
+ */
+export const LIST_NEST_MODE_HTML = 'html'
+
+/**
+ * List nesting mode for direct, nested lists, see the {@link nestLists | `nestLists()` function}
+ */
+export const LIST_NEST_MODE_DIRECT = 'direct'
+
 /**
  * List nesting mode, see the {@link nestLists | `nestLists()` function}
  */
-export enum ToolkitListNestMode {
-  Html = 'html',
-  Direct = 'direct',
-}
-/* eslint-enable no-shadow, no-unused-vars */
+export type ToolkitListNestMode = 'html' | 'direct'
 
 /**
  * Toolkit-specific type representing a nested list

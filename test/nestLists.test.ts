@@ -1,15 +1,15 @@
 import type {PortableTextListItemBlock} from '@portabletext/types'
 import tap from 'tap'
-import {nestLists, ToolkitListNestMode} from '../src'
+import {LIST_NEST_MODE_DIRECT, LIST_NEST_MODE_HTML, nestLists} from '../src'
 
 tap.test('nestLists: returns empty tree on no blocks', (t) => {
-  t.same(nestLists([], ToolkitListNestMode.Html), [])
+  t.same(nestLists([], LIST_NEST_MODE_HTML), [])
   t.end()
 })
 
 tap.test('nestLists: returns non-list blocks verbatim', (t) => {
   const block = {_type: 'block', children: [{_type: 'span', text: 'Verbatim, please'}]}
-  t.same(nestLists([block], ToolkitListNestMode.Html), [block])
+  t.same(nestLists([block], LIST_NEST_MODE_HTML), [block])
   t.end()
 })
 
@@ -20,7 +20,7 @@ tap.test('nestLists: wraps list items in toolkit list node', (t) => {
     children: [{_type: 'span', text: 'Verbatim, please'}],
     listItem: 'bullet',
   }
-  t.same(nestLists([block], ToolkitListNestMode.Html), [
+  t.same(nestLists([block], LIST_NEST_MODE_HTML), [
     {
       _type: '@list',
       _key: 'a-parent',
@@ -32,13 +32,13 @@ tap.test('nestLists: wraps list items in toolkit list node', (t) => {
   ])
 
   // Uses index as key if no _key is present
-  t.same(nestLists([{...block, _key: undefined}], ToolkitListNestMode.Html)[0]._key, '0-parent')
+  t.same(nestLists([{...block, _key: undefined}], LIST_NEST_MODE_HTML)[0]._key, '0-parent')
   t.end()
 })
 
 tap.test('nestLists: wraps adjacent list items of same type/level in toolkit list node', (t) => {
   const blocks = createBlocks(['First', 'Second', 'Third'])
-  t.matchSnapshot(nestLists(blocks, ToolkitListNestMode.Html))
+  t.matchSnapshot(nestLists(blocks, LIST_NEST_MODE_HTML))
   t.end()
 })
 
@@ -47,7 +47,7 @@ tap.test('nestLists: wraps adjacent list items of different types in separate li
     ...createBlocks(['Bullet 1', 'Bullet 2']),
     ...createBlocks(['Number 1', 'Number 2'], {type: 'number', startIndex: 2}),
   ]
-  t.matchSnapshot(nestLists(blocks, ToolkitListNestMode.Html))
+  t.matchSnapshot(nestLists(blocks, LIST_NEST_MODE_HTML))
   t.end()
 })
 
@@ -57,7 +57,7 @@ tap.test('nestLists: ends lists when non-list item occurs', (t) => {
     {_type: 'map'},
     ...createBlocks(['Number 1', 'Number 2'], {type: 'number', startIndex: 2}),
   ]
-  t.matchSnapshot(nestLists(blocks, ToolkitListNestMode.Html))
+  t.matchSnapshot(nestLists(blocks, LIST_NEST_MODE_HTML))
   t.end()
 })
 
@@ -66,7 +66,7 @@ tap.test('nestLists: wraps deeper lists inside of last list item in html mode', 
     ...createBlocks(['Bullet 1', 'Bullet 2']),
     ...createBlocks(['Number 1', 'Number 2'], {type: 'number', level: 2, startIndex: 2}),
   ]
-  t.matchSnapshot(nestLists(blocks, ToolkitListNestMode.Html))
+  t.matchSnapshot(nestLists(blocks, LIST_NEST_MODE_HTML))
   t.end()
 })
 
@@ -75,7 +75,7 @@ tap.test('nestLists: nests deeper lists inside of parent list in direct mode', (
     ...createBlocks(['Bullet 1', 'Bullet 2']),
     ...createBlocks(['Number 1', 'Number 2'], {type: 'number', level: 2, startIndex: 2}),
   ]
-  t.matchSnapshot(nestLists(blocks, ToolkitListNestMode.Direct))
+  t.matchSnapshot(nestLists(blocks, LIST_NEST_MODE_DIRECT))
   t.end()
 })
 
@@ -86,7 +86,7 @@ tap.test('nestLists: assumes level is 1 if not set', (t) => {
       ({level, ...block}) => block
     ),
   ]
-  t.matchSnapshot(nestLists(blocks, ToolkitListNestMode.Html))
+  t.matchSnapshot(nestLists(blocks, LIST_NEST_MODE_HTML))
   t.end()
 })
 
@@ -99,7 +99,7 @@ tap.test('nestLists: handles deeper/shallower transitions correctly in html mode
     ...createBlocks(['Level 3, I', 'Level 3, J'], {level: 3, startIndex: 8}),
     ...createBlocks(['Level 1, K', 'Level 1, L'], {level: 1, startIndex: 10, type: 'number'}),
   ]
-  t.matchSnapshot(nestLists(blocks, ToolkitListNestMode.Html))
+  t.matchSnapshot(nestLists(blocks, LIST_NEST_MODE_HTML))
   t.end()
 })
 
@@ -112,7 +112,7 @@ tap.test('nestLists: handles deeper/shallower transitions correctly in direct mo
     ...createBlocks(['Level 3, I', 'Level 3, J'], {level: 3, startIndex: 8}),
     ...createBlocks(['Level 1, K', 'Level 1, L'], {level: 1, startIndex: 10, type: 'number'}),
   ]
-  t.matchSnapshot(nestLists(blocks, ToolkitListNestMode.Direct))
+  t.matchSnapshot(nestLists(blocks, LIST_NEST_MODE_DIRECT))
   t.end()
 })
 
@@ -121,7 +121,7 @@ tap.only('nestLists: wraps adjacent list items of different types in separate li
     ...createBlocks(['Bullet 1', 'Bullet 2'], {type: 'bullet', startIndex: 0}),
     ...createBlocks(['Number 1', 'Number 2'], {type: 'number', startIndex: 2}),
   ]
-  t.matchSnapshot(nestLists(blocks, ToolkitListNestMode.Html))
+  t.matchSnapshot(nestLists(blocks, LIST_NEST_MODE_HTML))
   t.end()
 })
 

@@ -33,7 +33,7 @@ export type ToolkitNestListsOutputNode<T> =
  * When using `direct`, all list nodes will be of type {@link ToolkitPortableTextDirectList},
  * while with `html` they will be of type {@link ToolkitPortableTextHtmlList}
  *
- * These modes are defined in the {@link ToolkitListNestMode} enum.
+ * These modes are available as {@link LIST_NEST_MODE_HTML} and {@link LIST_NEST_MODE_DIRECT}.
  *
  * @param blocks - Array of Portable Text blocks and other arbitrary types
  * @param mode - Mode to use for nesting, `direct` or `html`
@@ -41,11 +41,11 @@ export type ToolkitNestListsOutputNode<T> =
  */
 export function nestLists<T extends TypedObject = PortableTextBlock | TypedObject>(
   blocks: T[],
-  mode: ToolkitListNestMode.Direct
+  mode: 'direct'
 ): (T | ToolkitPortableTextDirectList)[]
 export function nestLists<T extends TypedObject = PortableTextBlock | TypedObject>(
   blocks: T[],
-  mode: ToolkitListNestMode.Html
+  mode: 'html'
 ): (T | ToolkitPortableTextHtmlList)[]
 export function nestLists<T extends TypedObject = PortableTextBlock | TypedObject>(
   blocks: T[],

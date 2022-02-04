@@ -12,6 +12,10 @@ Particularly useful for building rendering libraries for Portable Text that outp
 npm install --save @portabletext/toolkit
 ```
 
+## Documentation
+
+See [https://portabletext.github.io/toolkit/](https://portabletext.github.io/toolkit/)
+
 ## Usage
 
 ```ts

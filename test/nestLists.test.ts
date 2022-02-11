@@ -32,7 +32,7 @@ tap.test('nestLists: wraps list items in toolkit list node', (t) => {
   ])
 
   // Uses index as key if no _key is present
-  t.same(nestLists([{...block, _key: undefined}], LIST_NEST_MODE_HTML)[0]._key, '0-parent')
+  t.same(nestLists([{...block, _key: undefined}], LIST_NEST_MODE_HTML)[0]?._key, '0-parent')
   t.end()
 })
 

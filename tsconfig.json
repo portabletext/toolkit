@@ -2,6 +2,7 @@
   "compilerOptions": {
     "strict": true,
     "esModuleInterop": true,
-    "lib": ["ES2016", "DOM"]
+    "lib": ["ES2016", "DOM"],
+    "noUncheckedIndexedAccess": true
   }
 }

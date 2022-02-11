@@ -58,14 +58,17 @@ export function buildMarksTree<M extends PortableTextMarkDefinition = PortableTe
 
   for (let i = 0; i < children.length; i++) {
     const span = children[i]
+    if (!span) {
+      continue
+    }
 
-    const marksNeeded = sortedMarks[i]
+    const marksNeeded = sortedMarks[i] || []
     let pos = 1
 
     // Start at position one. Root is always plain and should never be removed
     if (nodeStack.length > 1) {
       for (pos; pos < nodeStack.length; pos++) {
-        const mark = nodeStack[pos].markKey || ''
+        const mark = nodeStack[pos]?.markKey || ''
         const index = marksNeeded.indexOf(mark)
 
         if (index === -1) {
@@ -81,6 +84,9 @@ export function buildMarksTree<M extends PortableTextMarkDefinition = PortableTe
 
     // Add needed nodes
     let currentNode = nodeStack[nodeStack.length - 1]
+    if (!currentNode) {
+      continue
+    }
     for (const markKey of marksNeeded) {
       const markDef = markDefs.find((def) => def._key === markKey)
       const markType = markDef ? markDef._type : markKey

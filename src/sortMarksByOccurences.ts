@@ -63,6 +63,7 @@ export function sortMarksByOccurences(
       const sibling = blockChildren[siblingIndex]
 
       if (
+        sibling &&
         isPortableTextSpan(sibling) &&
         Array.isArray(sibling.marks) &&
         sibling.marks.indexOf(mark) !== -1
@@ -77,7 +78,7 @@ export function sortMarksByOccurences(
   return marks.sort((markA, markB) => sortMarks(occurences, markA, markB))
 }
 
-function sortMarks(occurences: Record<string, number>, markA: string, markB: string): number {
+function sortMarks<U extends string, T extends Record<U, number>>(occurences: T, markA: U, markB: U): number {
   const aOccurences = occurences[markA]
   const bOccurences = occurences[markB]
 

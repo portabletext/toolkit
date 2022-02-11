@@ -87,6 +87,7 @@ export function buildMarksTree<M extends PortableTextMarkDefinition = PortableTe
     if (!currentNode) {
       continue
     }
+
     for (const markKey of marksNeeded) {
       const markDef = markDefs.find((def) => def._key === markKey)
       const markType = markDef ? markDef._type : markKey

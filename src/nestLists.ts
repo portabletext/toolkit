@@ -63,6 +63,7 @@ export function nestLists<T extends TypedObject = PortableTextBlock | TypedObjec
     if (!block) {
       continue
     }
+
     if (!isPortableTextListItemBlock(block)) {
       tree.push(block)
       currentList = undefined
@@ -119,7 +120,7 @@ export function nestLists<T extends TypedObject = PortableTextBlock | TypedObjec
     // Different list props, are we going back up the tree?
     if ((block.level || 1) < currentList.level) {
       // Current list has ended, and we need to hook up with a parent of the same level and type
-      const matchingBranch = tree[tree.length - 1];
+      const matchingBranch = tree[tree.length - 1]
       const match = matchingBranch && findListMatching(matchingBranch, block)
       if (match) {
         currentList = match
@@ -135,7 +136,7 @@ export function nestLists<T extends TypedObject = PortableTextBlock | TypedObjec
 
     // Different list props, different list style?
     if (block.listItem !== currentList.listItem) {
-      const matchingBranch = tree[tree.length - 1];
+      const matchingBranch = tree[tree.length - 1]
       const match = matchingBranch && findListMatching(matchingBranch, {level: block.level || 1})
       if (match && match.listItem === block.listItem) {
         currentList = match

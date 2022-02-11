@@ -78,7 +78,11 @@ export function sortMarksByOccurences(
   return marks.sort((markA, markB) => sortMarks(occurences, markA, markB))
 }
 
-function sortMarks<U extends string, T extends Record<U, number>>(occurences: T, markA: U, markB: U): number {
+function sortMarks<U extends string, T extends Record<U, number>>(
+  occurences: T,
+  markA: U,
+  markB: U
+): number {
   const aOccurences = occurences[markA]
   const bOccurences = occurences[markB]
 

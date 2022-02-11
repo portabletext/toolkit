@@ -3,6 +3,10 @@
     "strict": true,
     "esModuleInterop": true,
     "lib": ["ES2016", "DOM"],
-    "noUncheckedIndexedAccess": true
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "forceConsistentCasingInFileNames": true
   }
 }

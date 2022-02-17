@@ -56,6 +56,31 @@ tap.test('buildMarksTree: joins on adjacent spans with same annotation', (t) => 
   t.end()
 })
 
+tap.test(
+  'buildMarksTree: nests decorators and annotations correctly, extracts correct `markDef`',
+  (t) => {
+    const block: PortableTextBlock = {
+      _type: 'block',
+      children: [
+        {_type: 'span', text: 'This block '},
+        {_type: 'span', text: 'contains', marks: ['em', 's0m3l1nk']},
+        {_type: 'span', text: 'a link', marks: ['s0m3l1nk', 'strong']},
+        {_type: 'span', text: ' and some bolded text', marks: ['strong']},
+      ],
+      markDefs: [
+        {
+          _key: 's0m3l1nk',
+          _type: 'link',
+          href: 'https://some.example/',
+        },
+      ],
+    }
+
+    t.matchSnapshot(buildMarksTree(block))
+    t.end()
+  }
+)
+
 tap.test('buildMarksTree: includes inline objects in tree', (t) => {
   const block: PortableTextBlock = {
     _type: 'block',

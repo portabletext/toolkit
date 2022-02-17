@@ -185,3 +185,64 @@ Array [
   },
 ]
 `
+
+exports[`test/buildMarksTree.test.ts TAP buildMarksTree: nests decorators and annotations correctly, extracts correct \`markDef\` > must match snapshot 1`] = `
+Array [
+  Object {
+    "_type": "@text",
+    "text": "This block ",
+  },
+  Object {
+    "_key": undefined,
+    "_type": "@span",
+    "children": Array [
+      Object {
+        "_key": undefined,
+        "_type": "@span",
+        "children": Array [
+          Object {
+            "_type": "@text",
+            "text": "contains",
+          },
+        ],
+        "markDef": undefined,
+        "markKey": "em",
+        "markType": "em",
+      },
+      Object {
+        "_key": undefined,
+        "_type": "@span",
+        "children": Array [
+          Object {
+            "_type": "@text",
+            "text": "a link",
+          },
+        ],
+        "markDef": undefined,
+        "markKey": "strong",
+        "markType": "strong",
+      },
+    ],
+    "markDef": Object {
+      "_key": "s0m3l1nk",
+      "_type": "link",
+      "href": "https://some.example/",
+    },
+    "markKey": "s0m3l1nk",
+    "markType": "link",
+  },
+  Object {
+    "_key": undefined,
+    "_type": "@span",
+    "children": Array [
+      Object {
+        "_type": "@text",
+        "text": " and some bolded text",
+      },
+    ],
+    "markDef": undefined,
+    "markKey": "strong",
+    "markType": "strong",
+  },
+]
+`

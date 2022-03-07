@@ -2,12 +2,12 @@
   "name": "@portabletext/toolkit",
   "version": "1.0.4",
   "description": "Toolkit of handy utility functions for dealing with Portable Text",
-  "main": "./dist/portable-text-toolkit.cjs.js",
-  "module": "./dist/portable-text-toolkit.esm.js",
+  "main": "./dist/portable-text-toolkit.js",
+  "module": "./dist/portable-text-toolkit.mjs",
   "exports": {
     ".": {
-      "import": "./dist/portable-text-toolkit.esm.js",
-      "require": "./dist/portable-text-toolkit.cjs.js"
+      "import": "./dist/portable-text-toolkit.mjs",
+      "require": "./dist/portable-text-toolkit.js"
     }
   },
   "sideEffects": false,
@@ -43,6 +43,7 @@
     "@portabletext/types": "^1.0.3"
   },
   "devDependencies": {
+    "@rexxars/vite-dts": "^1.0.4",
     "@types/tap": "^15.0.5",
     "@typescript-eslint/eslint-plugin": "^5.11.0",
     "@typescript-eslint/parser": "^5.11.0",
@@ -55,8 +56,7 @@
     "tap": "^15.1.5",
     "typedoc": "^0.22.11",
     "typescript": "^4.5.5",
-    "vite": "^2.8.1",
-    "vite-dts": "^1.0.4"
+    "vite": "^2.8.1"
   },
   "bugs": {
     "url": "https://github.com/portabletext/toolkit/issues"

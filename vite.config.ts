@@ -1,14 +1,17 @@
-const path = require('path')
-const {defineConfig} = require('vite')
-const dts = require('vite-dts').default
+import path from 'path'
+import {defineConfig} from 'vite'
+import dts from '@rexxars/vite-dts'
 
-module.exports = defineConfig({
+export default defineConfig({
   build: {
     lib: {
       entry: path.resolve(__dirname, 'src/index.ts'),
-      formats: ['esm', 'cjs'],
+      formats: ['es', 'cjs'],
       name: 'portable-text-toolkit',
-      fileName: (format) => `portable-text-toolkit.${format}.js`,
+      fileName: (format) => {
+        const ext = format === 'es' ? 'mjs' : 'js'
+        return `portable-text-toolkit.${ext}`
+      },
     },
     rollupOptions: {
       output: {

@@ -56,7 +56,7 @@ export function isPortableTextBlock(
 /**
  * Strict check to determine if node is a correctly formatted portable list item block.
  *
- * @param node - Node to check
+ * @param block - Block to check
  * @returns True if valid Portable Text list item block, otherwise false
  */
 export function isPortableTextListItemBlock(
@@ -87,7 +87,7 @@ export function isPortableTextToolkitList(
  * Loose check to determine if span is a toolkit span node.
  * Only checks `_type`, assumes correct structure.
  *
- * @param block - Span to check
+ * @param span - Span to check
  * @returns True if toolkit span, otherwise false
  */
 export function isPortableTextToolkitSpan(
@@ -100,7 +100,7 @@ export function isPortableTextToolkitSpan(
  * Loose check to determine if node is a toolkit text node.
  * Only checks `_type`, assumes correct structure.
  *
- * @param block - Node to check
+ * @param node - Node to check
  * @returns True if toolkit text node, otherwise false
  */
 export function isPortableTextToolkitTextNode(

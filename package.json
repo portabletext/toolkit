@@ -2,12 +2,17 @@
   "name": "@portabletext/toolkit",
   "version": "1.0.6",
   "description": "Toolkit of handy utility functions for dealing with Portable Text",
+  "types": "./dist/portable-text-toolkit.d.ts",
+  "source": "./src/index.ts",
+  "module": "./dist/portable-text-toolkit.esm.js",
   "main": "./dist/portable-text-toolkit.js",
-  "module": "./dist/portable-text-toolkit.mjs",
   "exports": {
     ".": {
-      "import": "./dist/portable-text-toolkit.mjs",
-      "require": "./dist/portable-text-toolkit.js"
+      "types": "./dist/portable-text-toolkit.d.ts",
+      "source": "./src/index.ts",
+      "import": "./dist/portable-text-toolkit.esm.js",
+      "require": "./dist/portable-text-toolkit.js",
+      "default": "./dist/portable-text-toolkit.esm.js"
     }
   },
   "sideEffects": false,
@@ -17,7 +22,7 @@
     "README.md"
   ],
   "scripts": {
-    "build": "vite build",
+    "build": "rimraf dist && pkg-utils build && pkg-utils --strict",
     "clean": "rimraf .nyc_output coverage",
     "docs": "typedoc",
     "coverage": "tap test/*.test.* --coverage-report=html",
@@ -43,7 +48,7 @@
     "@portabletext/types": "^1.0.3"
   },
   "devDependencies": {
-    "@rexxars/vite-dts": "^1.0.4",
+    "@sanity/pkg-utils": "^1.15.0",
     "@types/tap": "^15.0.5",
     "@typescript-eslint/eslint-plugin": "^5.11.0",
     "@typescript-eslint/parser": "^5.11.0",
@@ -55,8 +60,7 @@
     "rimraf": "^3.0.2",
     "tap": "^15.1.5",
     "typedoc": "^0.22.11",
-    "typescript": "^4.5.5",
-    "vite": "^2.8.1"
+    "typescript": "^4.5.5"
   },
   "bugs": {
     "url": "https://github.com/portabletext/toolkit/issues"

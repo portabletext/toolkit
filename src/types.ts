@@ -23,7 +23,7 @@ export type ToolkitListNestMode = 'html' | 'direct'
 /**
  * Toolkit-specific type representing a nested list
  *
- * See the {@link nestLists | `nestLists()`` function} for more info
+ * See the `nestLists()` function for more info
  */
 export type ToolkitPortableTextList = ToolkitPortableTextHtmlList | ToolkitPortableTextDirectList
 

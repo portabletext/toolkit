@@ -16,6 +16,9 @@
     }
   },
   "sideEffects": false,
+  "engines": {
+    "node": "^14.13.1 || >=16.0.0"
+  },
   "files": [
     "dist",
     "src",

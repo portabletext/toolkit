@@ -4,16 +4,17 @@
   "description": "Toolkit of handy utility functions for dealing with Portable Text",
   "types": "./dist/portable-text-toolkit.d.ts",
   "source": "./src/index.ts",
-  "module": "./dist/portable-text-toolkit.esm.js",
-  "main": "./dist/portable-text-toolkit.js",
+  "module": "./dist/portable-text-toolkit.js",
+  "main": "./dist/portable-text-toolkit.cjs",
   "exports": {
     ".": {
       "types": "./dist/portable-text-toolkit.d.ts",
       "source": "./src/index.ts",
-      "import": "./dist/portable-text-toolkit.esm.js",
-      "require": "./dist/portable-text-toolkit.js",
-      "default": "./dist/portable-text-toolkit.esm.js"
-    }
+      "import": "./dist/portable-text-toolkit.js",
+      "require": "./dist/portable-text-toolkit.cjs",
+      "default": "./dist/portable-text-toolkit.js"
+    },
+    "./package.json": "./package.json"
   },
   "sideEffects": false,
   "engines": {
@@ -24,6 +25,7 @@
     "src",
     "README.md"
   ],
+  "type": "module",
   "scripts": {
     "build": "rimraf dist && pkg-utils build && pkg-utils --strict",
     "clean": "rimraf .nyc_output coverage",

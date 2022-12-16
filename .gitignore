@@ -50,5 +50,4 @@ package-lock.json
 .cache
 
 # Compiled Portable Text toolkit + docs
-/dist
 /docs

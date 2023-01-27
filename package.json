@@ -10,15 +10,10 @@
     ".": {
       "types": "./dist/portable-text-toolkit.d.ts",
       "source": "./src/index.ts",
-      "require": "./dist/portable-text-toolkit.js",
-      "node": {
-        "import": "./dist/portable-text-toolkit.cjs.mjs",
-        "require": "./dist/portable-text-toolkit.js"
-      },
       "import": "./dist/portable-text-toolkit.esm.js",
+      "require": "./dist/portable-text-toolkit.js",
       "default": "./dist/portable-text-toolkit.esm.js"
-    },
-    "./package.json": "./package.json"
+    }
   },
   "sideEffects": false,
   "engines": {
@@ -56,7 +51,7 @@
     "@portabletext/types": "^2.0.0"
   },
   "devDependencies": {
-    "@sanity/pkg-utils": "^2.2.3",
+    "@sanity/pkg-utils": "^1.16.1",
     "@types/tap": "^15.0.7",
     "@typescript-eslint/eslint-plugin": "^5.11.0",
     "@typescript-eslint/parser": "^5.11.0",

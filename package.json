@@ -1,6 +1,6 @@
 {
   "name": "@portabletext/toolkit",
-  "version": "1.0.8",
+  "version": "2.0.0",
   "description": "Toolkit of handy utility functions for dealing with Portable Text",
   "types": "./dist/portable-text-toolkit.d.ts",
   "source": "./src/index.ts",
@@ -10,10 +10,15 @@
     ".": {
       "types": "./dist/portable-text-toolkit.d.ts",
       "source": "./src/index.ts",
-      "import": "./dist/portable-text-toolkit.esm.js",
       "require": "./dist/portable-text-toolkit.js",
+      "node": {
+        "import": "./dist/portable-text-toolkit.cjs.mjs",
+        "require": "./dist/portable-text-toolkit.js"
+      },
+      "import": "./dist/portable-text-toolkit.esm.js",
       "default": "./dist/portable-text-toolkit.esm.js"
-    }
+    },
+    "./package.json": "./package.json"
   },
   "sideEffects": false,
   "engines": {
@@ -51,7 +56,7 @@
     "@portabletext/types": "^2.0.0"
   },
   "devDependencies": {
-    "@sanity/pkg-utils": "^1.16.1",
+    "@sanity/pkg-utils": "^2.2.3",
     "@types/tap": "^15.0.7",
     "@typescript-eslint/eslint-plugin": "^5.11.0",
     "@typescript-eslint/parser": "^5.11.0",
@@ -60,7 +65,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-config-sanity": "^6.0.0",
     "prettier": "^2.5.1",
-    "rimraf": "^3.0.2",
+    "rimraf": "^4.1.2",
     "tap": "^16.3.0",
     "typedoc": "^0.23.19",
     "typescript": "^4.8.4"

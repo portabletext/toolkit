@@ -1,6 +1,6 @@
 # @portabletext/toolkit
 
-[![npm version](https://img.shields.io/npm/v/@portabletext/toolkit.svg?style=flat-square)](https://www.npmjs.com/package/@portabletext/toolkit)[![npm bundle size](https://img.shields.io/bundlephobia/minzip/@portabletext/toolkit?style=flat-square)](https://bundlephobia.com/result?p=@portabletext/toolkit)[![Build Status](https://img.shields.io/github/actions/workflow/status/portabletext/toolkit/test.yml?branch=main&style=flat-square)](https://github.com/portabletext/toolkit/actions?query=workflow%3Atest)
+[![npm version](https://img.shields.io/npm/v/@portabletext/toolkit.svg?style=flat-square)](https://www.npmjs.com/package/@portabletext/toolkit)[![npm bundle size](https://img.shields.io/bundlephobia/minzip/@portabletext/toolkit?style=flat-square)](https://bundlephobia.com/result?p=@portabletext/toolkit)[![Build Status](https://img.shields.io/github/actions/workflow/status/portabletext/toolkit/main.yml?branch=main&style=flat-square)](https://github.com/portabletext/toolkit/actions?query=workflow%3Atest)
 
 Javascript toolkit of handy utility functions for dealing with Portable Text.
 

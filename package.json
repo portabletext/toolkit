@@ -2,10 +2,25 @@
   "name": "@portabletext/toolkit",
   "version": "2.0.1",
   "description": "Toolkit of handy utility functions for dealing with Portable Text",
-  "types": "./dist/portable-text-toolkit.d.ts",
-  "source": "./src/index.ts",
-  "module": "./dist/portable-text-toolkit.esm.js",
-  "main": "./dist/portable-text-toolkit.js",
+  "keywords": [
+    "sanity",
+    "cms",
+    "headless",
+    "realtime",
+    "content",
+    "portable-text-toolkit"
+  ],
+  "homepage": "https://github.com/portabletext/toolkit#readme",
+  "bugs": {
+    "url": "https://github.com/portabletext/toolkit/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/portabletext/toolkit.git"
+  },
+  "license": "MIT",
+  "author": "Sanity.io <hello@sanity.io>",
+  "sideEffects": false,
   "exports": {
     ".": {
       "types": "./dist/portable-text-toolkit.d.ts",
@@ -20,74 +35,51 @@
     },
     "./package.json": "./package.json"
   },
-  "sideEffects": false,
-  "engines": {
-    "node": "^14.13.1 || >=16.0.0"
-  },
+  "main": "./dist/portable-text-toolkit.js",
+  "module": "./dist/portable-text-toolkit.esm.js",
+  "source": "./src/index.ts",
+  "types": "./dist/portable-text-toolkit.d.ts",
   "files": [
     "dist",
     "src",
     "README.md"
   ],
   "scripts": {
-    "build": "rimraf dist && pkg-utils build && pkg-utils --strict",
+    "build": "rimraf dist && pkg-utils build --strict && pkg-utils --strict",
     "clean": "rimraf .nyc_output coverage",
-    "docs": "typedoc",
     "coverage": "tap test/*.test.* --coverage-report=html",
+    "docs": "typedoc",
     "lint": "eslint . && tsc --noEmit",
-    "prepublishOnly": "npm run build && npm run lint",
+    "prepare": "husky install",
+    "prepublishOnly": "run-s build lint",
     "test": "tap test/*.test.*"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/portabletext/toolkit.git"
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
   },
-  "keywords": [
-    "sanity",
-    "cms",
-    "headless",
-    "realtime",
-    "content",
-    "portable-text-toolkit"
-  ],
-  "author": "Sanity.io <hello@sanity.io>",
-  "license": "MIT",
-  "dependencies": {
-    "@portabletext/types": "^2.0.0"
+  "lint-staged": {
+    "*": [
+      "prettier --write --cache --ignore-unknown"
+    ]
   },
-  "devDependencies": {
-    "@babel/plugin-proposal-object-rest-spread": "^7.20.7",
-    "@sanity/pkg-utils": "^2.2.3",
-    "@types/tap": "^15.0.7",
-    "@typescript-eslint/eslint-plugin": "^5.11.0",
-    "@typescript-eslint/parser": "^5.11.0",
-    "esbuild-register": "^3.2.1",
-    "eslint": "^8.8.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-config-sanity": "^6.0.0",
-    "prettier": "^2.5.1",
-    "rimraf": "^4.1.2",
-    "tap": "^16.3.0",
-    "typedoc": "^0.23.19",
-    "typescript": "^4.8.4"
-  },
-  "bugs": {
-    "url": "https://github.com/portabletext/toolkit/issues"
-  },
-  "homepage": "https://github.com/portabletext/toolkit#readme",
   "prettier": {
-    "semi": false,
-    "printWidth": 100,
     "bracketSpacing": false,
+    "plugins": [
+      "prettier-plugin-packagejson"
+    ],
+    "printWidth": 100,
+    "semi": false,
     "singleQuote": true
   },
   "eslintConfig": {
     "parserOptions": {
-      "ecmaVersion": 9,
-      "sourceType": "module",
       "ecmaFeatures": {
         "modules": true
-      }
+      },
+      "ecmaVersion": 9,
+      "sourceType": "module"
     },
     "extends": [
       "sanity",
@@ -95,17 +87,69 @@
       "prettier"
     ],
     "ignorePatterns": [
-      "lib/**/"
+      "dist/**/"
     ]
   },
+  "release": {
+    "branches": [
+      "+([0-9])?(.{+([0-9]),x}).x",
+      "main",
+      {
+        "name": "beta",
+        "prerelease": true
+      },
+      {
+        "name": "alpha",
+        "prerelease": true
+      }
+    ],
+    "extends": "@sanity/semantic-release-preset"
+  },
   "tap": {
+    "check-coverage": false,
     "node-arg": [
       "-r",
       "esbuild-register"
     ],
     "nyc-arg": [
       "--exclude=tap-snapshots/*"
-    ],
-    "check-coverage": false
+    ]
+  },
+  "dependencies": {
+    "@portabletext/types": "^2.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.12",
+    "@babel/plugin-proposal-object-rest-spread": "^7.20.7",
+    "@commitlint/cli": "^17.4.2",
+    "@commitlint/config-conventional": "^17.4.2",
+    "@sanity/pkg-utils": "^2.2.3",
+    "@sanity/semantic-release-preset": "^4.0.0",
+    "@types/tap": "^15.0.7",
+    "@typescript-eslint/eslint-plugin": "^5.11.0",
+    "@typescript-eslint/parser": "^5.11.0",
+    "commitizen": "^4.3.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "esbuild": "^0.17.5",
+    "esbuild-register": "^3.4.2",
+    "eslint": "^8.8.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-sanity": "^6.0.0",
+    "husky": "^8.0.3",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.5.1",
+    "prettier-plugin-packagejson": "^2.4.2",
+    "rimraf": "^4.1.2",
+    "semantic-release": "^20.0.4",
+    "tap": "^16.3.0",
+    "typedoc": "^0.23.19",
+    "typescript": "^4.9.4"
+  },
+  "packageManager": "pnpm@7.26.2",
+  "engines": {
+    "node": "^14.13.1 || >=16.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

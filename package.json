@@ -45,14 +45,18 @@
     "README.md"
   ],
   "scripts": {
-    "build": "rimraf dist && pkg-utils build --strict && pkg-utils --strict",
-    "clean": "rimraf .nyc_output coverage",
+    "build": "run-s clean pkg:build pkg:check",
+    "clean": "rimraf .nyc_output dist coverage",
     "coverage": "tap test/*.test.* --coverage-report=html",
-    "docs": "typedoc",
-    "lint": "eslint . && tsc --noEmit",
+    "docs:build": "typedoc",
+    "format": "prettier --write --cache --ignore-unknown .",
+    "lint": "eslint .",
+    "pkg:build": "pkg-utils build --strict",
+    "pkg:check": "pkg-utils --strict",
     "prepare": "husky install",
-    "prepublishOnly": "run-s build lint",
-    "test": "tap test/*.test.*"
+    "prepublishOnly": "run-s build lint type-check",
+    "test": "tap test/*.test.*",
+    "type-check": "tsc --noEmit"
   },
   "commitlint": {
     "extends": [

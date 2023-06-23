@@ -1,21 +1,16 @@
-/* IMPORTANT
- * This snapshot file is auto-generated, but designed for humans.
- * It should be checked into source control and tracked carefully.
- * Re-generate by setting TAP_SNAPSHOT=1 and running tests.
- * Make sure to inspect the output below.  Do not ignore changes!
- */
-'use strict'
-exports[`test/nestLists.test.ts TAP nestLists: assumes level is 1 if not set > must match snapshot 1`] = `
-Array [
-  Object {
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`nestLists: assumes level is 1 if not set 1`] = `
+[
+  {
     "_key": "A0-parent",
     "_type": "@list",
-    "children": Array [
-      Object {
+    "children": [
+      {
         "_key": "A0",
         "_type": "block",
-        "children": Array [
-          Object {
+        "children": [
+          {
             "_type": "span",
             "text": "Bullet 1",
           },
@@ -27,15 +22,15 @@ Array [
     "listItem": "bullet",
     "mode": "html",
   },
-  Object {
+  {
     "_key": "B0-parent",
     "_type": "@list",
-    "children": Array [
-      Object {
+    "children": [
+      {
         "_key": "B0",
         "_type": "block",
-        "children": Array [
-          Object {
+        "children": [
+          {
             "_type": "span",
             "text": "Bullet 2",
           },
@@ -48,19 +43,19 @@ Array [
     "mode": "html",
   },
 ]
-`
+`;
 
-exports[`test/nestLists.test.ts TAP nestLists: ends lists when non-list item occurs > must match snapshot 1`] = `
-Array [
-  Object {
+exports[`nestLists: ends lists when non-list item occurs 1`] = `
+[
+  {
     "_key": "A0-parent",
     "_type": "@list",
-    "children": Array [
-      Object {
+    "children": [
+      {
         "_key": "A0",
         "_type": "block",
-        "children": Array [
-          Object {
+        "children": [
+          {
             "_type": "span",
             "text": "Bullet 1",
           },
@@ -68,11 +63,11 @@ Array [
         "level": 1,
         "listItem": "bullet",
       },
-      Object {
+      {
         "_key": "B1",
         "_type": "block",
-        "children": Array [
-          Object {
+        "children": [
+          {
             "_type": "span",
             "text": "Bullet 2",
           },
@@ -85,18 +80,18 @@ Array [
     "listItem": "bullet",
     "mode": "html",
   },
-  Object {
+  {
     "_type": "map",
   },
-  Object {
+  {
     "_key": "C0-parent",
     "_type": "@list",
-    "children": Array [
-      Object {
+    "children": [
+      {
         "_key": "C0",
         "_type": "block",
-        "children": Array [
-          Object {
+        "children": [
+          {
             "_type": "span",
             "text": "Number 1",
           },
@@ -104,11 +99,11 @@ Array [
         "level": 1,
         "listItem": "number",
       },
-      Object {
+      {
         "_key": "D1",
         "_type": "block",
-        "children": Array [
-          Object {
+        "children": [
+          {
             "_type": "span",
             "text": "Number 2",
           },
@@ -122,19 +117,19 @@ Array [
     "mode": "html",
   },
 ]
-`
+`;
 
-exports[`test/nestLists.test.ts TAP nestLists: handles deeper/shallower transitions correctly in direct mode > must match snapshot 1`] = `
-Array [
-  Object {
+exports[`nestLists: handles deeper/shallower transitions correctly in direct mode 1`] = `
+[
+  {
     "_key": "A0-parent",
     "_type": "@list",
-    "children": Array [
-      Object {
+    "children": [
+      {
         "_key": "A0",
         "_type": "block",
-        "children": Array [
-          Object {
+        "children": [
+          {
             "_type": "span",
             "text": "Level 1, A",
           },
@@ -142,11 +137,11 @@ Array [
         "level": 1,
         "listItem": "bullet",
       },
-      Object {
+      {
         "_key": "B1",
         "_type": "block",
-        "children": Array [
-          Object {
+        "children": [
+          {
             "_type": "span",
             "text": "Level 1, B",
           },
@@ -154,15 +149,15 @@ Array [
         "level": 1,
         "listItem": "bullet",
       },
-      Object {
+      {
         "_key": "C0-parent",
         "_type": "@list",
-        "children": Array [
-          Object {
+        "children": [
+          {
             "_key": "C0",
             "_type": "block",
-            "children": Array [
-              Object {
+            "children": [
+              {
                 "_type": "span",
                 "text": "Level 2, C",
               },
@@ -170,11 +165,11 @@ Array [
             "level": 2,
             "listItem": "bullet",
           },
-          Object {
+          {
             "_key": "D1",
             "_type": "block",
-            "children": Array [
-              Object {
+            "children": [
+              {
                 "_type": "span",
                 "text": "Level 2, D",
               },
@@ -182,15 +177,15 @@ Array [
             "level": 2,
             "listItem": "bullet",
           },
-          Object {
+          {
             "_key": "E0-parent",
             "_type": "@list",
-            "children": Array [
-              Object {
+            "children": [
+              {
                 "_key": "E0",
                 "_type": "block",
-                "children": Array [
-                  Object {
+                "children": [
+                  {
                     "_type": "span",
                     "text": "Level 3, E",
                   },
@@ -198,11 +193,11 @@ Array [
                 "level": 3,
                 "listItem": "bullet",
               },
-              Object {
+              {
                 "_key": "F1",
                 "_type": "block",
-                "children": Array [
-                  Object {
+                "children": [
+                  {
                     "_type": "span",
                     "text": "Level 3, F",
                   },
@@ -215,11 +210,11 @@ Array [
             "listItem": "bullet",
             "mode": "direct",
           },
-          Object {
+          {
             "_key": "G0",
             "_type": "block",
-            "children": Array [
-              Object {
+            "children": [
+              {
                 "_type": "span",
                 "text": "Level 2, G",
               },
@@ -227,11 +222,11 @@ Array [
             "level": 2,
             "listItem": "bullet",
           },
-          Object {
+          {
             "_key": "H1",
             "_type": "block",
-            "children": Array [
-              Object {
+            "children": [
+              {
                 "_type": "span",
                 "text": "Level 2, H",
               },
@@ -239,15 +234,15 @@ Array [
             "level": 2,
             "listItem": "bullet",
           },
-          Object {
+          {
             "_key": "I0-parent",
             "_type": "@list",
-            "children": Array [
-              Object {
+            "children": [
+              {
                 "_key": "I0",
                 "_type": "block",
-                "children": Array [
-                  Object {
+                "children": [
+                  {
                     "_type": "span",
                     "text": "Level 3, I",
                   },
@@ -255,11 +250,11 @@ Array [
                 "level": 3,
                 "listItem": "bullet",
               },
-              Object {
+              {
                 "_key": "J1",
                 "_type": "block",
-                "children": Array [
-                  Object {
+                "children": [
+                  {
                     "_type": "span",
                     "text": "Level 3, J",
                   },
@@ -282,15 +277,15 @@ Array [
     "listItem": "bullet",
     "mode": "direct",
   },
-  Object {
+  {
     "_key": "K0-parent",
     "_type": "@list",
-    "children": Array [
-      Object {
+    "children": [
+      {
         "_key": "K0",
         "_type": "block",
-        "children": Array [
-          Object {
+        "children": [
+          {
             "_type": "span",
             "text": "Level 1, K",
           },
@@ -298,11 +293,11 @@ Array [
         "level": 1,
         "listItem": "number",
       },
-      Object {
+      {
         "_key": "L1",
         "_type": "block",
-        "children": Array [
-          Object {
+        "children": [
+          {
             "_type": "span",
             "text": "Level 1, L",
           },
@@ -316,19 +311,19 @@ Array [
     "mode": "direct",
   },
 ]
-`
+`;
 
-exports[`test/nestLists.test.ts TAP nestLists: handles deeper/shallower transitions correctly in html mode > must match snapshot 1`] = `
-Array [
-  Object {
+exports[`nestLists: handles deeper/shallower transitions correctly in html mode 1`] = `
+[
+  {
     "_key": "A0-parent",
     "_type": "@list",
-    "children": Array [
-      Object {
+    "children": [
+      {
         "_key": "A0",
         "_type": "block",
-        "children": Array [
-          Object {
+        "children": [
+          {
             "_type": "span",
             "text": "Level 1, A",
           },
@@ -336,23 +331,23 @@ Array [
         "level": 1,
         "listItem": "bullet",
       },
-      Object {
+      {
         "_key": "B1",
         "_type": "block",
-        "children": Array [
-          Object {
+        "children": [
+          {
             "_type": "span",
             "text": "Level 1, B",
           },
-          Object {
+          {
             "_key": "C0-parent",
             "_type": "@list",
-            "children": Array [
-              Object {
+            "children": [
+              {
                 "_key": "C0",
                 "_type": "block",
-                "children": Array [
-                  Object {
+                "children": [
+                  {
                     "_type": "span",
                     "text": "Level 2, C",
                   },
@@ -360,23 +355,23 @@ Array [
                 "level": 2,
                 "listItem": "bullet",
               },
-              Object {
+              {
                 "_key": "D1",
                 "_type": "block",
-                "children": Array [
-                  Object {
+                "children": [
+                  {
                     "_type": "span",
                     "text": "Level 2, D",
                   },
-                  Object {
+                  {
                     "_key": "E0-parent",
                     "_type": "@list",
-                    "children": Array [
-                      Object {
+                    "children": [
+                      {
                         "_key": "E0",
                         "_type": "block",
-                        "children": Array [
-                          Object {
+                        "children": [
+                          {
                             "_type": "span",
                             "text": "Level 3, E",
                           },
@@ -384,11 +379,11 @@ Array [
                         "level": 3,
                         "listItem": "bullet",
                       },
-                      Object {
+                      {
                         "_key": "F1",
                         "_type": "block",
-                        "children": Array [
-                          Object {
+                        "children": [
+                          {
                             "_type": "span",
                             "text": "Level 3, F",
                           },
@@ -405,11 +400,11 @@ Array [
                 "level": 2,
                 "listItem": "bullet",
               },
-              Object {
+              {
                 "_key": "G0",
                 "_type": "block",
-                "children": Array [
-                  Object {
+                "children": [
+                  {
                     "_type": "span",
                     "text": "Level 2, G",
                   },
@@ -417,23 +412,23 @@ Array [
                 "level": 2,
                 "listItem": "bullet",
               },
-              Object {
+              {
                 "_key": "H1",
                 "_type": "block",
-                "children": Array [
-                  Object {
+                "children": [
+                  {
                     "_type": "span",
                     "text": "Level 2, H",
                   },
-                  Object {
+                  {
                     "_key": "I0-parent",
                     "_type": "@list",
-                    "children": Array [
-                      Object {
+                    "children": [
+                      {
                         "_key": "I0",
                         "_type": "block",
-                        "children": Array [
-                          Object {
+                        "children": [
+                          {
                             "_type": "span",
                             "text": "Level 3, I",
                           },
@@ -441,11 +436,11 @@ Array [
                         "level": 3,
                         "listItem": "bullet",
                       },
-                      Object {
+                      {
                         "_key": "J1",
                         "_type": "block",
-                        "children": Array [
-                          Object {
+                        "children": [
+                          {
                             "_type": "span",
                             "text": "Level 3, J",
                           },
@@ -476,15 +471,15 @@ Array [
     "listItem": "bullet",
     "mode": "html",
   },
-  Object {
+  {
     "_key": "K0-parent",
     "_type": "@list",
-    "children": Array [
-      Object {
+    "children": [
+      {
         "_key": "K0",
         "_type": "block",
-        "children": Array [
-          Object {
+        "children": [
+          {
             "_type": "span",
             "text": "Level 1, K",
           },
@@ -492,11 +487,11 @@ Array [
         "level": 1,
         "listItem": "number",
       },
-      Object {
+      {
         "_key": "L1",
         "_type": "block",
-        "children": Array [
-          Object {
+        "children": [
+          {
             "_type": "span",
             "text": "Level 1, L",
           },
@@ -510,19 +505,19 @@ Array [
     "mode": "html",
   },
 ]
-`
+`;
 
-exports[`test/nestLists.test.ts TAP nestLists: nests deeper lists inside of parent list in direct mode > must match snapshot 1`] = `
-Array [
-  Object {
+exports[`nestLists: nests deeper lists inside of parent list in direct mode 1`] = `
+[
+  {
     "_key": "A0-parent",
     "_type": "@list",
-    "children": Array [
-      Object {
+    "children": [
+      {
         "_key": "A0",
         "_type": "block",
-        "children": Array [
-          Object {
+        "children": [
+          {
             "_type": "span",
             "text": "Bullet 1",
           },
@@ -530,11 +525,11 @@ Array [
         "level": 1,
         "listItem": "bullet",
       },
-      Object {
+      {
         "_key": "B1",
         "_type": "block",
-        "children": Array [
-          Object {
+        "children": [
+          {
             "_type": "span",
             "text": "Bullet 2",
           },
@@ -542,15 +537,15 @@ Array [
         "level": 1,
         "listItem": "bullet",
       },
-      Object {
+      {
         "_key": "C0-parent",
         "_type": "@list",
-        "children": Array [
-          Object {
+        "children": [
+          {
             "_key": "C0",
             "_type": "block",
-            "children": Array [
-              Object {
+            "children": [
+              {
                 "_type": "span",
                 "text": "Number 1",
               },
@@ -558,11 +553,11 @@ Array [
             "level": 2,
             "listItem": "number",
           },
-          Object {
+          {
             "_key": "D1",
             "_type": "block",
-            "children": Array [
-              Object {
+            "children": [
+              {
                 "_type": "span",
                 "text": "Number 2",
               },
@@ -581,19 +576,19 @@ Array [
     "mode": "direct",
   },
 ]
-`
+`;
 
-exports[`test/nestLists.test.ts TAP nestLists: wraps adjacent list items of different types in separate list nodes > must match snapshot 1`] = `
-Array [
-  Object {
+exports[`nestLists: wraps adjacent list items of different types in separate list nodes 1`] = `
+[
+  {
     "_key": "A0-parent",
     "_type": "@list",
-    "children": Array [
-      Object {
+    "children": [
+      {
         "_key": "A0",
         "_type": "block",
-        "children": Array [
-          Object {
+        "children": [
+          {
             "_type": "span",
             "text": "Bullet 1",
           },
@@ -601,11 +596,11 @@ Array [
         "level": 1,
         "listItem": "bullet",
       },
-      Object {
+      {
         "_key": "B1",
         "_type": "block",
-        "children": Array [
-          Object {
+        "children": [
+          {
             "_type": "span",
             "text": "Bullet 2",
           },
@@ -618,15 +613,15 @@ Array [
     "listItem": "bullet",
     "mode": "html",
   },
-  Object {
+  {
     "_key": "C0-parent",
     "_type": "@list",
-    "children": Array [
-      Object {
+    "children": [
+      {
         "_key": "C0",
         "_type": "block",
-        "children": Array [
-          Object {
+        "children": [
+          {
             "_type": "span",
             "text": "Number 1",
           },
@@ -634,11 +629,11 @@ Array [
         "level": 1,
         "listItem": "number",
       },
-      Object {
+      {
         "_key": "D1",
         "_type": "block",
-        "children": Array [
-          Object {
+        "children": [
+          {
             "_type": "span",
             "text": "Number 2",
           },
@@ -652,19 +647,19 @@ Array [
     "mode": "html",
   },
 ]
-`
+`;
 
-exports[`test/nestLists.test.ts TAP nestLists: wraps adjacent list items of different types in separate list nodes > must match snapshot 2`] = `
-Array [
-  Object {
+exports[`nestLists: wraps adjacent list items of different types in separate list nodes 2`] = `
+[
+  {
     "_key": "A0-parent",
     "_type": "@list",
-    "children": Array [
-      Object {
+    "children": [
+      {
         "_key": "A0",
         "_type": "block",
-        "children": Array [
-          Object {
+        "children": [
+          {
             "_type": "span",
             "text": "Bullet 1",
           },
@@ -672,11 +667,11 @@ Array [
         "level": 1,
         "listItem": "bullet",
       },
-      Object {
+      {
         "_key": "B1",
         "_type": "block",
-        "children": Array [
-          Object {
+        "children": [
+          {
             "_type": "span",
             "text": "Bullet 2",
           },
@@ -689,15 +684,15 @@ Array [
     "listItem": "bullet",
     "mode": "html",
   },
-  Object {
+  {
     "_key": "C0-parent",
     "_type": "@list",
-    "children": Array [
-      Object {
+    "children": [
+      {
         "_key": "C0",
         "_type": "block",
-        "children": Array [
-          Object {
+        "children": [
+          {
             "_type": "span",
             "text": "Number 1",
           },
@@ -705,11 +700,11 @@ Array [
         "level": 1,
         "listItem": "number",
       },
-      Object {
+      {
         "_key": "D1",
         "_type": "block",
-        "children": Array [
-          Object {
+        "children": [
+          {
             "_type": "span",
             "text": "Number 2",
           },
@@ -723,19 +718,19 @@ Array [
     "mode": "html",
   },
 ]
-`
+`;
 
-exports[`test/nestLists.test.ts TAP nestLists: wraps adjacent list items of same type/level in toolkit list node > must match snapshot 1`] = `
-Array [
-  Object {
+exports[`nestLists: wraps adjacent list items of same type/level in toolkit list node 1`] = `
+[
+  {
     "_key": "A0-parent",
     "_type": "@list",
-    "children": Array [
-      Object {
+    "children": [
+      {
         "_key": "A0",
         "_type": "block",
-        "children": Array [
-          Object {
+        "children": [
+          {
             "_type": "span",
             "text": "First",
           },
@@ -743,11 +738,11 @@ Array [
         "level": 1,
         "listItem": "bullet",
       },
-      Object {
+      {
         "_key": "B1",
         "_type": "block",
-        "children": Array [
-          Object {
+        "children": [
+          {
             "_type": "span",
             "text": "Second",
           },
@@ -755,11 +750,11 @@ Array [
         "level": 1,
         "listItem": "bullet",
       },
-      Object {
+      {
         "_key": "C2",
         "_type": "block",
-        "children": Array [
-          Object {
+        "children": [
+          {
             "_type": "span",
             "text": "Third",
           },
@@ -773,19 +768,19 @@ Array [
     "mode": "html",
   },
 ]
-`
+`;
 
-exports[`test/nestLists.test.ts TAP nestLists: wraps deeper lists inside of last list item in html mode > must match snapshot 1`] = `
-Array [
-  Object {
+exports[`nestLists: wraps deeper lists inside of last list item in html mode 1`] = `
+[
+  {
     "_key": "A0-parent",
     "_type": "@list",
-    "children": Array [
-      Object {
+    "children": [
+      {
         "_key": "A0",
         "_type": "block",
-        "children": Array [
-          Object {
+        "children": [
+          {
             "_type": "span",
             "text": "Bullet 1",
           },
@@ -793,23 +788,23 @@ Array [
         "level": 1,
         "listItem": "bullet",
       },
-      Object {
+      {
         "_key": "B1",
         "_type": "block",
-        "children": Array [
-          Object {
+        "children": [
+          {
             "_type": "span",
             "text": "Bullet 2",
           },
-          Object {
+          {
             "_key": "C0-parent",
             "_type": "@list",
-            "children": Array [
-              Object {
+            "children": [
+              {
                 "_key": "C0",
                 "_type": "block",
-                "children": Array [
-                  Object {
+                "children": [
+                  {
                     "_type": "span",
                     "text": "Number 1",
                   },
@@ -817,11 +812,11 @@ Array [
                 "level": 2,
                 "listItem": "number",
               },
-              Object {
+              {
                 "_key": "D1",
                 "_type": "block",
-                "children": Array [
-                  Object {
+                "children": [
+                  {
                     "_type": "span",
                     "text": "Number 2",
                   },
@@ -844,4 +839,4 @@ Array [
     "mode": "html",
   },
 ]
-`
+`;

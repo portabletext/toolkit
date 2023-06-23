@@ -1,8 +1,8 @@
 import type {PortableTextBlock} from '@portabletext/types'
-import tap from 'tap'
+import {expect, test} from 'vitest'
 import {sortMarksByOccurences} from '../src'
 
-tap.test('sortMarksByOccurences: sorts correctly', (t) => {
+test('sortMarksByOccurences: sorts correctly', () => {
   const block: PortableTextBlock = {
     _type: 'block',
     children: [
@@ -14,17 +14,16 @@ tap.test('sortMarksByOccurences: sorts correctly', (t) => {
     ],
   }
 
-  t.same(block.children.map(sortMarksByOccurences), [
+  expect(block.children.map(sortMarksByOccurences)).toEqual([
     [],
     [],
     ['strong'],
     ['strong', 's0m3l1nk'],
     ['strong'],
   ])
-  t.end()
 })
 
-tap.test('sortMarksByOccurences: sorts correctly on tied decorator usage', (t) => {
+test('sortMarksByOccurences: sorts correctly on tied decorator usage', () => {
   const block: PortableTextBlock = {
     _type: 'block',
     children: [
@@ -34,11 +33,14 @@ tap.test('sortMarksByOccurences: sorts correctly on tied decorator usage', (t) =
     ],
   }
 
-  t.same(block.children.map(sortMarksByOccurences), [['strong', 'em'], ['strong', 'em'], []])
-  t.end()
+  expect(block.children.map(sortMarksByOccurences)).toEqual([
+    ['strong', 'em'],
+    ['strong', 'em'],
+    [],
+  ])
 })
 
-tap.test('sortMarksByOccurences: sorts correctly on tied decorator usage with annotations', (t) => {
+test('sortMarksByOccurences: sorts correctly on tied decorator usage with annotations', () => {
   const block: PortableTextBlock = {
     _type: 'block',
     children: [
@@ -48,15 +50,14 @@ tap.test('sortMarksByOccurences: sorts correctly on tied decorator usage with an
     ],
   }
 
-  t.same(block.children.map(sortMarksByOccurences), [
+  expect(block.children.map(sortMarksByOccurences)).toEqual([
     ['a', 'b', 'strong', 'em'],
     ['a', 'b', 'strong', 'em'],
     [],
   ])
-  t.end()
 })
 
-tap.test('sortMarksByOccurences: returns empty array on invalid marks', (t) => {
+test('sortMarksByOccurences: returns empty array on invalid marks', () => {
   const block: PortableTextBlock = {
     _type: 'block',
     children: [
@@ -66,6 +67,5 @@ tap.test('sortMarksByOccurences: returns empty array on invalid marks', (t) => {
     ],
   }
 
-  t.same(block.children.map(sortMarksByOccurences), [[], [], []])
-  t.end()
+  expect(block.children.map(sortMarksByOccurences)).toEqual([[], [], []])
 })

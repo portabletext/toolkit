@@ -1,26 +1,24 @@
 import type {PortableTextListItemBlock} from '@portabletext/types'
-import tap from 'tap'
+import {expect, test} from 'vitest'
 import {LIST_NEST_MODE_DIRECT, LIST_NEST_MODE_HTML, nestLists} from '../src'
 
-tap.test('nestLists: returns empty tree on no blocks', (t) => {
-  t.same(nestLists([], LIST_NEST_MODE_HTML), [])
-  t.end()
+test('nestLists: returns empty tree on no blocks', () => {
+  expect(nestLists([], LIST_NEST_MODE_HTML)).toEqual([])
 })
 
-tap.test('nestLists: returns non-list blocks verbatim', (t) => {
+test('nestLists: returns non-list blocks verbatim', () => {
   const block = {_type: 'block', children: [{_type: 'span', text: 'Verbatim, please'}]}
-  t.same(nestLists([block], LIST_NEST_MODE_HTML), [block])
-  t.end()
+  expect(nestLists([block], LIST_NEST_MODE_HTML)).toEqual([block])
 })
 
-tap.test('nestLists: wraps list items in toolkit list node', (t) => {
+test('nestLists: wraps list items in toolkit list node', () => {
   const block = {
     _type: 'block',
     _key: 'a',
     children: [{_type: 'span', text: 'Verbatim, please'}],
     listItem: 'bullet',
   }
-  t.same(nestLists([block], LIST_NEST_MODE_HTML), [
+  expect(nestLists([block], LIST_NEST_MODE_HTML)).toEqual([
     {
       _type: '@list',
       _key: 'a-parent',
@@ -32,65 +30,58 @@ tap.test('nestLists: wraps list items in toolkit list node', (t) => {
   ])
 
   // Uses index as key if no _key is present
-  t.same(nestLists([{...block, _key: undefined}], LIST_NEST_MODE_HTML)[0]?._key, '0-parent')
-  t.end()
+  expect(nestLists([{...block, _key: undefined}], LIST_NEST_MODE_HTML)[0]?._key).toBe('0-parent')
 })
 
-tap.test('nestLists: wraps adjacent list items of same type/level in toolkit list node', (t) => {
+test('nestLists: wraps adjacent list items of same type/level in toolkit list node', () => {
   const blocks = createBlocks(['First', 'Second', 'Third'])
-  t.matchSnapshot(nestLists(blocks, LIST_NEST_MODE_HTML))
-  t.end()
+  expect(nestLists(blocks, LIST_NEST_MODE_HTML)).toMatchSnapshot()
 })
 
-tap.test('nestLists: wraps adjacent list items of different types in separate list nodes', (t) => {
+test('nestLists: wraps adjacent list items of different types in separate list nodes', () => {
   const blocks = [
     ...createBlocks(['Bullet 1', 'Bullet 2']),
     ...createBlocks(['Number 1', 'Number 2'], {type: 'number', startIndex: 2}),
   ]
-  t.matchSnapshot(nestLists(blocks, LIST_NEST_MODE_HTML))
-  t.end()
+  expect(nestLists(blocks, LIST_NEST_MODE_HTML)).toMatchSnapshot()
 })
 
-tap.test('nestLists: ends lists when non-list item occurs', (t) => {
+test('nestLists: ends lists when non-list item occurs', () => {
   const blocks = [
     ...createBlocks(['Bullet 1', 'Bullet 2']),
     {_type: 'map'},
     ...createBlocks(['Number 1', 'Number 2'], {type: 'number', startIndex: 2}),
   ]
-  t.matchSnapshot(nestLists(blocks, LIST_NEST_MODE_HTML))
-  t.end()
+  expect(nestLists(blocks, LIST_NEST_MODE_HTML)).toMatchSnapshot()
 })
 
-tap.test('nestLists: wraps deeper lists inside of last list item in html mode', (t) => {
+test('nestLists: wraps deeper lists inside of last list item in html mode', () => {
   const blocks = [
     ...createBlocks(['Bullet 1', 'Bullet 2']),
     ...createBlocks(['Number 1', 'Number 2'], {type: 'number', level: 2, startIndex: 2}),
   ]
-  t.matchSnapshot(nestLists(blocks, LIST_NEST_MODE_HTML))
-  t.end()
+  expect(nestLists(blocks, LIST_NEST_MODE_HTML)).toMatchSnapshot()
 })
 
-tap.test('nestLists: nests deeper lists inside of parent list in direct mode', (t) => {
+test('nestLists: nests deeper lists inside of parent list in direct mode', () => {
   const blocks = [
     ...createBlocks(['Bullet 1', 'Bullet 2']),
     ...createBlocks(['Number 1', 'Number 2'], {type: 'number', level: 2, startIndex: 2}),
   ]
-  t.matchSnapshot(nestLists(blocks, LIST_NEST_MODE_DIRECT))
-  t.end()
+  expect(nestLists(blocks, LIST_NEST_MODE_DIRECT)).toMatchSnapshot()
 })
 
-tap.test('nestLists: assumes level is 1 if not set', (t) => {
+test('nestLists: assumes level is 1 if not set', () => {
   const blocks = [
     ...createBlocks(['Bullet 1']).map(({level, ...block}) => block),
     ...createBlocks(['Bullet 2'], {startIndex: 1, type: 'number'}).map(
       ({level, ...block}) => block
     ),
   ]
-  t.matchSnapshot(nestLists(blocks, LIST_NEST_MODE_HTML))
-  t.end()
+  expect(nestLists(blocks, LIST_NEST_MODE_HTML)).toMatchSnapshot()
 })
 
-tap.test('nestLists: handles deeper/shallower transitions correctly in html mode', (t) => {
+test('nestLists: handles deeper/shallower transitions correctly in html mode', () => {
   const blocks = [
     ...createBlocks(['Level 1, A', 'Level 1, B']),
     ...createBlocks(['Level 2, C', 'Level 2, D'], {level: 2, startIndex: 2}),
@@ -99,11 +90,10 @@ tap.test('nestLists: handles deeper/shallower transitions correctly in html mode
     ...createBlocks(['Level 3, I', 'Level 3, J'], {level: 3, startIndex: 8}),
     ...createBlocks(['Level 1, K', 'Level 1, L'], {level: 1, startIndex: 10, type: 'number'}),
   ]
-  t.matchSnapshot(nestLists(blocks, LIST_NEST_MODE_HTML))
-  t.end()
+  expect(nestLists(blocks, LIST_NEST_MODE_HTML)).toMatchSnapshot()
 })
 
-tap.test('nestLists: handles deeper/shallower transitions correctly in direct mode', (t) => {
+test('nestLists: handles deeper/shallower transitions correctly in direct mode', () => {
   const blocks = [
     ...createBlocks(['Level 1, A', 'Level 1, B']),
     ...createBlocks(['Level 2, C', 'Level 2, D'], {level: 2, startIndex: 2}),
@@ -112,17 +102,15 @@ tap.test('nestLists: handles deeper/shallower transitions correctly in direct mo
     ...createBlocks(['Level 3, I', 'Level 3, J'], {level: 3, startIndex: 8}),
     ...createBlocks(['Level 1, K', 'Level 1, L'], {level: 1, startIndex: 10, type: 'number'}),
   ]
-  t.matchSnapshot(nestLists(blocks, LIST_NEST_MODE_DIRECT))
-  t.end()
+  expect(nestLists(blocks, LIST_NEST_MODE_DIRECT)).toMatchSnapshot()
 })
 
-tap.only('nestLists: wraps adjacent list items of different types in separate list nodes', (t) => {
+test('nestLists: wraps adjacent list items of different types in separate list nodes', () => {
   const blocks = [
     ...createBlocks(['Bullet 1', 'Bullet 2'], {type: 'bullet', startIndex: 0}),
     ...createBlocks(['Number 1', 'Number 2'], {type: 'number', startIndex: 2}),
   ]
-  t.matchSnapshot(nestLists(blocks, LIST_NEST_MODE_HTML))
-  t.end()
+  expect(nestLists(blocks, LIST_NEST_MODE_HTML)).toMatchSnapshot()
 })
 
 function createBlocks(

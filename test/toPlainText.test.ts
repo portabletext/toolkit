@@ -1,22 +1,20 @@
-import tap from 'tap'
+import {expect, test} from 'vitest'
 import {toPlainText} from '../src'
 
-tap.test('toPlainText: converts single-block, single-span with no formatting correctly', (t) => {
-  t.equal(
+test('toPlainText: converts single-block, single-span with no formatting correctly', () => {
+  expect(
     toPlainText({
       _type: 'block',
       _key: 'a',
       style: 'normal',
       children: [{_type: 'span', _key: 's', text: 'Portable Text'}],
       markDefs: [],
-    }),
-    'Portable Text'
-  )
-  t.end()
+    })
+  ).toEqual('Portable Text')
 })
 
-tap.test('toPlainText: converts single-block, multi-span with no formatting correctly', (t) => {
-  t.equal(
+test('toPlainText: converts single-block, multi-span with no formatting correctly', () => {
+  expect(
     toPlainText({
       _type: 'block',
       _key: 'a',
@@ -26,14 +24,12 @@ tap.test('toPlainText: converts single-block, multi-span with no formatting corr
         {_type: 'span', _key: 'z', text: 'Text'},
       ],
       markDefs: [],
-    }),
-    'Portable Text'
-  )
-  t.end()
+    })
+  ).toEqual('Portable Text')
 })
 
-tap.test('toPlainText: converts single-block, multi-span with formatting correctly', (t) => {
-  t.equal(
+test('toPlainText: converts single-block, multi-span with formatting correctly', () => {
+  expect(
     toPlainText({
       _type: 'block',
       _key: 'a',
@@ -43,14 +39,12 @@ tap.test('toPlainText: converts single-block, multi-span with formatting correct
         {_type: 'span', _key: 'z', text: ' Text!'},
       ],
       markDefs: [],
-    }),
-    'Portable Text!'
-  )
-  t.end()
+    })
+  ).toEqual('Portable Text!')
 })
 
-tap.test('toPlainText: converts multi-block, multi-span with formatting correctly', (t) => {
-  t.equal(
+test('toPlainText: converts multi-block, multi-span with formatting correctly', () => {
+  expect(
     toPlainText([
       {
         _type: 'block',
@@ -68,14 +62,12 @@ tap.test('toPlainText: converts multi-block, multi-span with formatting correctl
         style: 'normal',
         children: [{_type: 'span', _key: 'a', text: 'Use it!', marks: []}],
       },
-    ]),
-    'Portable Text!\n\nUse it!'
-  )
-  t.end()
+    ])
+  ).toEqual('Portable Text!\n\nUse it!')
 })
 
-tap.test('toPlainText: ignores non-blocks, non-spans', (t) => {
-  t.equal(
+test('toPlainText: ignores non-blocks, non-spans', () => {
+  expect(
     toPlainText([
       {
         _type: 'block',
@@ -99,14 +91,12 @@ tap.test('toPlainText: ignores non-blocks, non-spans', (t) => {
         style: 'normal',
         children: [{_type: 'span', _key: 'a', text: '...and the map!', marks: []}],
       },
-    ]),
-    'Ignore the image.\n\n...and the map!'
-  )
-  t.end()
+    ])
+  ).toEqual('Ignore the image.\n\n...and the map!')
 })
 
-tap.test('toPlainText: does not add unnecessary whitespace on non-spans', (t) => {
-  t.equal(
+test('toPlainText: does not add unnecessary whitespace on non-spans', () => {
+  expect(
     toPlainText({
       _type: 'block',
       children: [
@@ -117,11 +107,10 @@ tap.test('toPlainText: does not add unnecessary whitespace on non-spans', (t) =>
     }),
     'Ignore the image.'
   )
-  t.end()
 })
 
-tap.test('toPlainText: adds whitespace on span-hugging non-spans', (t) => {
-  t.equal(
+test('toPlainText: adds whitespace on span-hugging non-spans', () => {
+  expect(
     toPlainText({
       _type: 'block',
       children: [
@@ -129,22 +118,18 @@ tap.test('toPlainText: adds whitespace on span-hugging non-spans', (t) => {
         {_type: 'image', src: '/some/image.png'},
         {_type: 'span', text: 'the image.'},
       ],
-    }),
-    'Ignore the image.'
-  )
-  t.end()
+    })
+  ).toEqual('Ignore the image.')
 })
 
-tap.test('toPlainText: does not add leading whitespace on span-hugging non-span', (t) => {
-  t.equal(
+test('toPlainText: does not add leading whitespace on span-hugging non-span', () => {
+  expect(
     toPlainText({
       _type: 'block',
       children: [
         {_type: 'image', src: '/some/image.png'},
         {_type: 'span', text: 'Now that is an image.'},
       ],
-    }),
-    'Now that is an image.'
-  )
-  t.end()
+    })
+  ).toEqual('Now that is an image.')
 })

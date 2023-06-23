@@ -1,75 +1,70 @@
-/* IMPORTANT
- * This snapshot file is auto-generated, but designed for humans.
- * It should be checked into source control and tracked carefully.
- * Re-generate by setting TAP_SNAPSHOT=1 and running tests.
- * Make sure to inspect the output below.  Do not ignore changes!
- */
-'use strict'
-exports[`test/buildMarksTree.test.ts TAP buildMarksTree: handles leading inline objects in tree > must match snapshot 1`] = `
-Array [
-  Object {
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`buildMarksTree: handles leading inline objects in tree 1`] = `
+[
+  {
     "_key": "a",
     "_type": "image",
     "src": "/some/image.png",
   },
-  Object {
+  {
     "_type": "@text",
     "text": "Include",
   },
-  Object {
+  {
     "_type": "@text",
     "text": " the image.",
   },
 ]
-`
+`;
 
-exports[`test/buildMarksTree.test.ts TAP buildMarksTree: handles trailing inline objects in tree > must match snapshot 1`] = `
-Array [
-  Object {
+exports[`buildMarksTree: handles trailing inline objects in tree 1`] = `
+[
+  {
     "_type": "@text",
     "text": "Include",
   },
-  Object {
+  {
     "_type": "@text",
     "text": " the image.",
   },
-  Object {
+  {
     "_key": "c",
     "_type": "image",
     "src": "/some/image.png",
   },
 ]
-`
+`;
 
-exports[`test/buildMarksTree.test.ts TAP buildMarksTree: includes inline objects in tree > must match snapshot 1`] = `
-Array [
-  Object {
+exports[`buildMarksTree: includes inline objects in tree 1`] = `
+[
+  {
     "_type": "@text",
     "text": "Include",
   },
-  Object {
+  {
     "_key": "h",
     "_type": "image",
     "src": "/some/image.png",
   },
-  Object {
+  {
     "_type": "@text",
     "text": " the image.",
   },
 ]
-`
+`;
 
-exports[`test/buildMarksTree.test.ts TAP buildMarksTree: includes inline objects in tree, with surrounding marks > must match snapshot 1`] = `
-Array [
-  Object {
+exports[`buildMarksTree: includes inline objects in tree, with surrounding marks 1`] = `
+[
+  {
     "_key": "a",
     "_type": "@span",
-    "children": Array [
-      Object {
+    "children": [
+      {
         "_key": "a",
         "_type": "@span",
-        "children": Array [
-          Object {
+        "children": [
+          {
             "_type": "@text",
             "text": "Include",
           },
@@ -83,20 +78,20 @@ Array [
     "markKey": "strong",
     "markType": "strong",
   },
-  Object {
+  {
     "_key": "h",
     "_type": "image",
     "src": "/some/image.png",
   },
-  Object {
+  {
     "_key": "z",
     "_type": "@span",
-    "children": Array [
-      Object {
+    "children": [
+      {
         "_key": "z",
         "_type": "@span",
-        "children": Array [
-          Object {
+        "children": [
+          {
             "_type": "@text",
             "text": " the image.",
           },
@@ -111,24 +106,24 @@ Array [
     "markType": "strong",
   },
 ]
-`
+`;
 
-exports[`test/buildMarksTree.test.ts TAP buildMarksTree: joins on adjacent spans with same annotation > must match snapshot 1`] = `
-Array [
-  Object {
+exports[`buildMarksTree: joins on adjacent spans with same annotation 1`] = `
+[
+  {
     "_key": "a",
     "_type": "@span",
-    "children": Array [
-      Object {
+    "children": [
+      {
         "_type": "@text",
         "text": "Portable",
       },
-      Object {
+      {
         "_type": "@text",
         "text": " Text!",
       },
     ],
-    "markDef": Object {
+    "markDef": {
       "_key": "link",
       "_type": "link",
       "href": "https://portabletext.org",
@@ -137,36 +132,36 @@ Array [
     "markType": "link",
   },
 ]
-`
+`;
 
-exports[`test/buildMarksTree.test.ts TAP buildMarksTree: nests correctly, extracts correct \`markDef\` > must match snapshot 1`] = `
-Array [
-  Object {
+exports[`buildMarksTree: nests correctly, extracts correct \`markDef\` 1`] = `
+[
+  {
     "_type": "@text",
     "text": "This block ",
   },
-  Object {
+  {
     "_type": "@text",
     "text": "",
   },
-  Object {
+  {
     "_key": undefined,
     "_type": "@span",
-    "children": Array [
-      Object {
+    "children": [
+      {
         "_type": "@text",
         "text": "contains",
       },
-      Object {
+      {
         "_key": undefined,
         "_type": "@span",
-        "children": Array [
-          Object {
+        "children": [
+          {
             "_type": "@text",
             "text": "a link",
           },
         ],
-        "markDef": Object {
+        "markDef": {
           "_key": "s0m3l1nk",
           "_type": "link",
           "href": "https://some.example/",
@@ -174,7 +169,7 @@ Array [
         "markKey": "s0m3l1nk",
         "markType": "link",
       },
-      Object {
+      {
         "_type": "@text",
         "text": " and some bolded text",
       },
@@ -184,23 +179,23 @@ Array [
     "markType": "strong",
   },
 ]
-`
+`;
 
-exports[`test/buildMarksTree.test.ts TAP buildMarksTree: nests decorators and annotations correctly, extracts correct \`markDef\` > must match snapshot 1`] = `
-Array [
-  Object {
+exports[`buildMarksTree: nests decorators and annotations correctly, extracts correct \`markDef\` 1`] = `
+[
+  {
     "_type": "@text",
     "text": "This block ",
   },
-  Object {
+  {
     "_key": undefined,
     "_type": "@span",
-    "children": Array [
-      Object {
+    "children": [
+      {
         "_key": undefined,
         "_type": "@span",
-        "children": Array [
-          Object {
+        "children": [
+          {
             "_type": "@text",
             "text": "contains",
           },
@@ -209,11 +204,11 @@ Array [
         "markKey": "em",
         "markType": "em",
       },
-      Object {
+      {
         "_key": undefined,
         "_type": "@span",
-        "children": Array [
-          Object {
+        "children": [
+          {
             "_type": "@text",
             "text": "a link",
           },
@@ -223,7 +218,7 @@ Array [
         "markType": "strong",
       },
     ],
-    "markDef": Object {
+    "markDef": {
       "_key": "s0m3l1nk",
       "_type": "link",
       "href": "https://some.example/",
@@ -231,11 +226,11 @@ Array [
     "markKey": "s0m3l1nk",
     "markType": "link",
   },
-  Object {
+  {
     "_key": undefined,
     "_type": "@span",
-    "children": Array [
-      Object {
+    "children": [
+      {
         "_type": "@text",
         "text": " and some bolded text",
       },
@@ -245,4 +240,4 @@ Array [
     "markType": "strong",
   },
 ]
-`
+`;

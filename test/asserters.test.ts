@@ -1,4 +1,4 @@
-import tap from 'tap'
+import {expect, test} from 'vitest'
 import {
   isPortableTextBlock,
   isPortableTextListItemBlock,
@@ -8,8 +8,8 @@ import {
   isPortableTextToolkitTextNode,
 } from '../src'
 
-tap.test('isPortableTextBlock: all possible non-list properties', (t) => {
-  t.ok(
+test('isPortableTextBlock: all possible non-list properties', () => {
+  expect(
     isPortableTextBlock({
       _type: 'block',
       _key: 'a',
@@ -18,12 +18,11 @@ tap.test('isPortableTextBlock: all possible non-list properties', (t) => {
       markDefs: [{_key: 'l', _type: 'link', href: 'https://portabletext.org/'}],
     }),
     '`true` if all possible non-list properties are present'
-  )
-  t.end()
+  ).toBe(true)
 })
 
-tap.test('isPortableTextBlock: all possible list properties', (t) => {
-  t.ok(
+test('isPortableTextBlock: all possible list properties', () => {
+  expect(
     isPortableTextBlock({
       _type: 'block',
       _key: 'a',
@@ -34,45 +33,41 @@ tap.test('isPortableTextBlock: all possible list properties', (t) => {
       level: 1,
     }),
     '`true` if all possible list properties are present'
-  )
-  t.end()
+  ).toBe(true)
 })
 
-tap.test('isPortableTextBlock: absolute minimum properties', (t) => {
-  t.ok(
+test('isPortableTextBlock: absolute minimum properties', () => {
+  expect(
     isPortableTextBlock({
       _type: 'any-type',
       children: [],
     }),
     '`true` on stripped to the bone block'
-  )
-  t.end()
+  ).toBe(true)
 })
 
-tap.test('isPortableTextBlock: minimum properties (with span)', (t) => {
-  t.ok(
+test('isPortableTextBlock: minimum properties (with span)', () => {
+  expect(
     isPortableTextBlock({
       _type: 'any-type',
       children: [{_type: 'span', text: 'Portable Text'}],
     }),
     '`true` on single span child'
-  )
-  t.end()
+  ).toBe(true)
 })
 
-tap.test('isPortableTextBlock: minimum properties (non-span child)', (t) => {
-  t.ok(
+test('isPortableTextBlock: minimum properties (non-span child)', () => {
+  expect(
     isPortableTextBlock({
       _type: 'any-type',
       children: [{_type: 'other', arb: 'itrary'}],
     }),
     '`true` on single non-span child'
-  )
-  t.end()
+  ).toBe(true)
 })
 
-tap.test('isPortableTextBlock: false on markDefs without a `_key`', (t) => {
-  t.notOk(
+test('isPortableTextBlock: false on markDefs without a `_key`', () => {
+  expect(
     isPortableTextBlock({
       _type: 'block',
       _key: 'a',
@@ -81,35 +76,32 @@ tap.test('isPortableTextBlock: false on markDefs without a `_key`', (t) => {
       markDefs: [{_type: 'link', href: 'https://portabletext.org/'} as any],
     }),
     '`false` on mark def with no `_type`'
-  )
-  t.end()
+  ).toBe(false)
 })
 
-tap.test('isPortableTextBlock: false on non-string `_type`', (t) => {
-  t.notOk(
+test('isPortableTextBlock: false on non-string `_type`', () => {
+  expect(
     isPortableTextBlock({
       _type: 123 as any,
       children: [],
     }),
     '`false` on non-string `_type`'
-  )
-  t.end()
+  ).toBe(false)
 })
 
-tap.test('isPortableTextBlock: false on non-array `markDefs`', (t) => {
-  t.notOk(
+test('isPortableTextBlock: false on non-array `markDefs`', () => {
+  expect(
     isPortableTextBlock({
       _type: 'block',
       children: [],
       markDefs: 123 as any,
     }),
     '`false` on non-array `markDefs`'
-  )
-  t.end()
+  ).toBe(false)
 })
 
-tap.test('isPortableTextBlock: false on missing `children`', (t) => {
-  t.notOk(
+test('isPortableTextBlock: false on missing `children`', () => {
+  expect(
     isPortableTextBlock({
       _type: 'block',
       _key: 'a',
@@ -117,12 +109,11 @@ tap.test('isPortableTextBlock: false on missing `children`', (t) => {
       markDefs: [{_key: 'l', _type: 'link', href: 'https://portabletext.org/'}],
     }),
     '`false` on missing `children`'
-  )
-  t.end()
+  ).toBe(false)
 })
 
-tap.test('isPortableTextBlock: false on `children` without `_type`', (t) => {
-  t.notOk(
+test('isPortableTextBlock: false on `children` without `_type`', () => {
+  expect(
     isPortableTextBlock({
       _type: 'block',
       _key: 'a',
@@ -130,12 +121,11 @@ tap.test('isPortableTextBlock: false on `children` without `_type`', (t) => {
       children: [{yep: ''} as any],
     }),
     '`false` on children missing `_type`'
-  )
-  t.end()
+  ).toBe(false)
 })
 
-tap.test('isPortableTextListItemBlock: true on all properties present', (t) => {
-  t.ok(
+test('isPortableTextListItemBlock: true on all properties present', () => {
+  expect(
     isPortableTextListItemBlock({
       _type: 'block',
       _key: 'a',
@@ -146,12 +136,11 @@ tap.test('isPortableTextListItemBlock: true on all properties present', (t) => {
       listItem: 'bullet',
     }),
     '`true` if all list properties are present'
-  )
-  t.end()
+  ).toBe(true)
 })
 
-tap.test('isPortableTextListItemBlock: true on `level` missing', (t) => {
-  t.ok(
+test('isPortableTextListItemBlock: true on `level` missing', () => {
+  expect(
     isPortableTextListItemBlock({
       _type: 'block',
       _key: 'a',
@@ -161,12 +150,11 @@ tap.test('isPortableTextListItemBlock: true on `level` missing', (t) => {
       listItem: 'bullet',
     }),
     '`true` if all block properties + listItem are present'
-  )
-  t.end()
+  ).toBe(true)
 })
 
-tap.test('isPortableTextListItemBlock: false on `level` of incorrect type', (t) => {
-  t.notOk(
+test('isPortableTextListItemBlock: false on `level` of incorrect type', () => {
+  expect(
     isPortableTextListItemBlock({
       _type: 'block',
       _key: 'a',
@@ -177,12 +165,11 @@ tap.test('isPortableTextListItemBlock: false on `level` of incorrect type', (t) 
       level: 'nope' as any,
     }),
     '`false` if `level` is not a number'
-  )
-  t.end()
+  ).toBe(false)
 })
 
-tap.test('isPortableTextListItemBlock: false on `listItem` of incorrect type', (t) => {
-  t.notOk(
+test('isPortableTextListItemBlock: false on `listItem` of incorrect type', () => {
+  expect(
     isPortableTextListItemBlock({
       _type: 'block',
       _key: 'a',
@@ -192,12 +179,11 @@ tap.test('isPortableTextListItemBlock: false on `listItem` of incorrect type', (
       listItem: 13 as any,
     }),
     '`false` if `listItem` is not a string'
-  )
-  t.end()
+  ).toBe(false)
 })
 
-tap.test('isPortableTextListItemBlock: false if no `listItem`', (t) => {
-  t.notOk(
+test('isPortableTextListItemBlock: false if no `listItem`', () => {
+  expect(
     isPortableTextListItemBlock({
       _type: 'block',
       _key: 'a',
@@ -206,12 +192,11 @@ tap.test('isPortableTextListItemBlock: false if no `listItem`', (t) => {
       markDefs: [{_key: 'l', _type: 'link', href: 'https://portabletext.org/'}],
     }),
     '`false` if `listItem` is missing'
-  )
-  t.end()
+  ).toBe(false)
 })
 
-tap.test('isPortableTextSpan: true on all valid span properties', (t) => {
-  t.ok(
+test('isPortableTextSpan: true on all valid span properties', () => {
+  expect(
     isPortableTextSpan({
       _type: 'span',
       _key: 'a',
@@ -219,107 +204,100 @@ tap.test('isPortableTextSpan: true on all valid span properties', (t) => {
       marks: ['l'],
     }),
     '`true` if all properties are present'
-  )
-  t.end()
+  ).toBe(true)
 })
 
-tap.test('isPortableTextSpan: true on all required span properties', (t) => {
-  t.ok(
+test('isPortableTextSpan: true on all required span properties', () => {
+  expect(
     isPortableTextSpan({
       _type: 'span',
       text: 'Portable Text',
     }),
     '`true` if all required properties are present'
-  )
-  t.end()
+  ).toBe(true)
 })
 
-tap.test('isPortableTextSpan: false on non-`span` type', (t) => {
-  t.notOk(
+test('isPortableTextSpan: false on non-`span` type', () => {
+  expect(
     isPortableTextSpan({
       _type: 'nonSpan',
       text: 'Portable Text',
     }),
     '`false` if `_type` is not `span`'
-  )
-  t.end()
+  ).toBe(false)
 })
 
-tap.test('isPortableTextSpan: false on missing `text`', (t) => {
-  t.notOk(
+test('isPortableTextSpan: false on missing `text`', () => {
+  expect(
     isPortableTextSpan({
       _type: 'span',
       foo: 'bar',
     }),
     '`false` if `text` is missing'
-  )
-  t.end()
+  ).toBe(false)
 })
 
-tap.test('isPortableTextSpan: false on non-string `text`', (t) => {
-  t.notOk(
+test('isPortableTextSpan: false on non-string `text`', () => {
+  expect(
     isPortableTextSpan({
       _type: 'span',
       text: 123,
     }),
     '`false` if `text` is not a string'
-  )
-  t.end()
+  ).toBe(false)
 })
 
-tap.test('isPortableTextSpan: false on non-array `marks`', (t) => {
-  t.notOk(
+test('isPortableTextSpan: false on non-array `marks`', () => {
+  expect(
     isPortableTextSpan({
       _type: 'span',
       text: 'yes',
       marks: 'also yes',
     }),
     '`false` if `marks` is not an array'
-  )
-  t.end()
+  ).toBe(false)
 })
 
-tap.test('isPortableTextSpan: false on non-string `marks` item', (t) => {
-  t.notOk(
+test('isPortableTextSpan: false on non-string `marks` item', () => {
+  expect(
     isPortableTextSpan({
       _type: 'span',
       text: 'yes',
       marks: ['yep', 123],
     }),
     '`false` if `marks` contains non-strings'
-  )
-  t.end()
+  ).toBe(false)
 })
 
 /**
  * WEAK ASSERTERS FOLLOWS - THESE ARE NOT THOROUGH, ONLY SURFACE-LEVEL
  */
-tap.test('isPortableTextToolkitList: true on correct _type', (t) => {
-  t.ok(isPortableTextToolkitList({_type: '@list'}), '`true` if `_type` is `@list`')
-  t.end()
+test('isPortableTextToolkitList: true on correct _type', () => {
+  expect(isPortableTextToolkitList({_type: '@list'}), '`true` if `_type` is `@list`').toBe(true)
 })
 
-tap.test('isPortableTextToolkitList: false on incorrect _type', (t) => {
-  t.notOk(isPortableTextToolkitList({_type: 'list'}), '`false` if `_type` is not `@list`')
-  t.end()
+test('isPortableTextToolkitList: false on incorrect _type', () => {
+  expect(isPortableTextToolkitList({_type: 'list'}), '`false` if `_type` is not `@list`').toBe(
+    false
+  )
 })
 
-tap.test('isPortableTextToolkitSpan: true on correct _type', (t) => {
-  t.ok(isPortableTextToolkitSpan({_type: '@span'}), '`true` if `_type` is `@span`')
-  t.end()
+test('isPortableTextToolkitSpan: true on correct _type', () => {
+  expect(isPortableTextToolkitSpan({_type: '@span'}), '`true` if `_type` is `@span`').toBe(true)
 })
 
-tap.test('isPortableTextToolkitSpan: false on incorrect _type', (t) => {
-  t.notOk(isPortableTextToolkitSpan({_type: 'span'}), '`false` if `_type` is not `@span`')
-  t.end()
+test('isPortableTextToolkitSpan: false on incorrect _type', () => {
+  expect(isPortableTextToolkitSpan({_type: 'span'}), '`false` if `_type` is not `@span`').toBe(
+    false
+  )
 })
 
-tap.test('isPortableTextToolkitTextNode: true on correct _type', (t) => {
-  t.ok(isPortableTextToolkitTextNode({_type: '@text'}), '`true` if `_type` is `@text`')
-  t.end()
+test('isPortableTextToolkitTextNode: true on correct _type', () => {
+  expect(isPortableTextToolkitTextNode({_type: '@text'}), '`true` if `_type` is `@text`').toBe(true)
 })
 
-tap.test('isPortableTextToolkitTextNode: false on incorrect _type', (t) => {
-  t.notOk(isPortableTextToolkitTextNode({_type: 'text'}), '`false` if `_type` is not `@text`')
-  t.end()
+test('isPortableTextToolkitTextNode: false on incorrect _type', () => {
+  expect(isPortableTextToolkitTextNode({_type: 'text'}), '`false` if `_type` is not `@text`').toBe(
+    false
+  )
 })

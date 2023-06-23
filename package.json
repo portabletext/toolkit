@@ -26,10 +26,6 @@
       "types": "./dist/portable-text-toolkit.d.ts",
       "source": "./src/index.ts",
       "require": "./dist/portable-text-toolkit.js",
-      "node": {
-        "import": "./dist/portable-text-toolkit.cjs.mjs",
-        "require": "./dist/portable-text-toolkit.js"
-      },
       "import": "./dist/portable-text-toolkit.esm.js",
       "default": "./dist/portable-text-toolkit.esm.js"
     },

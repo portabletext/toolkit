@@ -21,20 +21,21 @@
   "license": "MIT",
   "author": "Sanity.io <hello@sanity.io>",
   "sideEffects": false,
+  "type": "module",
   "exports": {
     ".": {
-      "types": "./dist/portable-text-toolkit.d.ts",
+      "types": "./dist/index.d.ts",
       "source": "./src/index.ts",
-      "require": "./dist/portable-text-toolkit.js",
-      "import": "./dist/portable-text-toolkit.esm.js",
-      "default": "./dist/portable-text-toolkit.esm.js"
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
     },
     "./package.json": "./package.json"
   },
-  "main": "./dist/portable-text-toolkit.js",
-  "module": "./dist/portable-text-toolkit.esm.js",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
   "source": "./src/index.ts",
-  "types": "./dist/portable-text-toolkit.d.ts",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist",
     "src",

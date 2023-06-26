@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.4](https://github.com/portabletext/toolkit/compare/v2.0.3...v2.0.4) (2023-06-26)
+
+### Bug Fixes
+
+- **deps:** update non-major ([6a9347a](https://github.com/portabletext/toolkit/commit/6a9347ad8ad08400f3eb2284e072997bf4067d59))
+
 ## [2.0.3](https://github.com/portabletext/toolkit/compare/v2.0.2...v2.0.3) (2023-06-26)
 
 ### Bug Fixes

@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.3](https://github.com/portabletext/toolkit/compare/v2.0.2...v2.0.3) (2023-06-26)
+
+### Bug Fixes
+
+- refactor to `type: module` ([1dc6579](https://github.com/portabletext/toolkit/commit/1dc6579053980f6191007985bc9ca9a9d4532f7b))
+
 ## [2.0.2](https://github.com/portabletext/toolkit/compare/v2.0.1...v2.0.2) (2023-06-23)
 
 ### Bug Fixes

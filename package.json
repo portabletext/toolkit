@@ -136,7 +136,7 @@
     "vitest": "^0.32.2",
     "vitest-github-actions-reporter": "^0.10.0"
   },
-  "packageManager": "pnpm@8.6.3",
+  "packageManager": "pnpm@8.6.5",
   "engines": {
     "node": "^14.13.1 || >=16.0.0"
   },

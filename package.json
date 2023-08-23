@@ -111,7 +111,7 @@
     "extends": "@sanity/semantic-release-preset"
   },
   "dependencies": {
-    "@portabletext/types": "^2.0.5"
+    "@portabletext/types": "^2.0.6"
   },
   "devDependencies": {
     "@babel/core": "^7.22.10",

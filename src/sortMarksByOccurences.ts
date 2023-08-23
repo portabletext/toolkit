@@ -43,7 +43,7 @@ const knownDecorators = ['strong', 'em', 'code', 'underline', 'strike-through']
 export function sortMarksByOccurences(
   span: PortableTextSpan | TypedObject,
   index: number,
-  blockChildren: (PortableTextSpan | TypedObject)[]
+  blockChildren: (PortableTextSpan | TypedObject)[],
 ): string[] {
   if (!isPortableTextSpan(span) || !span.marks) {
     return []
@@ -81,7 +81,7 @@ export function sortMarksByOccurences(
 function sortMarks<U extends string, T extends Record<U, number>>(
   occurences: T,
   markA: U,
-  markB: U
+  markB: U,
 ): number {
   const aOccurences = occurences[markA]
   const bOccurences = occurences[markB]

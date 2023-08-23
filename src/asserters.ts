@@ -14,7 +14,7 @@ import type {ToolkitNestedPortableTextSpan, ToolkitPortableTextList, ToolkitText
  * @returns True if valid Portable Text span, otherwise false
  */
 export function isPortableTextSpan(
-  node: ArbitraryTypedObject | PortableTextSpan
+  node: ArbitraryTypedObject | PortableTextSpan,
 ): node is PortableTextSpan {
   return (
     node._type === 'span' &&
@@ -32,7 +32,7 @@ export function isPortableTextSpan(
  * @returns True if valid Portable Text block, otherwise false
  */
 export function isPortableTextBlock(
-  node: PortableTextBlock | TypedObject
+  node: PortableTextBlock | TypedObject,
 ): node is PortableTextBlock {
   return (
     // A block doesn't _have_ to be named 'block' - to differentiate between
@@ -61,7 +61,7 @@ export function isPortableTextBlock(
  * @returns True if valid Portable Text list item block, otherwise false
  */
 export function isPortableTextListItemBlock(
-  block: PortableTextBlock | TypedObject
+  block: PortableTextBlock | TypedObject,
 ): block is PortableTextListItemBlock {
   return (
     isPortableTextBlock(block) &&
@@ -79,7 +79,7 @@ export function isPortableTextListItemBlock(
  * @returns True if toolkit list, otherwise false
  */
 export function isPortableTextToolkitList(
-  block: TypedObject | ToolkitPortableTextList
+  block: TypedObject | ToolkitPortableTextList,
 ): block is ToolkitPortableTextList {
   return block._type === '@list'
 }
@@ -92,7 +92,7 @@ export function isPortableTextToolkitList(
  * @returns True if toolkit span, otherwise false
  */
 export function isPortableTextToolkitSpan(
-  span: TypedObject | ToolkitNestedPortableTextSpan
+  span: TypedObject | ToolkitNestedPortableTextSpan,
 ): span is ToolkitNestedPortableTextSpan {
   return span._type === '@span'
 }
@@ -105,7 +105,7 @@ export function isPortableTextToolkitSpan(
  * @returns True if toolkit text node, otherwise false
  */
 export function isPortableTextToolkitTextNode(
-  node: TypedObject | ToolkitTextNode
+  node: TypedObject | ToolkitTextNode,
 ): node is ToolkitTextNode {
   return node._type === '@text'
 }

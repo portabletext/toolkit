@@ -39,7 +39,7 @@ import {sortMarksByOccurences} from './sortMarksByOccurences'
  * @returns Array of (potentially) nested spans, text nodes and/or arbitrary inline objects
  */
 export function buildMarksTree<M extends PortableTextMarkDefinition = PortableTextMarkDefinition>(
-  block: PortableTextBlock<M>
+  block: PortableTextBlock<M>,
 ): (ToolkitNestedPortableTextSpan<M> | ToolkitTextNode | ArbitraryTypedObject)[] {
   const {children, markDefs = []} = block
   if (!children || !children.length) {
@@ -115,7 +115,7 @@ export function buildMarksTree<M extends PortableTextMarkDefinition = PortableTe
       }
 
       currentNode.children = currentNode.children.concat(
-        lines.map((text) => ({_type: '@text', text}))
+        lines.map((text) => ({_type: '@text', text})),
       )
     } else {
       // This is some other inline object, not a text span

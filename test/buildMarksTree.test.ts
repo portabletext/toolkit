@@ -9,7 +9,7 @@ test('buildMarksTree: returns empty tree on empty blocks', () => {
 
 test('buildMarksTree: returns newlines as individual text nodes', () => {
   expect(
-    buildMarksTree({_type: 'block', children: [{_type: 'span', text: 'Portable\nText'}]})
+    buildMarksTree({_type: 'block', children: [{_type: 'span', text: 'Portable\nText'}]}),
   ).toEqual([
     {_type: '@text', text: 'Portable'},
     {_type: '@text', text: '\n'},

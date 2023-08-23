@@ -9,7 +9,7 @@ test('toPlainText: converts single-block, single-span with no formatting correct
       style: 'normal',
       children: [{_type: 'span', _key: 's', text: 'Portable Text'}],
       markDefs: [],
-    })
+    }),
   ).toEqual('Portable Text')
 })
 
@@ -24,7 +24,7 @@ test('toPlainText: converts single-block, multi-span with no formatting correctl
         {_type: 'span', _key: 'z', text: 'Text'},
       ],
       markDefs: [],
-    })
+    }),
   ).toEqual('Portable Text')
 })
 
@@ -39,7 +39,7 @@ test('toPlainText: converts single-block, multi-span with formatting correctly',
         {_type: 'span', _key: 'z', text: ' Text!'},
       ],
       markDefs: [],
-    })
+    }),
   ).toEqual('Portable Text!')
 })
 
@@ -62,7 +62,7 @@ test('toPlainText: converts multi-block, multi-span with formatting correctly', 
         style: 'normal',
         children: [{_type: 'span', _key: 'a', text: 'Use it!', marks: []}],
       },
-    ])
+    ]),
   ).toEqual('Portable Text!\n\nUse it!')
 })
 
@@ -91,7 +91,7 @@ test('toPlainText: ignores non-blocks, non-spans', () => {
         style: 'normal',
         children: [{_type: 'span', _key: 'a', text: '...and the map!', marks: []}],
       },
-    ])
+    ]),
   ).toEqual('Ignore the image.\n\n...and the map!')
 })
 
@@ -105,7 +105,7 @@ test('toPlainText: does not add unnecessary whitespace on non-spans', () => {
         {_type: 'span', text: ' the image.'},
       ],
     }),
-    'Ignore the image.'
+    'Ignore the image.',
   )
 })
 
@@ -118,7 +118,7 @@ test('toPlainText: adds whitespace on span-hugging non-spans', () => {
         {_type: 'image', src: '/some/image.png'},
         {_type: 'span', text: 'the image.'},
       ],
-    })
+    }),
   ).toEqual('Ignore the image.')
 })
 
@@ -130,6 +130,6 @@ test('toPlainText: does not add leading whitespace on span-hugging non-span', ()
         {_type: 'image', src: '/some/image.png'},
         {_type: 'span', text: 'Now that is an image.'},
       ],
-    })
+    }),
   ).toEqual('Now that is an image.')
 })

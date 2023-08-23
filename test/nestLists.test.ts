@@ -75,7 +75,7 @@ test('nestLists: assumes level is 1 if not set', () => {
   const blocks = [
     ...createBlocks(['Bullet 1']).map(({level, ...block}) => block),
     ...createBlocks(['Bullet 2'], {startIndex: 1, type: 'number'}).map(
-      ({level, ...block}) => block
+      ({level, ...block}) => block,
     ),
   ]
   expect(nestLists(blocks, LIST_NEST_MODE_HTML)).toMatchSnapshot()
@@ -115,7 +115,7 @@ test('nestLists: wraps adjacent list items of different types in separate list n
 
 function createBlocks(
   spans: string[],
-  options: {level?: number; type?: string; startIndex?: number} = {}
+  options: {level?: number; type?: string; startIndex?: number} = {},
 ): PortableTextListItemBlock[] {
   const {level = 1, type = 'bullet', startIndex = 0} = options
   return spans.map((span, i) => ({

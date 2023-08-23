@@ -41,19 +41,19 @@ export type ToolkitNestListsOutputNode<T> =
  */
 export function nestLists<T extends TypedObject = PortableTextBlock | TypedObject>(
   blocks: T[],
-  mode: 'direct'
+  mode: 'direct',
 ): (T | ToolkitPortableTextDirectList)[]
 export function nestLists<T extends TypedObject = PortableTextBlock | TypedObject>(
   blocks: T[],
-  mode: 'html'
+  mode: 'html',
 ): (T | ToolkitPortableTextHtmlList)[]
 export function nestLists<T extends TypedObject = PortableTextBlock | TypedObject>(
   blocks: T[],
-  mode: 'direct' | 'html'
+  mode: 'direct' | 'html',
 ): (T | ToolkitPortableTextHtmlList | ToolkitPortableTextDirectList)[]
 export function nestLists<T extends TypedObject = PortableTextBlock | TypedObject>(
   blocks: T[],
-  mode: ToolkitListNestMode
+  mode: ToolkitListNestMode,
 ): ToolkitNestListsOutputNode<T>[] {
   const tree: ToolkitNestListsOutputNode<T>[] = []
   let currentList: ToolkitPortableTextList | undefined
@@ -108,7 +108,7 @@ export function nestLists<T extends TypedObject = PortableTextBlock | TypedObjec
         currentList.children[currentList.children.length - 1] = newLastChild
       } else {
         ;(currentList as ToolkitPortableTextDirectList).children.push(
-          newList as ToolkitPortableTextDirectList
+          newList as ToolkitPortableTextDirectList,
         )
       }
 
@@ -164,7 +164,7 @@ function blockMatchesList(block: PortableTextBlock, list: ToolkitPortableTextLis
 function listFromBlock(
   block: PortableTextListItemBlock,
   index: number,
-  mode: ToolkitListNestMode
+  mode: ToolkitListNestMode,
 ): ToolkitPortableTextList {
   return {
     _type: '@list',
@@ -178,7 +178,7 @@ function listFromBlock(
 
 function findListMatching<T extends TypedObject | PortableTextBlock>(
   rootNode: T,
-  matching: Partial<PortableTextListItemBlock>
+  matching: Partial<PortableTextListItemBlock>,
 ): ToolkitPortableTextList | undefined {
   const level = matching.level || 1
   const style = matching.listItem || 'normal'

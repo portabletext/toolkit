@@ -130,7 +130,7 @@ export interface ToolkitTextNode {
  * In this type, each span only has a single mark, instead of an array of them.
  */
 export interface ToolkitNestedPortableTextSpan<
-  M extends PortableTextMarkDefinition = PortableTextMarkDefinition
+  M extends PortableTextMarkDefinition = PortableTextMarkDefinition,
 > {
   /**
    * Type name, prefixed with `@` to signal that this is a toolkit-specific node.

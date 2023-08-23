@@ -8,7 +8,7 @@ test('spanToPlainText: converts single-span correctly', () => {
       _key: 'a',
       children: [{_type: '@text', text: 'Just a plain text thing'}],
       markType: 'em',
-    })
+    }),
   ).toEqual('Just a plain text thing')
 })
 
@@ -30,6 +30,6 @@ test('spanToPlainText: converts nested spans correctly', () => {
         {_type: '@text', text: ' of marks.'},
       ],
       markType: 'em',
-    })
+    }),
   ).toEqual('Just a very nested span of marks.')
 })

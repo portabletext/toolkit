@@ -16,7 +16,7 @@ const trailingSpace = /^\s/
  * @returns The plain-text content of the blocks
  */
 export function toPlainText(
-  block: PortableTextBlock | ArbitraryTypedObject[] | PortableTextBlock[]
+  block: PortableTextBlock | ArbitraryTypedObject[] | PortableTextBlock[],
 ): string {
   const blocks = Array.isArray(block) ? block : [block]
   let text = ''

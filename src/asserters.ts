@@ -41,7 +41,7 @@ export function isPortableTextBlock(
     // Toolkit-types like nested spans are @-prefixed
     node._type[0] !== '@' &&
     // `markDefs` isn't _required_ per say, but if it's there, it needs to be an array
-    (!('markDefs' in node) ||
+    (!node.markDefs ||
       (Array.isArray(node.markDefs) &&
         // Every mark definition needs to have an `_key` to be mappable in child spans
         node.markDefs.every((def) => typeof def._key === 'string'))) &&

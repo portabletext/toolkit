@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.7](https://github.com/portabletext/toolkit/compare/v2.0.6...v2.0.7) (2023-08-23)
+
+### Bug Fixes
+
+- setup provenance ([94ec5cf](https://github.com/portabletext/toolkit/commit/94ec5cf0f3e83d0df3ba0649339fb58195686a45))
+
 ## [2.0.6](https://github.com/portabletext/toolkit/compare/v2.0.5...v2.0.6) (2023-08-23)
 
 ### Bug Fixes

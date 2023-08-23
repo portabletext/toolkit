@@ -3,7 +3,7 @@
   "extends": ["github>sanity-io/renovate-config"],
   "packageRules": [
     {
-      "matchDepTypes": ["peerDependencies"],
+      "matchDepTypes": ["dependencies"],
       "matchPackageNames": ["@portabletext/types"],
       "rangeStrategy": "bump",
       "semanticCommitType": "fix"

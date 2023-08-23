@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.6](https://github.com/portabletext/toolkit/compare/v2.0.5...v2.0.6) (2023-08-23)
+
+### Bug Fixes
+
+- isPortableTextBlock not accounting for `markDefs: undefined` ([#25](https://github.com/portabletext/toolkit/issues/25)) ([db076c8](https://github.com/portabletext/toolkit/commit/db076c869e816c151308c47ce50858ef80d4eb76))
+
 ## [2.0.5](https://github.com/portabletext/toolkit/compare/v2.0.4...v2.0.5) (2023-08-23)
 
 ### Bug Fixes

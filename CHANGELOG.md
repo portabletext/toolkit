@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.5](https://github.com/portabletext/toolkit/compare/v2.0.4...v2.0.5) (2023-08-23)
+
+### Bug Fixes
+
+- add `node.module` condition ([1b369ba](https://github.com/portabletext/toolkit/commit/1b369bac105ccdb78df28f1b95b2cbbdf0e7ee74))
+
 ## [2.0.4](https://github.com/portabletext/toolkit/compare/v2.0.3...v2.0.4) (2023-06-26)
 
 ### Bug Fixes

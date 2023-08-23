@@ -8,21 +8,38 @@ on:
       - beta
       - main
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+
 permissions:
   contents: read # for checkout
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Lint & Build
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: lts/*
+      - run: corepack enable && pnpm --version
+      - run: pnpm install
+      - run: pnpm type-check
+      - run: pnpm lint
+      - run: pnpm build
+
   test:
     runs-on: ${{ matrix.platform }}
     name: Node.js ${{ matrix.node-version }} / ${{ matrix.platform }}
     strategy:
       fail-fast: false
       matrix:
-        platform: [ubuntu-latest]
-        node-version: [lts/*, current]
+        platform: [macos-latest, ubuntu-latest, windows-latest]
+        node-version: [lts/*]
         include:
-          - platform: macos-latest
-            node-version: lts/*
+          - platform: ubuntu-latest
+            node-version: current
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -31,7 +48,6 @@ jobs:
       - run: corepack enable && pnpm --version
       - run: pnpm install
       - run: pnpm test
-      - run: pnpm lint
 
   release:
     permissions:
@@ -40,7 +56,7 @@ jobs:
       pull-requests: write # to be able to comment on released pull requests
       id-token: write # to enable use of OIDC for npm provenance
     name: 'Semantic release'
-    needs: test
+    needs: [build, test]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3

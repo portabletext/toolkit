@@ -27,6 +27,10 @@
       "types": "./dist/index.d.ts",
       "source": "./src/index.ts",
       "require": "./dist/index.cjs",
+      "node": {
+        "module": "./dist/index.js",
+        "import": "./dist/index.cjs.js"
+      },
       "import": "./dist/index.js",
       "default": "./dist/index.js"
     },
@@ -114,8 +118,8 @@
     "@babel/plugin-proposal-object-rest-spread": "^7.20.7",
     "@commitlint/cli": "^17.6.6",
     "@commitlint/config-conventional": "^17.6.6",
-    "@sanity/pkg-utils": "^2.3.3",
-    "@sanity/semantic-release-preset": "^4.1.1",
+    "@sanity/pkg-utils": "^2.4.8",
+    "@sanity/semantic-release-preset": "^4.1.3",
     "@types/node": "^20.3.2",
     "@typescript-eslint/eslint-plugin": "^5.60.1",
     "@typescript-eslint/parser": "^5.60.1",
@@ -130,7 +134,7 @@
     "prettier": "^2.8.8",
     "prettier-plugin-packagejson": "^2.4.3",
     "rimraf": "^4.1.2",
-    "semantic-release": "^21.0.5",
+    "semantic-release": "^21.0.9",
     "typedoc": "^0.24.8",
     "typescript": "^5.1.3",
     "vitest": "^0.32.2",

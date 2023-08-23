@@ -12,7 +12,7 @@ test('buildMarksTree: returns newlines as individual text nodes', () => {
     buildMarksTree({_type: 'block', children: [{_type: 'span', text: 'Portable\nText'}]})
   ).toEqual([
     {_type: '@text', text: 'Portable'},
-     {_type: '@text', text: '\n'},
+    {_type: '@text', text: '\n'},
     {_type: '@text', text: 'Text'},
   ])
 })

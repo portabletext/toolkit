@@ -1,4 +1,5 @@
 import {expect, test} from 'vitest'
+
 import {spanToPlainText} from '../src'
 
 test('spanToPlainText: converts single-span correctly', () => {

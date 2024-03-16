@@ -1,4 +1,5 @@
 import type {PortableTextSpan, TypedObject} from '@portabletext/types'
+
 import {isPortableTextSpan} from './asserters'
 
 const knownDecorators = ['strong', 'em', 'code', 'underline', 'strike-through']

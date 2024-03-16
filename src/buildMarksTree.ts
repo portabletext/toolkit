@@ -3,9 +3,10 @@ import type {
   PortableTextBlock,
   PortableTextMarkDefinition,
 } from '@portabletext/types'
-import type {ToolkitNestedPortableTextSpan, ToolkitTextNode} from './types'
+
 import {isPortableTextSpan} from './asserters'
 import {sortMarksByOccurences} from './sortMarksByOccurences'
+import type {ToolkitNestedPortableTextSpan, ToolkitTextNode} from './types'
 
 /**
  * Takes a Portable Text block and returns a nested tree of nodes optimized for rendering

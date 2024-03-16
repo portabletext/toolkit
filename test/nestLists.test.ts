@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import type {PortableTextListItemBlock} from '@portabletext/types'
 import {expect, test} from 'vitest'
+
 import {LIST_NEST_MODE_DIRECT, LIST_NEST_MODE_HTML, nestLists} from '../src'
 
 test('nestLists: returns empty tree on no blocks', () => {

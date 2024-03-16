@@ -1,4 +1,5 @@
 import type {ArbitraryTypedObject, PortableTextBlock} from '@portabletext/types'
+
 import {isPortableTextBlock, isPortableTextSpan} from './asserters'
 
 const leadingSpace = /^\s/

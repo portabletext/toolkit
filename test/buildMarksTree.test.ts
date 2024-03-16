@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type {PortableTextBlock} from '@portabletext/types'
 import {expect, test} from 'vitest'
+
 import {buildMarksTree} from '../src'
 
 test('buildMarksTree: returns empty tree on empty blocks', () => {

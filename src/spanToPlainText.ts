@@ -1,5 +1,5 @@
-import type {ToolkitNestedPortableTextSpan} from './types'
 import {isPortableTextToolkitSpan, isPortableTextToolkitTextNode} from './asserters'
+import type {ToolkitNestedPortableTextSpan} from './types'
 
 /**
  * Returns the plain-text representation of a

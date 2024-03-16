@@ -5,6 +5,7 @@ import type {
   PortableTextSpan,
   TypedObject,
 } from '@portabletext/types'
+
 import type {ToolkitNestedPortableTextSpan, ToolkitPortableTextList, ToolkitTextNode} from './types'
 
 /**

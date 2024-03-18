@@ -120,7 +120,7 @@
     "vitest": "^1.4.0",
     "vitest-github-actions-reporter": "^0.11.1"
   },
-  "packageManager": "pnpm@8.15.4",
+  "packageManager": "pnpm@8.15.5",
   "engines": {
     "node": "^14.13.1 || >=16.0.0"
   },

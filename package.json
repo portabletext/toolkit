@@ -1,6 +1,6 @@
 {
   "name": "@portabletext/toolkit",
-  "version": "2.0.12",
+  "version": "2.0.13",
   "description": "Toolkit of handy utility functions for dealing with Portable Text",
   "keywords": [
     "sanity",

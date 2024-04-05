@@ -92,7 +92,7 @@
     ]
   },
   "dependencies": {
-    "@portabletext/types": "^2.0.11"
+    "@portabletext/types": "^2.0.12"
   },
   "devDependencies": {
     "@babel/core": "^7.24.4",

@@ -5,6 +5,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.15](https://github.com/portabletext/toolkit/compare/v2.0.14...v2.0.15) (2024-04-11)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @portabletext/types to ^2.0.13 ([#85](https://github.com/portabletext/toolkit/issues/85)) ([e5a0247](https://github.com/portabletext/toolkit/commit/e5a024795279f43cbd6712af67d8eb686652fd16))
+
 ## [2.0.14](https://github.com/portabletext/toolkit/compare/v2.0.13...v2.0.14) (2024-04-05)
 
 

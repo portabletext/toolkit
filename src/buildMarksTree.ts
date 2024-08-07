@@ -42,7 +42,8 @@ import type {ToolkitNestedPortableTextSpan, ToolkitTextNode} from './types'
 export function buildMarksTree<M extends PortableTextMarkDefinition = PortableTextMarkDefinition>(
   block: PortableTextBlock<M>,
 ): (ToolkitNestedPortableTextSpan<M> | ToolkitTextNode | ArbitraryTypedObject)[] {
-  const {children, markDefs = []} = block
+  const {children} = block
+  const markDefs = block.markDefs ?? []
   if (!children || !children.length) {
     return []
   }

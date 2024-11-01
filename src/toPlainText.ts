@@ -3,7 +3,7 @@ import type {ArbitraryTypedObject, PortableTextBlock} from '@portabletext/types'
 import {isPortableTextBlock, isPortableTextSpan} from './asserters'
 
 const leadingSpace = /^\s/
-const trailingSpace = /^\s/
+const trailingSpace = /\s$/
 
 /**
  * Takes a Portable Text block (or an array of them) and returns the text value

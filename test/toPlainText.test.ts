@@ -134,3 +134,16 @@ test('toPlainText: does not add leading whitespace on span-hugging non-span', ()
     }),
   ).toEqual('Now that is an image.')
 })
+
+test('toPlainText: does not add leading whitespace on span-hugging non-span (trailing)', () => {
+  expect(
+    toPlainText({
+      _type: 'block',
+      children: [
+        {_type: 'span', text: 'Now that is a '},
+        {_type: 'image', src: '/some/image.png'},
+        {_type: 'span', text: 'beautiful image.'},
+      ],
+    }),
+  ).toEqual('Now that is a beautiful image.')
+})

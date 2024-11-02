@@ -5,6 +5,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.16](https://github.com/portabletext/toolkit/compare/v2.0.15...v2.0.16) (2024-11-02)
+
+
+### Bug Fixes
+
+* prevent double spaces in `toPlainText` when span follows non-span ([#93](https://github.com/portabletext/toolkit/issues/93)) ([43b963f](https://github.com/portabletext/toolkit/commit/43b963fc0182c304564d2f460029609efabcb8c5))
+
 ## [2.0.15](https://github.com/portabletext/toolkit/compare/v2.0.14...v2.0.15) (2024-04-11)
 
 

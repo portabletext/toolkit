@@ -4,9 +4,9 @@ import type {
   PortableTextMarkDefinition,
 } from '@portabletext/types'
 
-import {isPortableTextSpan} from './asserters'
-import {sortMarksByOccurences} from './sortMarksByOccurences'
-import type {ToolkitNestedPortableTextSpan, ToolkitTextNode} from './types'
+import { isPortableTextSpan } from './asserters'
+import { sortMarksByOccurences } from './sortMarksByOccurences'
+import type { ToolkitNestedPortableTextSpan, ToolkitTextNode } from './types'
 
 /**
  * Takes a Portable Text block and returns a nested tree of nodes optimized for rendering
@@ -90,7 +90,7 @@ export function buildMarksTree<M extends PortableTextMarkDefinition = PortableTe
     }
 
     for (const markKey of marksNeeded) {
-      const markDef = markDefs.find((def) => def._key === markKey)
+      const markDef = markDefs?.find((def) => def._key === markKey)
       const markType = markDef ? markDef._type : markKey
       const node: ToolkitNestedPortableTextSpan<M> = {
         _type: '@span',

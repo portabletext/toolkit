@@ -5,6 +5,14 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.17](https://github.com/portabletext/toolkit/compare/v2.0.16...v2.0.17) (2025-02-06)
+
+
+### Bug Fixes
+
+* guard against `markDefs` being `null` ([#92](https://github.com/portabletext/toolkit/issues/92)) ([1f1644a](https://github.com/portabletext/toolkit/commit/1f1644a67d8e41f022d8626c193f7044ccc4469e))
+* **typeError:** Marking `markDefs` as optional to resolve TS error when markDefs array is missing ([#96](https://github.com/portabletext/toolkit/issues/96)) ([eedd7c7](https://github.com/portabletext/toolkit/commit/eedd7c77c1551f79d883d115c77eaf1a2906011f))
+
 ## [2.0.16](https://github.com/portabletext/toolkit/compare/v2.0.15...v2.0.16) (2024-11-02)
 
 

@@ -1,9 +1,4 @@
-<!-- markdownlint-disable --><!-- textlint-disable -->
-
-# 📓 Changelog
-
-All notable changes to this project will be documented in this file. See
-[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+# @portabletext/toolkit
 
 ## [2.0.17](https://github.com/portabletext/toolkit/compare/v2.0.16...v2.0.17) (2025-02-06)
 

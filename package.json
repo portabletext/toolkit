@@ -53,11 +53,6 @@
     "test": "vitest",
     "type-check": "tsc --noEmit"
   },
-  "lint-staged": {
-    "*": [
-      "prettier --write --cache --ignore-unknown"
-    ]
-  },
   "browserslist": "extends @sanity/browserslist-config",
   "prettier": {
     "bracketSpacing": false,

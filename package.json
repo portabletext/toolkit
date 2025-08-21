@@ -53,7 +53,10 @@
     "test": "vitest",
     "type-check": "tsc --noEmit"
   },
-  "browserslist": ["extends @sanity/browserslist-config", "node 14"],
+  "browserslist": [
+    "extends @sanity/browserslist-config",
+    "node 14"
+  ],
   "prettier": "@sanity/prettier-config",
   "eslintConfig": {
     "parserOptions": {

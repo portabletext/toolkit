@@ -9,8 +9,4 @@ export default defineConfig({
   },
 
   tsconfig: 'tsconfig.dist.json',
-
-  babel: {
-    plugins: ['@babel/plugin-transform-object-rest-spread'],
-  },
 })

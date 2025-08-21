@@ -54,15 +54,7 @@
     "type-check": "tsc --noEmit"
   },
   "browserslist": "extends @sanity/browserslist-config",
-  "prettier": {
-    "bracketSpacing": false,
-    "plugins": [
-      "prettier-plugin-packagejson"
-    ],
-    "printWidth": 100,
-    "semi": false,
-    "singleQuote": true
-  },
+  "prettier": "@sanity/prettier-config",
   "eslintConfig": {
     "parserOptions": {
       "ecmaFeatures": {
@@ -84,11 +76,11 @@
     "@portabletext/types": "^2.0.13"
   },
   "devDependencies": {
-    "@babel/core": "^7.24.7",
-    "@babel/plugin-transform-object-rest-spread": "^7.24.7",
     "@changesets/changelog-github": "^0.5.1",
     "@changesets/cli": "^2.29.6",
-    "@sanity/pkg-utils": "^6.10.0",
+    "@sanity/browserslist-config": "1.0.0",
+    "@sanity/pkg-utils": "^8.0.3",
+    "@sanity/prettier-config": "^2.0.1",
     "@types/node": "^20.8.7",
     "@typescript-eslint/eslint-plugin": "^7.13.1",
     "@typescript-eslint/parser": "^7.13.1",
@@ -97,11 +89,10 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-config-sanity": "^7.1.2",
     "npm-run-all2": "^5.0.2",
-    "prettier": "^3.3.2",
-    "prettier-plugin-packagejson": "^2.5.0",
+    "prettier": "^3.6.2",
     "rimraf": "^4.4.1",
-    "typedoc": "^0.25.13",
-    "typescript": "^5.4.5",
+    "typedoc": "^0.28.10",
+    "typescript": "5.9.2",
     "vitest": "^1.6.0",
     "vitest-github-actions-reporter": "^0.11.1"
   },

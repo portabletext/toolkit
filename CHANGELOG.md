@@ -1,5 +1,15 @@
 # @portabletext/toolkit
 
+## 3.0.0
+
+### Major Changes
+
+- [`06c95e3`](https://github.com/portabletext/toolkit/commit/06c95e3713d9b0aa8ea13882a39c7b64cebaf10a) Thanks [@stipsan](https://github.com/stipsan)! - Drop support for Sanity Studio v2
+
+### Patch Changes
+
+- [`1eef3d9`](https://github.com/portabletext/toolkit/commit/1eef3d9b8915c366720d295aa731ee51169a89e8) Thanks [@stipsan](https://github.com/stipsan)! - update build tooling
+
 ## 2.0.18
 
 ### Patch Changes

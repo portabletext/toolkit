@@ -1,68 +1,65 @@
 # @portabletext/toolkit
 
-## [2.0.17](https://github.com/portabletext/toolkit/compare/v2.0.16...v2.0.17) (2025-02-06)
+## 2.0.18
 
+### Patch Changes
+
+- [`aace023`](https://github.com/portabletext/toolkit/commit/aace02390d270708caf3768fdbb5ba1116cfa284) Thanks [@stipsan](https://github.com/stipsan)! - Update LICENSE year to 2025
+
+## [2.0.17](https://github.com/portabletext/toolkit/compare/v2.0.16...v2.0.17) (2025-02-06)
 
 ### Bug Fixes
 
-* guard against `markDefs` being `null` ([#92](https://github.com/portabletext/toolkit/issues/92)) ([1f1644a](https://github.com/portabletext/toolkit/commit/1f1644a67d8e41f022d8626c193f7044ccc4469e))
-* **typeError:** Marking `markDefs` as optional to resolve TS error when markDefs array is missing ([#96](https://github.com/portabletext/toolkit/issues/96)) ([eedd7c7](https://github.com/portabletext/toolkit/commit/eedd7c77c1551f79d883d115c77eaf1a2906011f))
+- guard against `markDefs` being `null` ([#92](https://github.com/portabletext/toolkit/issues/92)) ([1f1644a](https://github.com/portabletext/toolkit/commit/1f1644a67d8e41f022d8626c193f7044ccc4469e))
+- **typeError:** Marking `markDefs` as optional to resolve TS error when markDefs array is missing ([#96](https://github.com/portabletext/toolkit/issues/96)) ([eedd7c7](https://github.com/portabletext/toolkit/commit/eedd7c77c1551f79d883d115c77eaf1a2906011f))
 
 ## [2.0.16](https://github.com/portabletext/toolkit/compare/v2.0.15...v2.0.16) (2024-11-02)
 
-
 ### Bug Fixes
 
-* prevent double spaces in `toPlainText` when span follows non-span ([#93](https://github.com/portabletext/toolkit/issues/93)) ([43b963f](https://github.com/portabletext/toolkit/commit/43b963fc0182c304564d2f460029609efabcb8c5))
+- prevent double spaces in `toPlainText` when span follows non-span ([#93](https://github.com/portabletext/toolkit/issues/93)) ([43b963f](https://github.com/portabletext/toolkit/commit/43b963fc0182c304564d2f460029609efabcb8c5))
 
 ## [2.0.15](https://github.com/portabletext/toolkit/compare/v2.0.14...v2.0.15) (2024-04-11)
 
-
 ### Bug Fixes
 
-* **deps:** update dependency @portabletext/types to ^2.0.13 ([#85](https://github.com/portabletext/toolkit/issues/85)) ([e5a0247](https://github.com/portabletext/toolkit/commit/e5a024795279f43cbd6712af67d8eb686652fd16))
+- **deps:** update dependency @portabletext/types to ^2.0.13 ([#85](https://github.com/portabletext/toolkit/issues/85)) ([e5a0247](https://github.com/portabletext/toolkit/commit/e5a024795279f43cbd6712af67d8eb686652fd16))
 
 ## [2.0.14](https://github.com/portabletext/toolkit/compare/v2.0.13...v2.0.14) (2024-04-05)
 
-
 ### Bug Fixes
 
-* **deps:** update dependency @portabletext/types to ^2.0.12 ([#78](https://github.com/portabletext/toolkit/issues/78)) ([eaaa9a1](https://github.com/portabletext/toolkit/commit/eaaa9a1952c8200ad20c59e434d2ac53cfe19c45))
+- **deps:** update dependency @portabletext/types to ^2.0.12 ([#78](https://github.com/portabletext/toolkit/issues/78)) ([eaaa9a1](https://github.com/portabletext/toolkit/commit/eaaa9a1952c8200ad20c59e434d2ac53cfe19c45))
 
 ## [2.0.13](https://github.com/portabletext/toolkit/compare/v2.0.12...v2.0.13) (2024-03-20)
 
-
 ### Bug Fixes
 
-* **deps:** update dependency @portabletext/types to ^2.0.11 ([#73](https://github.com/portabletext/toolkit/issues/73)) ([e85b103](https://github.com/portabletext/toolkit/commit/e85b10331997f24e60348b96b174df36fea69230))
+- **deps:** update dependency @portabletext/types to ^2.0.11 ([#73](https://github.com/portabletext/toolkit/issues/73)) ([e85b103](https://github.com/portabletext/toolkit/commit/e85b10331997f24e60348b96b174df36fea69230))
 
 ## [2.0.12](https://github.com/portabletext/toolkit/compare/v2.0.11...v2.0.12) (2024-03-18)
 
-
 ### Bug Fixes
 
-* **deps:** update dependency @portabletext/types to ^2.0.10 ([#70](https://github.com/portabletext/toolkit/issues/70)) ([2b8e7f6](https://github.com/portabletext/toolkit/commit/2b8e7f63f609f8917b72ee655fd0907e626dafe3))
+- **deps:** update dependency @portabletext/types to ^2.0.10 ([#70](https://github.com/portabletext/toolkit/issues/70)) ([2b8e7f6](https://github.com/portabletext/toolkit/commit/2b8e7f63f609f8917b72ee655fd0907e626dafe3))
 
 ## [2.0.11](https://github.com/portabletext/toolkit/compare/v2.0.10...v2.0.11) (2024-03-16)
 
-
 ### Bug Fixes
 
-* **deps:** update dependency @portabletext/types to ^2.0.9 ([#65](https://github.com/portabletext/toolkit/issues/65)) ([83c5700](https://github.com/portabletext/toolkit/commit/83c5700720afa12c2856c60881931c05ec549741))
+- **deps:** update dependency @portabletext/types to ^2.0.9 ([#65](https://github.com/portabletext/toolkit/issues/65)) ([83c5700](https://github.com/portabletext/toolkit/commit/83c5700720afa12c2856c60881931c05ec549741))
 
 ## [2.0.10](https://github.com/portabletext/toolkit/compare/v2.0.9...v2.0.10) (2023-10-10)
 
-
 ### Bug Fixes
 
-* **deps:** update dependency @portabletext/types to ^2.0.8 ([#48](https://github.com/portabletext/toolkit/issues/48)) ([36cdd6f](https://github.com/portabletext/toolkit/commit/36cdd6f8786cc5474eb1a1f1306120691d852d8f))
+- **deps:** update dependency @portabletext/types to ^2.0.8 ([#48](https://github.com/portabletext/toolkit/issues/48)) ([36cdd6f](https://github.com/portabletext/toolkit/commit/36cdd6f8786cc5474eb1a1f1306120691d852d8f))
 
 ## [2.0.9](https://github.com/portabletext/toolkit/compare/v2.0.8...v2.0.9) (2023-09-28)
 
-
 ### Bug Fixes
 
-* **deps:** update dependency @portabletext/types to ^2.0.7 ([#40](https://github.com/portabletext/toolkit/issues/40)) ([16f8ee7](https://github.com/portabletext/toolkit/commit/16f8ee75322c1bb290dcff4d666f5e87a9c67f46))
+- **deps:** update dependency @portabletext/types to ^2.0.7 ([#40](https://github.com/portabletext/toolkit/issues/40)) ([16f8ee7](https://github.com/portabletext/toolkit/commit/16f8ee75322c1bb290dcff4d666f5e87a9c67f46))
 
 ## [2.0.8](https://github.com/portabletext/toolkit/compare/v2.0.7...v2.0.8) (2023-08-23)
 

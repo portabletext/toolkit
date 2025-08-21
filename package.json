@@ -1,6 +1,6 @@
 {
   "name": "@portabletext/toolkit",
-  "version": "2.0.18",
+  "version": "3.0.0",
   "description": "Toolkit of handy utility functions for dealing with Portable Text",
   "keywords": [
     "sanity",
@@ -53,7 +53,10 @@
     "test": "vitest",
     "type-check": "tsc --noEmit"
   },
-  "browserslist": ["extends @sanity/browserslist-config", "node 14"],
+  "browserslist": [
+    "extends @sanity/browserslist-config",
+    "node 14"
+  ],
   "prettier": "@sanity/prettier-config",
   "eslintConfig": {
     "parserOptions": {

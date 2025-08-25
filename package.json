@@ -76,7 +76,7 @@
     ]
   },
   "dependencies": {
-    "@portabletext/types": "^2.0.13"
+    "@portabletext/types": "^2.0.15"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.5.1",

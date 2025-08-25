@@ -1,5 +1,11 @@
 # @portabletext/toolkit
 
+## 3.0.1
+
+### Patch Changes
+
+- [#107](https://github.com/portabletext/toolkit/pull/107) [`12c0bba`](https://github.com/portabletext/toolkit/commit/12c0bba3e9e92a6c29c6af7909f9015be3ea6ace) Thanks [@renovate](https://github.com/apps/renovate)! - fix(deps): update dependency @portabletext/types to ^2.0.15
+
 ## 3.0.0
 
 ### Major Changes

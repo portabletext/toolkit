@@ -164,9 +164,5 @@ export interface ToolkitNestedPortableTextSpan<
    * Child nodes of this span. Can be toolkit-specific text nodes, nested spans
    * or any inline object type.
    */
-  children: (
-    | ToolkitTextNode
-    | ToolkitNestedPortableTextSpan<PortableTextMarkDefinition>
-    | ArbitraryTypedObject
-  )[]
+  children: (ToolkitTextNode | ToolkitNestedPortableTextSpan | ArbitraryTypedObject)[]
 }

@@ -150,7 +150,7 @@ export function nestLists<T extends TypedObject = PortableTextBlock | TypedObjec
       }
     }
 
-    // eslint-disable-next-line no-console
+    // oxlint-disable-next-line no-console
     console.warn('Unknown state encountered for block', block)
     tree.push(block)
   }

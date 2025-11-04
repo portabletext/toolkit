@@ -1,6 +1,6 @@
 {
   "name": "@portabletext/toolkit",
-  "version": "3.0.2",
+  "version": "3.0.3-canary.0",
   "description": "Toolkit of handy utility functions for dealing with Portable Text",
   "keywords": [
     "sanity",
@@ -42,7 +42,7 @@
     "coverage": "vitest run --coverage",
     "docs:build": "typedoc",
     "format": "oxfmt .",
-    "lint": "eslint .",
+    "lint": "oxlint --deny-warnings --report-unused-disable-directives --type-aware",
     "pkg:build": "pkg-utils build --strict",
     "pkg:check": "pkg-utils --strict",
     "prepublishOnly": "run-s build lint type-check",
@@ -51,22 +51,6 @@
     "type-check": "tsc --noEmit"
   },
   "browserslist": "extends @sanity/browserslist-config",
-  "eslintConfig": {
-    "parserOptions": {
-      "ecmaFeatures": {
-        "modules": true
-      },
-      "ecmaVersion": 9,
-      "sourceType": "module"
-    },
-    "extends": [
-      "sanity",
-      "sanity/typescript"
-    ],
-    "ignorePatterns": [
-      "dist/**/"
-    ]
-  },
   "dependencies": {
     "@portabletext/types": "^2.0.15"
   },
@@ -76,13 +60,11 @@
     "@sanity/browserslist-config": "^1.0.5",
     "@sanity/pkg-utils": "^8.1.4",
     "@types/node": "^24.10.0",
-    "@typescript-eslint/eslint-plugin": "^7.18.0",
-    "@typescript-eslint/parser": "^7.18.0",
     "@vitest/coverage-v8": "^4.0.6",
-    "eslint": "^8.57.1",
-    "eslint-config-sanity": "^7.1.4",
     "npm-run-all2": "^8.0.4",
     "oxfmt": "^0.9.0",
+    "oxlint": "^1.25.0",
+    "oxlint-tsgolint": "^0.5.0",
     "rimraf": "^4.4.1",
     "typedoc": "^0.28.12",
     "typescript": "5.9.2",

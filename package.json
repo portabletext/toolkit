@@ -1,6 +1,6 @@
 {
   "name": "@portabletext/toolkit",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Toolkit of handy utility functions for dealing with Portable Text",
   "keywords": [
     "sanity",
@@ -25,14 +25,11 @@
   "exports": {
     ".": {
       "source": "./src/index.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs",
       "default": "./dist/index.js"
     },
     "./package.json": "./package.json"
   },
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
+  "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
     "dist",

@@ -1,6 +1,6 @@
 {
   "name": "@portabletext/toolkit",
-  "version": "3.0.1",
+  "version": "3.0.3-canary.0",
   "description": "Toolkit of handy utility functions for dealing with Portable Text",
   "keywords": [
     "sanity",
@@ -25,14 +25,11 @@
   "exports": {
     ".": {
       "source": "./src/index.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs",
       "default": "./dist/index.js"
     },
     "./package.json": "./package.json"
   },
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
+  "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
     "dist",
@@ -44,8 +41,8 @@
     "clean": "rimraf dist coverage",
     "coverage": "vitest run --coverage",
     "docs:build": "typedoc",
-    "format": "prettier --write --cache --ignore-unknown .",
-    "lint": "eslint .",
+    "format": "oxfmt .",
+    "lint": "oxlint --deny-warnings --report-unused-disable-directives --type-aware",
     "pkg:build": "pkg-utils build --strict",
     "pkg:check": "pkg-utils --strict",
     "prepublishOnly": "run-s build lint type-check",
@@ -53,46 +50,21 @@
     "test": "vitest",
     "type-check": "tsc --noEmit"
   },
-  "browserslist": [
-    "extends @sanity/browserslist-config",
-    "node 14"
-  ],
-  "prettier": "@sanity/prettier-config",
-  "eslintConfig": {
-    "parserOptions": {
-      "ecmaFeatures": {
-        "modules": true
-      },
-      "ecmaVersion": 9,
-      "sourceType": "module"
-    },
-    "extends": [
-      "sanity",
-      "sanity/typescript",
-      "prettier"
-    ],
-    "ignorePatterns": [
-      "dist/**/"
-    ]
-  },
+  "browserslist": "extends @sanity/browserslist-config",
   "dependencies": {
-    "@portabletext/types": "^2.0.15"
+    "@portabletext/types": "^3.0.0"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.5.1",
     "@changesets/cli": "^2.29.6",
     "@sanity/browserslist-config": "^1.0.5",
     "@sanity/pkg-utils": "^8.1.4",
-    "@sanity/prettier-config": "^2.0.1",
     "@types/node": "^24.10.0",
-    "@typescript-eslint/eslint-plugin": "^7.18.0",
-    "@typescript-eslint/parser": "^7.18.0",
     "@vitest/coverage-v8": "^4.0.6",
-    "eslint": "^8.57.1",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-config-sanity": "^7.1.4",
     "npm-run-all2": "^8.0.4",
-    "prettier": "^3.6.2",
+    "oxfmt": "^0.9.0",
+    "oxlint": "^1.25.0",
+    "oxlint-tsgolint": "^0.5.0",
     "rimraf": "^4.4.1",
     "typedoc": "^0.28.12",
     "typescript": "5.9.2",
@@ -100,7 +72,7 @@
   },
   "packageManager": "pnpm@10.20.0",
   "engines": {
-    "node": "^14.13.1 || >=16.0.0"
+    "node": ">=20.19 <22 || >=22.12"
   },
   "publishConfig": {
     "access": "public"

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import type {PortableTextBlock} from '@portabletext/types'
 import {expect, test} from 'vitest'
 

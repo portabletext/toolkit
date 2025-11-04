@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import type {PortableTextListItemBlock} from '@portabletext/types'
 import {expect, test} from 'vitest'
 
@@ -75,9 +74,9 @@ test('nestLists: nests deeper lists inside of parent list in direct mode', () =>
 
 test('nestLists: assumes level is 1 if not set', () => {
   const blocks = [
-    ...createBlocks(['Bullet 1']).map(({level, ...block}) => block),
+    ...createBlocks(['Bullet 1']).map(({level: _level, ...block}) => block),
     ...createBlocks(['Bullet 2'], {startIndex: 1, type: 'number'}).map(
-      ({level, ...block}) => block,
+      ({level: _level, ...block}) => block,
     ),
   ]
   expect(nestLists(blocks, LIST_NEST_MODE_HTML)).toMatchSnapshot()

@@ -1,5 +1,15 @@
 # @portabletext/toolkit
 
+## 4.0.0
+
+### Major Changes
+
+- [#123](https://github.com/portabletext/toolkit/pull/123) [`2852611`](https://github.com/portabletext/toolkit/commit/28526114775f4ead49ec4b004474e02bece7eccb) Thanks [@stipsan](https://github.com/stipsan)! - Support for node versions older than v20.19 dropped
+
+- [#123](https://github.com/portabletext/toolkit/pull/123) [`2852611`](https://github.com/portabletext/toolkit/commit/28526114775f4ead49ec4b004474e02bece7eccb) Thanks [@stipsan](https://github.com/stipsan)! - Upgrade @portabletext/types to v3
+
+- [#123](https://github.com/portabletext/toolkit/pull/123) [`2852611`](https://github.com/portabletext/toolkit/commit/28526114775f4ead49ec4b004474e02bece7eccb) Thanks [@stipsan](https://github.com/stipsan)! - CJS exports removed
+
 ## 3.0.1
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "@portabletext/toolkit",
-  "version": "3.0.3-canary.0",
+  "version": "4.0.0",
   "description": "Toolkit of handy utility functions for dealing with Portable Text",
   "keywords": [
     "sanity",

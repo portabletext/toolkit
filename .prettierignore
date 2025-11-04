@@ -1,5 +1,0 @@
-dist
-docs
-pnpm-lock.yaml
-tap-snapshots
-.changeset/*.md

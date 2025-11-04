@@ -41,7 +41,7 @@
     "clean": "rimraf dist coverage",
     "coverage": "vitest run --coverage",
     "docs:build": "typedoc",
-    "format": "prettier --write --cache --ignore-unknown .",
+    "format": "oxfmt .",
     "lint": "eslint .",
     "pkg:build": "pkg-utils build --strict",
     "pkg:check": "pkg-utils --strict",
@@ -51,7 +51,6 @@
     "type-check": "tsc --noEmit"
   },
   "browserslist": "extends @sanity/browserslist-config",
-  "prettier": "@sanity/prettier-config",
   "eslintConfig": {
     "parserOptions": {
       "ecmaFeatures": {
@@ -62,8 +61,7 @@
     },
     "extends": [
       "sanity",
-      "sanity/typescript",
-      "prettier"
+      "sanity/typescript"
     ],
     "ignorePatterns": [
       "dist/**/"
@@ -77,16 +75,14 @@
     "@changesets/cli": "^2.29.6",
     "@sanity/browserslist-config": "^1.0.5",
     "@sanity/pkg-utils": "^8.1.4",
-    "@sanity/prettier-config": "^2.0.1",
     "@types/node": "^24.10.0",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
     "@vitest/coverage-v8": "^4.0.6",
     "eslint": "^8.57.1",
-    "eslint-config-prettier": "^10.1.8",
     "eslint-config-sanity": "^7.1.4",
     "npm-run-all2": "^8.0.4",
-    "prettier": "^3.6.2",
+    "oxfmt": "^0.9.0",
     "rimraf": "^4.4.1",
     "typedoc": "^0.28.12",
     "typescript": "5.9.2",

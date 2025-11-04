@@ -56,9 +56,9 @@
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.5.1",
-    "@changesets/cli": "^2.29.6",
+    "@changesets/cli": "^2.29.7",
     "@sanity/browserslist-config": "^1.0.5",
-    "@sanity/pkg-utils": "^8.1.4",
+    "@sanity/pkg-utils": "^8.1.29",
     "@types/node": "^24.10.0",
     "@vitest/coverage-v8": "^4.0.6",
     "npm-run-all2": "^8.0.4",
@@ -66,8 +66,8 @@
     "oxlint": "^1.25.0",
     "oxlint-tsgolint": "^0.5.0",
     "rimraf": "^4.4.1",
-    "typedoc": "^0.28.12",
-    "typescript": "5.9.2",
+    "typedoc": "^0.28.14",
+    "typescript": "5.9.3",
     "vitest": "^4.0.6"
   },
   "packageManager": "pnpm@10.20.0",

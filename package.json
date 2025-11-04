@@ -53,10 +53,7 @@
     "test": "vitest",
     "type-check": "tsc --noEmit"
   },
-  "browserslist": [
-    "extends @sanity/browserslist-config",
-    "node 14"
-  ],
+  "browserslist": "extends @sanity/browserslist-config",
   "prettier": "@sanity/prettier-config",
   "eslintConfig": {
     "parserOptions": {
@@ -100,7 +97,7 @@
   },
   "packageManager": "pnpm@10.20.0",
   "engines": {
-    "node": "^14.13.1 || >=16.0.0"
+    "node": ">=20.19 <22 || >=22.12"
   },
   "publishConfig": {
     "access": "public"

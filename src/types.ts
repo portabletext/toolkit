@@ -102,11 +102,10 @@ export interface ToolkitPortableTextDirectList {
 /**
  * Toolkit-specific type representing a list item block, but where the children can be another list
  */
-export interface ToolkitPortableTextListItem
-  extends PortableTextListItemBlock<
-    PortableTextMarkDefinition,
-    PortableTextSpan | ToolkitPortableTextList
-  > {}
+export interface ToolkitPortableTextListItem extends PortableTextListItemBlock<
+  PortableTextMarkDefinition,
+  PortableTextSpan | ToolkitPortableTextList
+> {}
 
 /**
  * Toolkit-specific type representing a text node, used when nesting spans.

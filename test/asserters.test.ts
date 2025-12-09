@@ -7,7 +7,7 @@ import {
   isPortableTextToolkitList,
   isPortableTextToolkitSpan,
   isPortableTextToolkitTextNode,
-} from '../src'
+} from '@portabletext/toolkit'
 
 test('isPortableTextBlock: all possible non-list properties', () => {
   expect(

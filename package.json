@@ -30,42 +30,33 @@
     "./package.json": "./package.json"
   },
   "main": "./dist/index.js",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
-    "dist",
-    "src",
-    "README.md"
+    "dist"
   ],
   "scripts": {
-    "build": "run-s clean pkg:build pkg:check",
-    "clean": "rimraf dist coverage",
+    "build": "pkg-utils build --strict --clean --check",
     "coverage": "vitest run --coverage",
     "docs:build": "typedoc",
     "format": "oxfmt .",
-    "lint": "oxlint --deny-warnings --report-unused-disable-directives --type-aware",
-    "pkg:build": "pkg-utils build --strict",
-    "pkg:check": "pkg-utils --strict",
-    "prepublishOnly": "run-s build lint type-check",
+    "lint": "oxlint --type-aware --type-check --deny-warnings --report-unused-disable-directives",
+    "prepublishOnly": "pnpm build",
     "release": "changeset publish",
-    "test": "vitest",
-    "type-check": "tsc --noEmit"
+    "test": "vitest"
   },
-  "browserslist": "extends @sanity/browserslist-config",
   "dependencies": {
     "@portabletext/types": "^4.0.0"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.5.2",
     "@changesets/cli": "^2.29.8",
-    "@sanity/browserslist-config": "^1.0.5",
     "@sanity/pkg-utils": "^9.2.3",
     "@types/node": "^24.10.2",
     "@vitest/coverage-v8": "^4.0.15",
-    "npm-run-all2": "^8.0.4",
     "oxfmt": "^0.17.0",
     "oxlint": "^1.32.0",
     "oxlint-tsgolint": "^0.8.4",
-    "rimraf": "^4.4.1",
     "typedoc": "^0.28.15",
     "typescript": "5.9.3",
     "vitest": "^4.0.15"

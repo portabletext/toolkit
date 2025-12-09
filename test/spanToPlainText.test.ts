@@ -1,6 +1,6 @@
 import {expect, test} from 'vitest'
 
-import {spanToPlainText} from '../src'
+import {spanToPlainText} from '@portabletext/toolkit'
 
 test('spanToPlainText: converts single-span correctly', () => {
   expect(

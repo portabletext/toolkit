@@ -7,6 +7,6 @@
 
     "lib": ["ES2016", "DOM"],
     "noUncheckedIndexedAccess": true,
-    "forceConsistentCasingInFileNames": true
-  }
+    "forceConsistentCasingInFileNames": true,
+  },
 }

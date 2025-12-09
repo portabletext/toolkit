@@ -25,6 +25,6 @@
     // Module resolution
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true
-  }
+    "esModuleInterop": true,
+  },
 }

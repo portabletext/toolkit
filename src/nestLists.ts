@@ -89,7 +89,7 @@ export function nestLists<T extends TypedObject = PortableTextBlock | TypedObjec
     if ((block.level || 1) > currentList.level) {
       const newList = listFromBlock(block, i, mode)
 
-      if (mode === 'html') {
+      if (currentList.mode === 'html' && newList.mode === 'html') {
         // Because HTML is kinda weird, nested lists needs to be nested within list items.
         // So while you would think that we could populate the parent list with a new sub-list,
         // we actually have to target the last list element (child) of the parent.
@@ -97,9 +97,10 @@ export function nestLists<T extends TypedObject = PortableTextBlock | TypedObjec
         // will mutate the input, and we don't want to blindly clone the entire tree.
 
         // Clone the last child while adding our new list as the last child of it
-        const lastListItem = currentList.children[
-          currentList.children.length - 1
-        ] as ToolkitPortableTextListItem
+        const lastListItem = currentList.children[currentList.children.length - 1]
+        if (!lastListItem) {
+          continue
+        }
 
         const newLastChild: ToolkitPortableTextListItem = {
           ...lastListItem,
@@ -108,10 +109,8 @@ export function nestLists<T extends TypedObject = PortableTextBlock | TypedObjec
 
         // Swap the last child
         currentList.children[currentList.children.length - 1] = newLastChild
-      } else {
-        ;(currentList as ToolkitPortableTextDirectList).children.push(
-          newList as ToolkitPortableTextDirectList,
-        )
+      } else if (currentList.mode === 'direct' && newList.mode === 'direct') {
+        currentList.children.push(newList)
       }
 
       // Set the newly created, deeper list as the current

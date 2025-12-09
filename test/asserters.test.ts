@@ -1,5 +1,3 @@
-import {expect, test} from 'vitest'
-
 import {
   isPortableTextBlock,
   isPortableTextListItemBlock,
@@ -8,6 +6,7 @@ import {
   isPortableTextToolkitSpan,
   isPortableTextToolkitTextNode,
 } from '@portabletext/toolkit'
+import {expect, test} from 'vitest'
 
 test('isPortableTextBlock: all possible non-list properties', () => {
   expect(

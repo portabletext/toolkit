@@ -1,7 +1,7 @@
 import type {PortableTextListItemBlock} from '@portabletext/types'
-import {expect, test} from 'vitest'
 
 import {LIST_NEST_MODE_DIRECT, LIST_NEST_MODE_HTML, nestLists} from '@portabletext/toolkit'
+import {expect, test} from 'vitest'
 
 test('nestLists: returns empty tree on no blocks', () => {
   expect(nestLists([], LIST_NEST_MODE_HTML)).toEqual([])

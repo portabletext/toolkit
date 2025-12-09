@@ -1,5 +1,6 @@
 {
   "extends": "@sanity/tsconfig/strictest",
+  "exclude": ["dist", "docs", "node_modules"],
   "compilerOptions": {
     "rootDir": ".",
     "outDir": "./dist",

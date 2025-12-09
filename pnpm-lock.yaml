@@ -21,6 +21,9 @@ importers:
       '@sanity/pkg-utils':
         specifier: ^9.2.3
         version: 9.2.3(@types/node@24.10.2)(typescript@5.9.3)
+      '@sanity/tsconfig':
+        specifier: ^2.0.0
+        version: 2.0.0
       '@types/node':
         specifier: ^24.10.2
         version: 24.10.2
@@ -1097,6 +1100,9 @@ packages:
     peerDependenciesMeta:
       babel-plugin-react-compiler:
         optional: true
+
+  '@sanity/tsconfig@2.0.0':
+    resolution: {integrity: sha512-t3VkUo8Sz4g6TjffUTDXzDCghs+MelX+lTJHNPK+Htjrcv/+VJSfHZhp4Zi4GuKjmdd3VzCtFb37S7R42qpppw==}
 
   '@shikijs/engine-oniguruma@3.19.0':
     resolution: {integrity: sha512-1hRxtYIJfJSZeM5ivbUXv9hcJP3PWRo5prG/V2sWwiubUKTa+7P62d2qxCW8jiVFX4pgRHhnHNp+qeR7Xl+6kg==}
@@ -3557,6 +3563,8 @@ snapshots:
       - oxc-resolver
       - supports-color
       - vue-tsc
+
+  '@sanity/tsconfig@2.0.0': {}
 
   '@shikijs/engine-oniguruma@3.19.0':
     dependencies:

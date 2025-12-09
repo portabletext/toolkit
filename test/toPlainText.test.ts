@@ -1,6 +1,5 @@
+import {toPlainText} from '@portabletext/toolkit'
 import {expect, test} from 'vitest'
-
-import {toPlainText} from '../src'
 
 test('toPlainText: converts single-block, single-span with no formatting correctly', () => {
   expect(

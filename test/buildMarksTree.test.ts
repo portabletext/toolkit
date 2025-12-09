@@ -1,7 +1,7 @@
 import type {PortableTextBlock} from '@portabletext/types'
-import {expect, test} from 'vitest'
 
-import {buildMarksTree} from '../src'
+import {buildMarksTree} from '@portabletext/toolkit'
+import {expect, test} from 'vitest'
 
 test('buildMarksTree: returns empty tree on empty blocks', () => {
   expect(buildMarksTree({_type: 'block', children: []})).toEqual([])

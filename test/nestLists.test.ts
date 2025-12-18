@@ -118,7 +118,7 @@ function createBlocks(
   spans: string[],
   options: {level?: number; type?: string; startIndex?: number} = {},
 ): PortableTextListItemBlock[] {
-  const { level = 1, type = 'bullet', startIndex = 0} = options
+  const {level = 1, type = 'bullet', startIndex = 0} = options
   return spans.map((span, i) => ({
     _type: 'block',
     _key: `${String.fromCharCode(65 + startIndex + i)}${i}`,

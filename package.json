@@ -3,12 +3,12 @@
   "version": "5.0.0",
   "description": "Toolkit of handy utility functions for dealing with Portable Text",
   "keywords": [
-    "sanity",
     "cms",
-    "headless",
-    "realtime",
     "content",
-    "portable-text-toolkit"
+    "headless",
+    "portable-text-toolkit",
+    "realtime",
+    "sanity"
   ],
   "homepage": "https://github.com/portabletext/toolkit#readme",
   "bugs": {
@@ -18,15 +18,15 @@
     "type": "git",
     "url": "git+ssh://git@github.com/portabletext/toolkit.git"
   },
-  "license": "MIT",
   "author": "Sanity.io <hello@sanity.io>",
+  "license": "MIT",
   "sideEffects": false,
   "type": "module",
+  "main": "./dist/index.js",
   "exports": {
     ".": "./src/index.ts",
     "./package.json": "./package.json"
   },
-  "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [

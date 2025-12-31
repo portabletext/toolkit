@@ -9,7 +9,7 @@ importers:
   .:
     dependencies:
       '@portabletext/types':
-        specifier: ^4.0.0
+        specifier: ^4.0.1
         version: 4.0.1
     devDependencies:
       '@changesets/changelog-github':

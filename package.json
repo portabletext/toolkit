@@ -49,7 +49,7 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@portabletext/types": "^4.0.0"
+    "@portabletext/types": "^4.0.1"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.5.2",

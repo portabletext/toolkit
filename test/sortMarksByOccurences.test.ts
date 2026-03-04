@@ -1,6 +1,5 @@
-import type {PortableTextBlock} from '@portabletext/types'
-
 import {sortMarksByOccurences} from '@portabletext/toolkit'
+import type {PortableTextBlock} from '@portabletext/types'
 import {expect, test} from 'vitest'
 
 test('sortMarksByOccurences: sorts correctly', () => {

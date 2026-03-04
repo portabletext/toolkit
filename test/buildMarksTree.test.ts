@@ -1,6 +1,5 @@
-import type {PortableTextBlock} from '@portabletext/types'
-
 import {buildMarksTree} from '@portabletext/toolkit'
+import type {PortableTextBlock} from '@portabletext/types'
 import {expect, test} from 'vitest'
 
 test('buildMarksTree: returns empty tree on empty blocks', () => {

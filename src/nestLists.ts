@@ -1,5 +1,10 @@
 import type {PortableTextBlock, PortableTextListItemBlock, TypedObject} from '@portabletext/types'
 
+import {
+  isPortableTextListItemBlock,
+  isPortableTextSpan,
+  isPortableTextToolkitList,
+} from './asserters'
 import type {
   ToolkitListNestMode,
   ToolkitPortableTextDirectList,
@@ -7,12 +12,6 @@ import type {
   ToolkitPortableTextList,
   ToolkitPortableTextListItem,
 } from './types'
-
-import {
-  isPortableTextListItemBlock,
-  isPortableTextSpan,
-  isPortableTextToolkitList,
-} from './asserters'
 
 export type ToolkitNestListsOutputNode<T> =
   | T

@@ -119,6 +119,1036 @@ exports[`nestLists: ends lists when non-list item occurs 1`] = `
 ]
 `;
 
+exports[`nestLists: fills skipped levels for 'initial level' in direct mode 1`] = `
+[
+  {
+    "_key": "level-3-parent-1",
+    "_type": "@list",
+    "children": [
+      {
+        "_key": "level-3-parent-2",
+        "_type": "@list",
+        "children": [
+          {
+            "_key": "level-3-parent",
+            "_type": "@list",
+            "children": [
+              {
+                "_key": "level-3",
+                "_type": "block",
+                "children": [
+                  {
+                    "_type": "span",
+                    "text": "Level 3",
+                  },
+                ],
+                "level": 3,
+                "listItem": "bullet",
+              },
+            ],
+            "level": 3,
+            "listItem": "bullet",
+            "mode": "direct",
+          },
+        ],
+        "level": 2,
+        "listItem": "bullet",
+        "mode": "direct",
+      },
+      {
+        "_key": "level-1",
+        "_type": "block",
+        "children": [
+          {
+            "_type": "span",
+            "text": "Level 1",
+          },
+        ],
+        "level": 1,
+        "listItem": "bullet",
+      },
+    ],
+    "level": 1,
+    "listItem": "bullet",
+    "mode": "direct",
+  },
+]
+`;
+
+exports[`nestLists: fills skipped levels for 'initial level' in html mode 1`] = `
+[
+  {
+    "_key": "level-3-parent-1",
+    "_type": "@list",
+    "children": [
+      {
+        "_key": "level-3-placeholder-1",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "level-3-parent-2",
+            "_type": "@list",
+            "children": [
+              {
+                "_key": "level-3-placeholder-2",
+                "_type": "block",
+                "children": [
+                  {
+                    "_key": "level-3-parent",
+                    "_type": "@list",
+                    "children": [
+                      {
+                        "_key": "level-3",
+                        "_type": "block",
+                        "children": [
+                          {
+                            "_type": "span",
+                            "text": "Level 3",
+                          },
+                        ],
+                        "level": 3,
+                        "listItem": "bullet",
+                      },
+                    ],
+                    "level": 3,
+                    "listItem": "bullet",
+                    "mode": "html",
+                  },
+                ],
+                "level": 2,
+                "listItem": "bullet",
+              },
+            ],
+            "level": 2,
+            "listItem": "bullet",
+            "mode": "html",
+          },
+        ],
+        "level": 1,
+        "listItem": "bullet",
+      },
+      {
+        "_key": "level-1",
+        "_type": "block",
+        "children": [
+          {
+            "_type": "span",
+            "text": "Level 1",
+          },
+        ],
+        "level": 1,
+        "listItem": "bullet",
+      },
+    ],
+    "level": 1,
+    "listItem": "bullet",
+    "mode": "html",
+  },
+]
+`;
+
+exports[`nestLists: fills skipped levels for 'same level without a matching list st…' in direct mode 1`] = `
+[
+  {
+    "_key": "level-1-parent",
+    "_type": "@list",
+    "children": [
+      {
+        "_key": "level-1",
+        "_type": "block",
+        "children": [
+          {
+            "_type": "span",
+            "text": "Level 1",
+          },
+        ],
+        "level": 1,
+        "listItem": "bullet",
+      },
+      {
+        "_key": "level-2-number-parent",
+        "_type": "@list",
+        "children": [
+          {
+            "_key": "level-2-number",
+            "_type": "block",
+            "children": [
+              {
+                "_type": "span",
+                "text": "Level 2 number",
+              },
+            ],
+            "level": 2,
+            "listItem": "number",
+          },
+        ],
+        "level": 2,
+        "listItem": "number",
+        "mode": "direct",
+      },
+    ],
+    "level": 1,
+    "listItem": "bullet",
+    "mode": "direct",
+  },
+  {
+    "_key": "level-2-parent-1",
+    "_type": "@list",
+    "children": [
+      {
+        "_key": "level-2-parent",
+        "_type": "@list",
+        "children": [
+          {
+            "_key": "level-2",
+            "_type": "block",
+            "children": [
+              {
+                "_type": "span",
+                "text": "Level 2",
+              },
+            ],
+            "level": 2,
+            "listItem": "bullet",
+          },
+        ],
+        "level": 2,
+        "listItem": "bullet",
+        "mode": "direct",
+      },
+    ],
+    "level": 1,
+    "listItem": "bullet",
+    "mode": "direct",
+  },
+]
+`;
+
+exports[`nestLists: fills skipped levels for 'same level without a matching list st…' in html mode 1`] = `
+[
+  {
+    "_key": "level-1-parent",
+    "_type": "@list",
+    "children": [
+      {
+        "_key": "level-1",
+        "_type": "block",
+        "children": [
+          {
+            "_type": "span",
+            "text": "Level 1",
+          },
+          {
+            "_key": "level-2-number-parent",
+            "_type": "@list",
+            "children": [
+              {
+                "_key": "level-2-number",
+                "_type": "block",
+                "children": [
+                  {
+                    "_type": "span",
+                    "text": "Level 2 number",
+                  },
+                ],
+                "level": 2,
+                "listItem": "number",
+              },
+            ],
+            "level": 2,
+            "listItem": "number",
+            "mode": "html",
+          },
+        ],
+        "level": 1,
+        "listItem": "bullet",
+      },
+    ],
+    "level": 1,
+    "listItem": "bullet",
+    "mode": "html",
+  },
+  {
+    "_key": "level-2-parent-1",
+    "_type": "@list",
+    "children": [
+      {
+        "_key": "level-2-placeholder-1",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "level-2-parent",
+            "_type": "@list",
+            "children": [
+              {
+                "_key": "level-2",
+                "_type": "block",
+                "children": [
+                  {
+                    "_type": "span",
+                    "text": "Level 2",
+                  },
+                ],
+                "level": 2,
+                "listItem": "bullet",
+              },
+            ],
+            "level": 2,
+            "listItem": "bullet",
+            "mode": "html",
+          },
+        ],
+        "level": 1,
+        "listItem": "bullet",
+      },
+    ],
+    "level": 1,
+    "listItem": "bullet",
+    "mode": "html",
+  },
+]
+`;
+
+exports[`nestLists: fills skipped levels for 'shallower level without a matching an…' in direct mode 1`] = `
+[
+  {
+    "_key": "level-1-parent",
+    "_type": "@list",
+    "children": [
+      {
+        "_key": "level-1",
+        "_type": "block",
+        "children": [
+          {
+            "_type": "span",
+            "text": "Level 1",
+          },
+        ],
+        "level": 1,
+        "listItem": "bullet",
+      },
+      {
+        "_key": "level-3-number-parent-2",
+        "_type": "@list",
+        "children": [
+          {
+            "_key": "level-3-number-parent",
+            "_type": "@list",
+            "children": [
+              {
+                "_key": "level-3-number",
+                "_type": "block",
+                "children": [
+                  {
+                    "_type": "span",
+                    "text": "Level 3 number",
+                  },
+                ],
+                "level": 3,
+                "listItem": "number",
+              },
+            ],
+            "level": 3,
+            "listItem": "number",
+            "mode": "direct",
+          },
+        ],
+        "level": 2,
+        "listItem": "number",
+        "mode": "direct",
+      },
+    ],
+    "level": 1,
+    "listItem": "bullet",
+    "mode": "direct",
+  },
+  {
+    "_key": "level-2-parent-1",
+    "_type": "@list",
+    "children": [
+      {
+        "_key": "level-2-parent",
+        "_type": "@list",
+        "children": [
+          {
+            "_key": "level-2",
+            "_type": "block",
+            "children": [
+              {
+                "_type": "span",
+                "text": "Level 2",
+              },
+            ],
+            "level": 2,
+            "listItem": "bullet",
+          },
+        ],
+        "level": 2,
+        "listItem": "bullet",
+        "mode": "direct",
+      },
+    ],
+    "level": 1,
+    "listItem": "bullet",
+    "mode": "direct",
+  },
+]
+`;
+
+exports[`nestLists: fills skipped levels for 'shallower level without a matching an…' in html mode 1`] = `
+[
+  {
+    "_key": "level-1-parent",
+    "_type": "@list",
+    "children": [
+      {
+        "_key": "level-1",
+        "_type": "block",
+        "children": [
+          {
+            "_type": "span",
+            "text": "Level 1",
+          },
+          {
+            "_key": "level-3-number-parent-2",
+            "_type": "@list",
+            "children": [
+              {
+                "_key": "level-3-number-placeholder-2",
+                "_type": "block",
+                "children": [
+                  {
+                    "_key": "level-3-number-parent",
+                    "_type": "@list",
+                    "children": [
+                      {
+                        "_key": "level-3-number",
+                        "_type": "block",
+                        "children": [
+                          {
+                            "_type": "span",
+                            "text": "Level 3 number",
+                          },
+                        ],
+                        "level": 3,
+                        "listItem": "number",
+                      },
+                    ],
+                    "level": 3,
+                    "listItem": "number",
+                    "mode": "html",
+                  },
+                ],
+                "level": 2,
+                "listItem": "number",
+              },
+            ],
+            "level": 2,
+            "listItem": "number",
+            "mode": "html",
+          },
+        ],
+        "level": 1,
+        "listItem": "bullet",
+      },
+    ],
+    "level": 1,
+    "listItem": "bullet",
+    "mode": "html",
+  },
+  {
+    "_key": "level-2-parent-1",
+    "_type": "@list",
+    "children": [
+      {
+        "_key": "level-2-placeholder-1",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "level-2-parent",
+            "_type": "@list",
+            "children": [
+              {
+                "_key": "level-2",
+                "_type": "block",
+                "children": [
+                  {
+                    "_type": "span",
+                    "text": "Level 2",
+                  },
+                ],
+                "level": 2,
+                "listItem": "bullet",
+              },
+            ],
+            "level": 2,
+            "listItem": "bullet",
+            "mode": "html",
+          },
+        ],
+        "level": 1,
+        "listItem": "bullet",
+      },
+    ],
+    "level": 1,
+    "listItem": "bullet",
+    "mode": "html",
+  },
+]
+`;
+
+exports[`nestLists: fills skipped levels for 'skipped level while nesting' in direct mode 1`] = `
+[
+  {
+    "_key": "level-1-parent",
+    "_type": "@list",
+    "children": [
+      {
+        "_key": "level-1",
+        "_type": "block",
+        "children": [
+          {
+            "_type": "span",
+            "text": "Level 1",
+          },
+        ],
+        "level": 1,
+        "listItem": "bullet",
+      },
+      {
+        "_key": "level-3-parent-2",
+        "_type": "@list",
+        "children": [
+          {
+            "_key": "level-3-parent",
+            "_type": "@list",
+            "children": [
+              {
+                "_key": "level-3",
+                "_type": "block",
+                "children": [
+                  {
+                    "_type": "span",
+                    "text": "Level 3",
+                  },
+                ],
+                "level": 3,
+                "listItem": "bullet",
+              },
+            ],
+            "level": 3,
+            "listItem": "bullet",
+            "mode": "direct",
+          },
+        ],
+        "level": 2,
+        "listItem": "bullet",
+        "mode": "direct",
+      },
+      {
+        "_key": "level-1-again",
+        "_type": "block",
+        "children": [
+          {
+            "_type": "span",
+            "text": "Level 1 again",
+          },
+        ],
+        "level": 1,
+        "listItem": "bullet",
+      },
+    ],
+    "level": 1,
+    "listItem": "bullet",
+    "mode": "direct",
+  },
+]
+`;
+
+exports[`nestLists: fills skipped levels for 'skipped level while nesting' in html mode 1`] = `
+[
+  {
+    "_key": "level-1-parent",
+    "_type": "@list",
+    "children": [
+      {
+        "_key": "level-1",
+        "_type": "block",
+        "children": [
+          {
+            "_type": "span",
+            "text": "Level 1",
+          },
+          {
+            "_key": "level-3-parent-2",
+            "_type": "@list",
+            "children": [
+              {
+                "_key": "level-3-placeholder-2",
+                "_type": "block",
+                "children": [
+                  {
+                    "_key": "level-3-parent",
+                    "_type": "@list",
+                    "children": [
+                      {
+                        "_key": "level-3",
+                        "_type": "block",
+                        "children": [
+                          {
+                            "_type": "span",
+                            "text": "Level 3",
+                          },
+                        ],
+                        "level": 3,
+                        "listItem": "bullet",
+                      },
+                    ],
+                    "level": 3,
+                    "listItem": "bullet",
+                    "mode": "html",
+                  },
+                ],
+                "level": 2,
+                "listItem": "bullet",
+              },
+            ],
+            "level": 2,
+            "listItem": "bullet",
+            "mode": "html",
+          },
+        ],
+        "level": 1,
+        "listItem": "bullet",
+      },
+      {
+        "_key": "level-1-again",
+        "_type": "block",
+        "children": [
+          {
+            "_type": "span",
+            "text": "Level 1 again",
+          },
+        ],
+        "level": 1,
+        "listItem": "bullet",
+      },
+    ],
+    "level": 1,
+    "listItem": "bullet",
+    "mode": "html",
+  },
+]
+`;
+
+exports[`nestLists: fills skipped levels for 'skipped levels with a changed list st…' in direct mode 1`] = `
+[
+  {
+    "_key": "level-3-bullet-parent-1",
+    "_type": "@list",
+    "children": [
+      {
+        "_key": "level-3-bullet-parent-2",
+        "_type": "@list",
+        "children": [
+          {
+            "_key": "level-3-bullet-parent",
+            "_type": "@list",
+            "children": [
+              {
+                "_key": "level-3-bullet",
+                "_type": "block",
+                "children": [
+                  {
+                    "_type": "span",
+                    "text": "Level 3 bullet",
+                  },
+                ],
+                "level": 3,
+                "listItem": "bullet",
+              },
+            ],
+            "level": 3,
+            "listItem": "bullet",
+            "mode": "direct",
+          },
+        ],
+        "level": 2,
+        "listItem": "bullet",
+        "mode": "direct",
+      },
+      {
+        "_key": "level-1",
+        "_type": "block",
+        "children": [
+          {
+            "_type": "span",
+            "text": "Level 1",
+          },
+        ],
+        "level": 1,
+        "listItem": "bullet",
+      },
+      {
+        "_key": "level-5-bullet-parent-2",
+        "_type": "@list",
+        "children": [
+          {
+            "_key": "level-5-bullet-parent-3",
+            "_type": "@list",
+            "children": [
+              {
+                "_key": "level-5-bullet-parent-4",
+                "_type": "@list",
+                "children": [
+                  {
+                    "_key": "level-5-bullet-parent",
+                    "_type": "@list",
+                    "children": [
+                      {
+                        "_key": "level-5-bullet",
+                        "_type": "block",
+                        "children": [
+                          {
+                            "_type": "span",
+                            "text": "Level 5 bullet",
+                          },
+                        ],
+                        "level": 5,
+                        "listItem": "bullet",
+                      },
+                    ],
+                    "level": 5,
+                    "listItem": "bullet",
+                    "mode": "direct",
+                  },
+                ],
+                "level": 4,
+                "listItem": "bullet",
+                "mode": "direct",
+              },
+            ],
+            "level": 3,
+            "listItem": "bullet",
+            "mode": "direct",
+          },
+          {
+            "_key": "level-2-bullet",
+            "_type": "block",
+            "children": [
+              {
+                "_type": "span",
+                "text": "Level 2 bullet",
+              },
+            ],
+            "level": 2,
+            "listItem": "bullet",
+          },
+          {
+            "_key": "level-5-number-parent-3",
+            "_type": "@list",
+            "children": [
+              {
+                "_key": "level-5-number-parent-4",
+                "_type": "@list",
+                "children": [
+                  {
+                    "_key": "level-5-number-parent",
+                    "_type": "@list",
+                    "children": [
+                      {
+                        "_key": "level-5-number",
+                        "_type": "block",
+                        "children": [
+                          {
+                            "_type": "span",
+                            "text": "Level 5 number",
+                          },
+                        ],
+                        "level": 5,
+                        "listItem": "number",
+                      },
+                    ],
+                    "level": 5,
+                    "listItem": "number",
+                    "mode": "direct",
+                  },
+                ],
+                "level": 4,
+                "listItem": "number",
+                "mode": "direct",
+              },
+            ],
+            "level": 3,
+            "listItem": "number",
+            "mode": "direct",
+          },
+        ],
+        "level": 2,
+        "listItem": "bullet",
+        "mode": "direct",
+      },
+    ],
+    "level": 1,
+    "listItem": "bullet",
+    "mode": "direct",
+  },
+  {
+    "_key": "level-1-number-parent",
+    "_type": "@list",
+    "children": [
+      {
+        "_key": "level-1-number",
+        "_type": "block",
+        "children": [
+          {
+            "_type": "span",
+            "text": "Level 1 number",
+          },
+        ],
+        "level": 1,
+        "listItem": "number",
+      },
+    ],
+    "level": 1,
+    "listItem": "number",
+    "mode": "direct",
+  },
+]
+`;
+
+exports[`nestLists: fills skipped levels for 'skipped levels with a changed list st…' in html mode 1`] = `
+[
+  {
+    "_key": "level-3-bullet-parent-1",
+    "_type": "@list",
+    "children": [
+      {
+        "_key": "level-3-bullet-placeholder-1",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "level-3-bullet-parent-2",
+            "_type": "@list",
+            "children": [
+              {
+                "_key": "level-3-bullet-placeholder-2",
+                "_type": "block",
+                "children": [
+                  {
+                    "_key": "level-3-bullet-parent",
+                    "_type": "@list",
+                    "children": [
+                      {
+                        "_key": "level-3-bullet",
+                        "_type": "block",
+                        "children": [
+                          {
+                            "_type": "span",
+                            "text": "Level 3 bullet",
+                          },
+                        ],
+                        "level": 3,
+                        "listItem": "bullet",
+                      },
+                    ],
+                    "level": 3,
+                    "listItem": "bullet",
+                    "mode": "html",
+                  },
+                ],
+                "level": 2,
+                "listItem": "bullet",
+              },
+            ],
+            "level": 2,
+            "listItem": "bullet",
+            "mode": "html",
+          },
+        ],
+        "level": 1,
+        "listItem": "bullet",
+      },
+      {
+        "_key": "level-1",
+        "_type": "block",
+        "children": [
+          {
+            "_type": "span",
+            "text": "Level 1",
+          },
+          {
+            "_key": "level-5-bullet-parent-2",
+            "_type": "@list",
+            "children": [
+              {
+                "_key": "level-5-bullet-placeholder-2",
+                "_type": "block",
+                "children": [
+                  {
+                    "_key": "level-5-bullet-parent-3",
+                    "_type": "@list",
+                    "children": [
+                      {
+                        "_key": "level-5-bullet-placeholder-3",
+                        "_type": "block",
+                        "children": [
+                          {
+                            "_key": "level-5-bullet-parent-4",
+                            "_type": "@list",
+                            "children": [
+                              {
+                                "_key": "level-5-bullet-placeholder-4",
+                                "_type": "block",
+                                "children": [
+                                  {
+                                    "_key": "level-5-bullet-parent",
+                                    "_type": "@list",
+                                    "children": [
+                                      {
+                                        "_key": "level-5-bullet",
+                                        "_type": "block",
+                                        "children": [
+                                          {
+                                            "_type": "span",
+                                            "text": "Level 5 bullet",
+                                          },
+                                        ],
+                                        "level": 5,
+                                        "listItem": "bullet",
+                                      },
+                                    ],
+                                    "level": 5,
+                                    "listItem": "bullet",
+                                    "mode": "html",
+                                  },
+                                ],
+                                "level": 4,
+                                "listItem": "bullet",
+                              },
+                            ],
+                            "level": 4,
+                            "listItem": "bullet",
+                            "mode": "html",
+                          },
+                        ],
+                        "level": 3,
+                        "listItem": "bullet",
+                      },
+                    ],
+                    "level": 3,
+                    "listItem": "bullet",
+                    "mode": "html",
+                  },
+                ],
+                "level": 2,
+                "listItem": "bullet",
+              },
+              {
+                "_key": "level-2-bullet",
+                "_type": "block",
+                "children": [
+                  {
+                    "_type": "span",
+                    "text": "Level 2 bullet",
+                  },
+                  {
+                    "_key": "level-5-number-parent-3",
+                    "_type": "@list",
+                    "children": [
+                      {
+                        "_key": "level-5-number-placeholder-3",
+                        "_type": "block",
+                        "children": [
+                          {
+                            "_key": "level-5-number-parent-4",
+                            "_type": "@list",
+                            "children": [
+                              {
+                                "_key": "level-5-number-placeholder-4",
+                                "_type": "block",
+                                "children": [
+                                  {
+                                    "_key": "level-5-number-parent",
+                                    "_type": "@list",
+                                    "children": [
+                                      {
+                                        "_key": "level-5-number",
+                                        "_type": "block",
+                                        "children": [
+                                          {
+                                            "_type": "span",
+                                            "text": "Level 5 number",
+                                          },
+                                        ],
+                                        "level": 5,
+                                        "listItem": "number",
+                                      },
+                                    ],
+                                    "level": 5,
+                                    "listItem": "number",
+                                    "mode": "html",
+                                  },
+                                ],
+                                "level": 4,
+                                "listItem": "number",
+                              },
+                            ],
+                            "level": 4,
+                            "listItem": "number",
+                            "mode": "html",
+                          },
+                        ],
+                        "level": 3,
+                        "listItem": "number",
+                      },
+                    ],
+                    "level": 3,
+                    "listItem": "number",
+                    "mode": "html",
+                  },
+                ],
+                "level": 2,
+                "listItem": "bullet",
+              },
+            ],
+            "level": 2,
+            "listItem": "bullet",
+            "mode": "html",
+          },
+        ],
+        "level": 1,
+        "listItem": "bullet",
+      },
+    ],
+    "level": 1,
+    "listItem": "bullet",
+    "mode": "html",
+  },
+  {
+    "_key": "level-1-number-parent",
+    "_type": "@list",
+    "children": [
+      {
+        "_key": "level-1-number",
+        "_type": "block",
+        "children": [
+          {
+            "_type": "span",
+            "text": "Level 1 number",
+          },
+        ],
+        "level": 1,
+        "listItem": "number",
+      },
+    ],
+    "level": 1,
+    "listItem": "number",
+    "mode": "html",
+  },
+]
+`;
+
 exports[`nestLists: handles deeper/shallower transitions correctly in direct mode 1`] = `
 [
   {

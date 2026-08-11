@@ -1,6 +1,14 @@
-import {LIST_NEST_MODE_DIRECT, LIST_NEST_MODE_HTML, nestLists} from '@portabletext/toolkit'
-import type {PortableTextListItemBlock} from '@portabletext/types'
+import {
+  isPortableTextListItemBlock,
+  isPortableTextToolkitList,
+  LIST_NEST_MODE_DIRECT,
+  LIST_NEST_MODE_HTML,
+  nestLists,
+} from '@portabletext/toolkit'
+import type {PortableTextListItemBlock, TypedObject} from '@portabletext/types'
 import {expect, test} from 'vitest'
+
+import {listNestingFixtures} from './fixtures/nestLists'
 
 test('nestLists: returns empty tree on no blocks', () => {
   expect(nestLists([], LIST_NEST_MODE_HTML)).toEqual([])
@@ -105,6 +113,20 @@ test('nestLists: handles deeper/shallower transitions correctly in direct mode',
   expect(nestLists(blocks, LIST_NEST_MODE_DIRECT)).toMatchSnapshot()
 })
 
+test.each(listNestingFixtures)(
+  'nestLists: fills skipped levels for $name in html mode',
+  ({blocks}) => {
+    expect(nestLists(blocks, LIST_NEST_MODE_HTML)).toMatchSnapshot()
+  },
+)
+
+test.each(listNestingFixtures)(
+  'nestLists: fills skipped levels for $name in direct mode',
+  ({blocks}) => {
+    expect(nestLists(blocks, LIST_NEST_MODE_DIRECT)).toMatchSnapshot()
+  },
+)
+
 test('nestLists: wraps adjacent list items of different types in separate list nodes', () => {
   const blocks = [
     ...createBlocks(['Bullet 1', 'Bullet 2'], {type: 'bullet', startIndex: 0}),
@@ -112,6 +134,48 @@ test('nestLists: wraps adjacent list items of different types in separate list n
   ]
   expect(nestLists(blocks, LIST_NEST_MODE_HTML)).toMatchSnapshot()
 })
+
+// Both nesting modes carry `level` on every list node, but only `html` mode _needs_ the tree to be
+// as deep as the level, since HTML has no other way of expressing depth. Keeping the two in sync in
+// `direct` mode as well means renderers that indent by tree depth and renderers that indent by
+// `level` agree on the result, whichever mode they pick.
+test.each(listNestingFixtures)('nestLists: nesting depth matches level for $name', ({blocks}) => {
+  expect(depthMismatches(nestLists(blocks, LIST_NEST_MODE_HTML))).toEqual([])
+  expect(depthMismatches(nestLists(blocks, LIST_NEST_MODE_DIRECT))).toEqual([])
+})
+
+function depthMismatches(nodes: TypedObject[]): string[] {
+  const mismatches: string[] = []
+  for (const node of nodes) {
+    collectDepthMismatches(node, 0, mismatches)
+  }
+  return mismatches
+}
+
+function collectDepthMismatches(node: TypedObject, depth: number, mismatches: string[]): void {
+  if (isPortableTextToolkitList(node)) {
+    if (node.level !== depth + 1) {
+      mismatches.push(`list at level ${node.level} is nested ${depth + 1} deep`)
+    }
+
+    for (const child of node.children) {
+      collectDepthMismatches(child, depth + 1, mismatches)
+    }
+    return
+  }
+
+  if (isPortableTextListItemBlock(node)) {
+    if ((node.level || 1) !== depth) {
+      mismatches.push(`list item at level ${node.level} is nested ${depth} deep`)
+    }
+
+    // In html mode a deeper list hangs off the list item rather than the list, so the nested list
+    // is still only one level deeper than the list this item belongs to.
+    for (const child of node.children) {
+      collectDepthMismatches(child, depth, mismatches)
+    }
+  }
+}
 
 function createBlocks(
   spans: string[],

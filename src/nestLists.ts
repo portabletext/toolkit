@@ -10,7 +10,6 @@ import type {
   ToolkitPortableTextDirectList,
   ToolkitPortableTextHtmlList,
   ToolkitPortableTextList,
-  ToolkitPortableTextListItem,
 } from './types'
 
 export type ToolkitNestListsOutputNode<T> =
@@ -35,6 +34,12 @@ export type ToolkitNestListsOutputNode<T> =
  * while with `html` they will be of type {@link ToolkitPortableTextHtmlList}
  *
  * These modes are available as {@link LIST_NEST_MODE_HTML} and {@link LIST_NEST_MODE_DIRECT}.
+ *
+ * In both modes, a list node is always nested as deeply as its `level` says it is. List items can
+ * start at any level and skip any number of levels, so the levels that were never authored are
+ * generated to keep the two in sync - meaning renderers can indent by tree depth or by `level` and
+ * get the same result. A generated list holds an empty list item in `html` mode, since HTML can
+ * only nest a list inside a list item, and holds nothing but the deeper list in `direct` mode.
  *
  * @param blocks - Array of Portable Text blocks and other arbitrary types
  * @param mode - Mode to use for nesting, `direct` or `html`
@@ -73,8 +78,9 @@ export function nestLists<T extends TypedObject = PortableTextBlock | TypedObjec
 
     // Start of a new list?
     if (!currentList) {
-      currentList = listFromBlock(block, i, mode)
-      tree.push(currentList)
+      const nestedLists = createNestedLists(block, i, mode, 0)
+      currentList = nestedLists.current
+      tree.push(nestedLists.root)
       continue
     }
 
@@ -86,35 +92,9 @@ export function nestLists<T extends TypedObject = PortableTextBlock | TypedObjec
 
     // Different list props, are we going deeper?
     if ((block.level || 1) > currentList.level) {
-      const newList = listFromBlock(block, i, mode)
-
-      if (mode === 'html') {
-        // Because HTML is kinda weird, nested lists needs to be nested within list items.
-        // So while you would think that we could populate the parent list with a new sub-list,
-        // we actually have to target the last list element (child) of the parent.
-        // However, at this point we need to be very careful - simply pushing to the list of children
-        // will mutate the input, and we don't want to blindly clone the entire tree.
-
-        // Clone the last child while adding our new list as the last child of it
-        const lastListItem = currentList.children[
-          currentList.children.length - 1
-        ] as ToolkitPortableTextListItem
-
-        const newLastChild: ToolkitPortableTextListItem = {
-          ...lastListItem,
-          children: [...lastListItem.children, newList],
-        }
-
-        // Swap the last child
-        currentList.children[currentList.children.length - 1] = newLastChild
-      } else {
-        ;(currentList as ToolkitPortableTextDirectList).children.push(
-          newList as ToolkitPortableTextDirectList,
-        )
-      }
-
-      // Set the newly created, deeper list as the current
-      currentList = newList
+      const nestedLists = createNestedLists(block, i, mode, currentList.level)
+      appendNestedList(currentList, nestedLists.root)
+      currentList = nestedLists.current
       continue
     }
 
@@ -130,8 +110,9 @@ export function nestLists<T extends TypedObject = PortableTextBlock | TypedObjec
       }
 
       // Similar parent can't be found, assume new list
-      currentList = listFromBlock(block, i, mode)
-      tree.push(currentList)
+      const nestedLists = createNestedLists(block, i, mode, 0)
+      currentList = nestedLists.current
+      tree.push(nestedLists.root)
       continue
     }
 
@@ -144,8 +125,9 @@ export function nestLists<T extends TypedObject = PortableTextBlock | TypedObjec
         currentList.children.push(block)
         continue
       } else {
-        currentList = listFromBlock(block, i, mode)
-        tree.push(currentList)
+        const nestedLists = createNestedLists(block, i, mode, 0)
+        currentList = nestedLists.current
+        tree.push(nestedLists.root)
         continue
       }
     }
@@ -166,14 +148,98 @@ function listFromBlock(
   block: PortableTextListItemBlock,
   index: number,
   mode: ToolkitListNestMode,
+  level: number,
+  children: PortableTextListItemBlock[],
 ): ToolkitPortableTextList {
-  return {
-    _type: '@list',
-    _key: `${block._key || `${index}`}-parent`,
+  // Generated ancestor lists share the block's key, so they need the level to stay unique
+  const suffix = level === (block.level || 1) ? '' : `-${level}`
+  const key = `${block._key || `${index}`}-parent${suffix}`
+  return {_type: '@list', _key: key, mode, level, listItem: block.listItem, children}
+}
+
+function createNestedLists(
+  block: PortableTextListItemBlock,
+  index: number,
+  mode: ToolkitListNestMode,
+  startLevel: number,
+): {root: ToolkitPortableTextList; current: ToolkitPortableTextList} {
+  const level = block.level || 1
+  const firstLevel = startLevel + 1
+  const root = listFromBlock(
+    block,
+    index,
     mode,
-    level: block.level || 1,
-    listItem: block.listItem,
-    children: [block],
+    firstLevel,
+    listChildren(block, index, mode, firstLevel, level),
+  )
+  let current = root
+
+  for (let listLevel = firstLevel + 1; listLevel <= level; listLevel++) {
+    const list = listFromBlock(
+      block,
+      index,
+      mode,
+      listLevel,
+      listChildren(block, index, mode, listLevel, level),
+    )
+    appendNestedList(current, list)
+    current = list
+  }
+
+  return {root, current}
+}
+
+function listChildren(
+  block: PortableTextListItemBlock,
+  index: number,
+  mode: ToolkitListNestMode,
+  listLevel: number,
+  targetLevel: number,
+): PortableTextListItemBlock[] {
+  if (listLevel === targetLevel) {
+    return [block]
+  }
+
+  return mode === 'html' ? [emptyListItemFromBlock(block, index, listLevel)] : []
+}
+
+function emptyListItemFromBlock(
+  block: PortableTextListItemBlock,
+  index: number,
+  level: number,
+): PortableTextListItemBlock {
+  return {
+    ...block,
+    _key: `${block._key || `${index}`}-placeholder-${level}`,
+    children: [],
+    level,
+  }
+}
+
+// Both lists are always created with the same mode, so the mixed cases cannot occur
+function appendNestedList(parentList: ToolkitPortableTextList, childList: ToolkitPortableTextList) {
+  if (parentList.mode === 'html' && childList.mode === 'html') {
+    // Because HTML is kinda weird, nested lists needs to be nested within list items.
+    // So while you would think that we could populate the parent list with a new sub-list,
+    // we actually have to target the last list element (child) of the parent.
+    // However, at this point we need to be very careful - simply pushing to the list of children
+    // will mutate the input, and we don't want to blindly clone the entire tree.
+    const lastIndex = parentList.children.length - 1
+    const lastListItem = parentList.children[lastIndex]
+    if (!lastListItem) {
+      return
+    }
+
+    // Swap the last child for a clone that holds our new list as its last child
+    parentList.children[lastIndex] = {
+      ...lastListItem,
+      children: [...lastListItem.children, childList],
+    }
+    return
+  }
+
+  if (parentList.mode === 'direct' && childList.mode === 'direct') {
+    parentList.children.push(childList)
   }
 }
 

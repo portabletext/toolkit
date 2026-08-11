@@ -25,8 +25,6 @@
   ],
   "type": "module",
   "sideEffects": false,
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": "./src/index.ts",
@@ -67,7 +65,7 @@
     "vitest": "^4.1.2"
   },
   "engines": {
-    "node": ">=20.19 <22 || >=22.12"
+    "node": ">=22.12"
   },
   "packageManager": "pnpm@10.30.3"
 }

@@ -195,6 +195,46 @@ test('isPortableTextListItemBlock: false if no `listItem`', () => {
   ).toBe(false)
 })
 
+test.each([{}, {listItem: 13}, {listItem: 'bullet', level: 'invalid'}])(
+  'isPortableTextListItemBlock: rejects non-list metadata before scanning content (%j)',
+  (metadata) => {
+    let contentReads = 0
+    const block = {
+      _type: 'block',
+      ...metadata,
+      get markDefs() {
+        contentReads++
+        return [{_key: 'link', _type: 'link'}]
+      },
+      get children() {
+        contentReads++
+        return [{_type: 'span', text: 'Text'}]
+      },
+    }
+
+    expect(isPortableTextListItemBlock(block)).toBe(false)
+    expect(contentReads).toBe(0)
+  },
+)
+
+test.each([
+  {_type: '@list', children: []},
+  {_type: 'block', children: 'invalid'},
+  {_type: 'block', children: [{}]},
+  {_type: 'block', children: [], markDefs: [{_type: 'link'}]},
+])('isPortableTextListItemBlock: still validates list block content (%j)', (block) => {
+  expect(isPortableTextListItemBlock({...block, listItem: 'bullet', level: 2})).toBe(false)
+})
+
+test.each([undefined, 0, -1, 1.5, Number.NaN])(
+  'isPortableTextListItemBlock: retains permissive numeric levels (%s)',
+  (level) => {
+    expect(isPortableTextListItemBlock({_type: 'custom', children: [], listItem: '', level})).toBe(
+      true,
+    )
+  },
+)
+
 test('isPortableTextSpan: true on all valid span properties', () => {
   expect(
     isPortableTextSpan({

@@ -28,7 +28,7 @@ const knownDecorators = ['strong', 'em', 'code', 'underline', 'strike-through']
  * bolded/italicized.
  *
  * This function is meant to be used like: `block.children.map(sortMarksByOccurences)`,
- * and is used internally in {@link buildMarksTree | `buildMarksTree()`}.
+ * and uses the same ordering as {@link buildMarksTree | `buildMarksTree()`}.
  *
  * The marks are sorted in the following order:
  *
@@ -56,9 +56,13 @@ export function sortMarksByOccurences(
 
   // Slicing because we'll be sorting with `sort()`, which mutates
   const marks = span.marks.slice()
-  const occurences: Record<string, number> = {}
+  if (marks.length === 1) {
+    return marks
+  }
+
+  const occurences = new Map<string, number>()
   marks.forEach((mark) => {
-    occurences[mark] = 1
+    let count = 1
 
     for (let siblingIndex = index + 1; siblingIndex < blockChildren.length; siblingIndex++) {
       const sibling = blockChildren[siblingIndex]
@@ -69,24 +73,61 @@ export function sortMarksByOccurences(
         Array.isArray(sibling.marks) &&
         sibling.marks.indexOf(mark) !== -1
       ) {
-        occurences[mark]++
+        count++
       } else {
         break
       }
     }
+    occurences.set(mark, count)
   })
 
-  return marks.sort((markA, markB) => sortMarks(occurences, markA, markB))
+  return marks.sort((markA, markB) =>
+    sortMarks(occurences.get(markA) ?? 0, occurences.get(markB) ?? 0, markA, markB),
+  )
 }
 
-function sortMarks<U extends string, T extends Record<U, number>>(
-  occurences: T,
-  markA: U,
-  markB: U,
-): number {
-  const aOccurences = occurences[markA]
-  const bOccurences = occurences[markB]
+/**
+ * Prepare a whole block in one backward pass. Each run counts consecutive spans,
+ * not duplicate marks within a span. Undefined entries represent non-span children.
+ * @internal
+ */
+export function sortBlockMarks(
+  children: (PortableTextSpan | TypedObject)[],
+): ({span: PortableTextSpan; marks: string[]} | undefined)[] {
+  const prepared: ({span: PortableTextSpan; marks: string[]} | undefined)[] = []
+  prepared.length = children.length
+  const runs = new Map<string, {index: number; count: number}>()
 
+  for (let index = children.length - 1; index >= 0; index--) {
+    const span = children[index]
+    if (!span || !isPortableTextSpan(span)) {
+      prepared[index] = undefined
+      continue
+    }
+
+    const marks = span.marks?.slice() ?? []
+    for (const mark of marks) {
+      const run = runs.get(mark)
+      if (!run) {
+        runs.set(mark, {index, count: 1})
+      } else if (run.index !== index) {
+        run.count = run.index === index + 1 ? run.count + 1 : 1
+        run.index = index
+      }
+    }
+
+    if (marks.length > 1) {
+      marks.sort((markA, markB) =>
+        sortMarks(runs.get(markA)?.count ?? 0, runs.get(markB)?.count ?? 0, markA, markB),
+      )
+    }
+    prepared[index] = {span, marks}
+  }
+
+  return prepared
+}
+
+function sortMarks(aOccurences: number, bOccurences: number, markA: string, markB: string): number {
   if (aOccurences !== bOccurences) {
     return bOccurences - aOccurences
   }

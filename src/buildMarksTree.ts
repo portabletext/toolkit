@@ -4,8 +4,7 @@ import type {
   PortableTextMarkDefinition,
 } from '@portabletext/types'
 
-import {isPortableTextSpan} from './asserters'
-import {sortMarksByOccurences} from './sortMarksByOccurences'
+import {sortBlockMarks} from './sortMarksByOccurences'
 import type {ToolkitNestedPortableTextSpan, ToolkitTextNode} from './types'
 
 /**
@@ -48,7 +47,8 @@ export function buildMarksTree<M extends PortableTextMarkDefinition = PortableTe
     return []
   }
 
-  const sortedMarks = children.map(sortMarksByOccurences)
+  const sortedMarks = sortBlockMarks(children)
+  let markDefsByKey: Map<string, M> | undefined
 
   const rootNode: ToolkitNestedPortableTextSpan<M> = {
     _type: '@span',
@@ -56,7 +56,7 @@ export function buildMarksTree<M extends PortableTextMarkDefinition = PortableTe
     markType: '<unknown>',
   }
 
-  let nodeStack: ToolkitNestedPortableTextSpan<M>[] = [rootNode]
+  const nodeStack: ToolkitNestedPortableTextSpan<M>[] = [rootNode]
 
   for (let i = 0; i < children.length; i++) {
     const span = children[i]
@@ -64,7 +64,8 @@ export function buildMarksTree<M extends PortableTextMarkDefinition = PortableTe
       continue
     }
 
-    const marksNeeded = sortedMarks[i] || []
+    const prepared = sortedMarks[i]
+    const marksNeeded = prepared?.marks || []
     let pos = 1
 
     // Start at position one. Root is always plain and should never be removed
@@ -82,7 +83,7 @@ export function buildMarksTree<M extends PortableTextMarkDefinition = PortableTe
     }
 
     // Keep from beginning to first miss
-    nodeStack = nodeStack.slice(0, pos)
+    nodeStack.length = pos
 
     // Add needed nodes
     let currentNode = nodeStack[nodeStack.length - 1]
@@ -91,7 +92,16 @@ export function buildMarksTree<M extends PortableTextMarkDefinition = PortableTe
     }
 
     for (const markKey of marksNeeded) {
-      const markDef = markDefs?.find((def) => def._key === markKey)
+      if (!markDefsByKey && markDefs.length > 0) {
+        markDefsByKey = new Map()
+        for (const def of markDefs) {
+          // Match Array.find's first-definition-wins behavior.
+          if (!markDefsByKey.has(def._key)) {
+            markDefsByKey.set(def._key, def)
+          }
+        }
+      }
+      const markDef = markDefsByKey?.get(markKey)
       const markType = markDef ? markDef._type : markKey
       const node: ToolkitNestedPortableTextSpan<M> = {
         _type: '@span',
@@ -110,18 +120,22 @@ export function buildMarksTree<M extends PortableTextMarkDefinition = PortableTe
     // Split at newlines to make individual line chunks, but keep newline
     // characters as individual elements in the array. We use these characters
     // in the span serializer to trigger hard-break rendering
-    if (isPortableTextSpan(span)) {
-      const lines = span.text.split('\n')
-      for (let line = lines.length; line-- > 1; ) {
-        lines.splice(line, 0, '\n')
+    if (prepared) {
+      const text = prepared.span.text
+      let start = 0
+      let newline = text.indexOf('\n')
+      while (newline !== -1) {
+        currentNode.children.push(
+          {_type: '@text', text: text.slice(start, newline)},
+          {_type: '@text', text: '\n'},
+        )
+        start = newline + 1
+        newline = text.indexOf('\n', start)
       }
-
-      currentNode.children = currentNode.children.concat(
-        lines.map((text) => ({_type: '@text', text})),
-      )
+      currentNode.children.push({_type: '@text', text: text.slice(start)})
     } else {
       // This is some other inline object, not a text span
-      currentNode.children = currentNode.children.concat(span)
+      currentNode.children.push(span)
     }
   }
 

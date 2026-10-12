@@ -167,7 +167,9 @@ test('buildMarksTree: handles large flat output and newline-heavy spans', () => 
   block.children = [{_type: 'span', text: '\n'.repeat(10_000)}]
   const lines = buildMarksTree(block)
   expect(lines).toHaveLength(20_001)
-  expect(lines.every((node, index) => 'text' in node && node.text === (index % 2 ? '\n' : ''))).toBe(true)
+  expect(
+    lines.every((node, index) => 'text' in node && node.text === (index % 2 ? '\n' : '')),
+  ).toBe(true)
 })
 
 test('buildMarksTree: preserves frozen inputs and returns independent output trees', () => {

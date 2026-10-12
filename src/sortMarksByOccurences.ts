@@ -94,9 +94,10 @@ export function sortMarksByOccurences(
 export function sortBlockMarks(
   children: (PortableTextSpan | TypedObject)[],
 ): ({span: PortableTextSpan; marks: string[]} | undefined)[] {
-  const prepared: ({span: PortableTextSpan; marks: string[]} | undefined)[] = []
-  prepared.length = children.length
-  const runs = new Map<string, {index: number; count: number}>()
+  // Preallocate for backward writes; growing an empty array regresses small blocks.
+  // oxlint-disable-next-line unicorn/no-new-array
+  const prepared = new Array<{span: PortableTextSpan; marks: string[]} | undefined>(children.length)
+  let runs: Map<string, {index: number; count: number}> | undefined
 
   for (let index = children.length - 1; index >= 0; index--) {
     const span = children[index]
@@ -107,6 +108,7 @@ export function sortBlockMarks(
 
     const marks = span.marks?.slice() ?? []
     for (const mark of marks) {
+      runs ??= new Map()
       const run = runs.get(mark)
       if (!run) {
         runs.set(mark, {index, count: 1})
@@ -118,7 +120,7 @@ export function sortBlockMarks(
 
     if (marks.length > 1) {
       marks.sort((markA, markB) =>
-        sortMarks(runs.get(markA)?.count ?? 0, runs.get(markB)?.count ?? 0, markA, markB),
+        sortMarks(runs?.get(markA)?.count ?? 0, runs?.get(markB)?.count ?? 0, markA, markB),
       )
     }
     prepared[index] = {span, marks}

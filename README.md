@@ -26,38 +26,20 @@ console.log(toPlainText(myPortableTextBlocks))
 
 ## Rendering performance
 
-`buildMarksTree` prepares all mark runs in a block together and appends output nodes
-without repeatedly copying accumulated children. Prefer it over independently
-sorting every span when constructing a render tree.
-
-For unchanged rerenders, keep memoization in the renderer. The toolkit functions
-deliberately do not cache: existing callers may mutate inputs or returned trees.
-With an immutable-data contract, a renderer can:
-
-- Cache `buildMarksTree` results by block object identity, for example in a
-  renderer-owned `WeakMap`. Replace the block whenever its children, marks, or
-  annotation definitions change; `_key` alone is not a content version.
-- Cache `nestLists` results by document array identity **and nesting mode**.
-  Replace the array on any document edit, preserving unchanged block identities
-  so their mark trees can still be reused. Nested list items cloned by
-  `nestLists` have new identities when nesting is rebuilt.
-- Treat cached outputs and referenced input objects as immutable. Do not share
-  mutable cached trees between independent consumers. Scope caches to their
-  renderer or document lifetime.
-- Rebuild the whole edited block's mark tree: a later span can change the mark
-  ordering of earlier spans. Rebuild document-level nesting on edits rather than
-  assuming only the edited list item is affected.
-
-Stable derived identities only avoid UI work when the consuming renderer uses
-them for memoization; they do not automatically prevent component rerenders.
+The toolkit functions do not cache. For reuse across rerenders, cache
+`buildMarksTree` by block object identity and `nestLists` by document array identity
+and nesting mode in the renderer. Replace the entire block on text, marks, or
+annotation edits, and the document array on any edit; `_key` is not a content
+version. Treat cached outputs and referenced inputs as immutable. Pass original
+Portable Text to `nestLists`, not trees containing generated `@list` nodes:
+legacy handling of those nodes can mutate them.
 
 Run preprocessing benchmarks with `pnpm exec vitest bench --run`. To compare
 revisions, save a baseline with `--outputJson /tmp/toolkit-bench.json`, then pass
-`--compare /tmp/toolkit-bench.json` on the next run. The benchmarks cover small and
-large blocks, marks, annotations, newlines, list transitions, and renderer-owned
-reuse for unchanged documents and single-block edits. They measure repeated
-preprocessing calls, not browser first paint, cold-start latency, or end-to-end
-component rendering; measure those and allocation profiles in the consuming app.
+`--compare /tmp/toolkit-bench.json` on the next run. These measure preprocessing,
+not browser rendering. Annotation indexing has an upfront cost proportional to
+the number of definitions, so blocks with many definitions but few marked spans
+can be substantially slower than a linear search.
 
 ## License
 

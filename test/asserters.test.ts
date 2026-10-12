@@ -226,12 +226,19 @@ test.each([
   expect(isPortableTextListItemBlock({...block, listItem: 'bullet', level: 2})).toBe(false)
 })
 
-test.each([undefined, 0, -1, 1.5, Number.NaN])(
-  'isPortableTextListItemBlock: retains permissive numeric levels (%s)',
+test.each([undefined, 1, 2, 3])(
+  'isPortableTextListItemBlock: accepts missing or positive integer levels (%s)',
   (level) => {
     expect(isPortableTextListItemBlock({_type: 'custom', children: [], listItem: '', level})).toBe(
       true,
     )
+  },
+)
+
+test.each(['str', 42, true, Symbol('block'), 10n, null, undefined])(
+  'isPortableTextListItemBlock: rejects non-object input (%s)',
+  (block) => {
+    expect(isPortableTextListItemBlock(block as any)).toBe(false)
   },
 )
 

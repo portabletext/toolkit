@@ -19,6 +19,14 @@ test('nestLists: returns non-list blocks verbatim', () => {
   expect(nestLists([block], LIST_NEST_MODE_HTML)).toEqual([block])
 })
 
+test.each([LIST_NEST_MODE_HTML, LIST_NEST_MODE_DIRECT] as const)(
+  'nestLists: preserves truthy primitive input in %s mode',
+  (mode) => {
+    const blocks = ['str', 42, true, Symbol('block'), 10n]
+    expect(nestLists(blocks as any, mode)).toEqual(blocks)
+  },
+)
+
 test('nestLists: wraps list items in toolkit list node', () => {
   const block = {
     _type: 'block',
@@ -241,7 +249,7 @@ test.each([LIST_NEST_MODE_HTML, LIST_NEST_MODE_DIRECT] as const)(
 )
 
 test.each([LIST_NEST_MODE_HTML, LIST_NEST_MODE_DIRECT] as const)(
-  'nestLists: preserves matching toolkit lists in authored child tails in %s mode',
+  'nestLists: refactor retains legacy authored toolkit-list mutation in %s mode',
   (mode) => {
     const embedded = {
       _type: '@list',
@@ -263,8 +271,27 @@ test.each([LIST_NEST_MODE_HTML, LIST_NEST_MODE_DIRECT] as const)(
     ]
     const tree = nestLists(blocks, mode)
     expect(tree).toHaveLength(1)
+    // Compatibility coverage only, not a recommended input shape or mutation contract.
+    // A future fix for authored toolkit-list mutation may change these expectations.
     expect(embedded.children.at(-1)).toBe(blocks[4])
     expect(embedded.children).toHaveLength(mode === LIST_NEST_MODE_HTML ? 3 : 4)
+  },
+)
+
+test.each([LIST_NEST_MODE_HTML, LIST_NEST_MODE_DIRECT] as const)(
+  'nestLists: stops fallback traversal at non-array authored children in %s mode',
+  (mode) => {
+    const blocks = [
+      ...createBlocks(['root']),
+      {
+        ...createBlocks(['deep'], {level: 3})[0]!,
+        children: [{_type: 'custom', children: 'text'}],
+      },
+      ...createBlocks(['new root'], {type: 'number'}),
+    ]
+    const tree = nestLists(blocks, mode)
+    expect(tree).toHaveLength(2)
+    expect(tree[1]).toMatchObject({listItem: 'number', children: [blocks[2]]})
   },
 )
 

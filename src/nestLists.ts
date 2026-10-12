@@ -63,6 +63,9 @@ export function nestLists<T extends TypedObject = PortableTextBlock | TypedObjec
 ): ToolkitNestListsOutputNode<T>[] {
   const tree: ToolkitNestListsOutputNode<T>[] = []
   let currentList: ToolkitPortableTextList | undefined
+  // For generated lists, ancestors[k - 1] is the level-k list on the active branch,
+  // and ancestors.length is currentList.level. Undefined after matching an authored
+  // toolkit list, whose arbitrary levels require fallback traversal instead.
   let ancestors: ToolkitPortableTextList[] | undefined = []
 
   for (let i = 0; i < blocks.length; i++) {
@@ -132,8 +135,7 @@ export function nestLists<T extends TypedObject = PortableTextBlock | TypedObjec
 
     // Different list props, different list style?
     if (block.listItem !== currentList.listItem) {
-      // The former level-only search never matched without a listItem filter.
-      // Preserve that behavior: a style change at the same level starts a new root.
+      // A style change at the same level starts a new root.
       ancestors = []
       const nestedLists = createNestedLists(block, i, mode, 0, ancestors)
       currentList = nestedLists.current
@@ -271,11 +273,11 @@ function findListMatching(
       return node
     }
 
-    if (!('children' in node)) {
+    if (!('children' in node) || !Array.isArray(node.children)) {
       return undefined
     }
 
-    const children = node.children as TypedObject[]
+    const children = node.children
     const child = children[children.length - 1]
     node = child && !isPortableTextSpan(child) ? child : undefined
   }

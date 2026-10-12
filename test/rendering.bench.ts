@@ -7,7 +7,7 @@ import {
 import type {PortableTextBlock} from '@portabletext/types'
 import {bench, describe} from 'vitest'
 
-const options = {time: 100, iterations: 5, warmupTime: 50}
+const options = {time: 500, iterations: 5, warmupTime: 100}
 
 function blockWithSpans(count: number, marks: (index: number) => string[]): PortableTextBlock {
   return {
@@ -22,7 +22,7 @@ function blockWithSpans(count: number, marks: (index: number) => string[]): Port
 }
 
 describe('mark tree preprocessing', () => {
-  for (const size of [10, 1_000, 10_000]) {
+  for (const size of [1, 3, 10, 1_000, 10_000]) {
     const plain = blockWithSpans(size, () => [])
     const singleMark = blockWithSpans(size, () => ['strong'])
     const sharedMarks = blockWithSpans(size, () => ['em', 'strong'])
@@ -101,46 +101,4 @@ describe('list preprocessing', () => {
       options,
     )
   }
-})
-
-describe('renderer-owned immutable memoization', () => {
-  const blocks = Array.from({length: 100}, () => blockWithSpans(100, () => ['em', 'strong']))
-  const updatedBlocks = blocks.map((block, index) =>
-    index === 50
-      ? {...block, children: [...block.children, {_type: 'span', text: 'Edited'}]}
-      : block,
-  )
-  const cache = new WeakMap<PortableTextBlock, ReturnType<typeof buildMarksTree>>()
-  for (const block of blocks) {
-    cache.set(block, buildMarksTree(block))
-  }
-
-  bench(
-    'unchanged document, rebuild',
-    () => {
-      blocks.map((block) => buildMarksTree(block))
-    },
-    options,
-  )
-  bench(
-    'unchanged document, reuse',
-    () => {
-      blocks.map((block) => cache.get(block))
-    },
-    options,
-  )
-  bench(
-    'single-block edit, rebuild',
-    () => {
-      updatedBlocks.map((block) => buildMarksTree(block))
-    },
-    options,
-  )
-  bench(
-    'single-block edit, reuse unchanged blocks',
-    () => {
-      updatedBlocks.map((block) => cache.get(block) ?? buildMarksTree(block))
-    },
-    options,
-  )
 })

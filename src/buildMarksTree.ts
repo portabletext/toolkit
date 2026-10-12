@@ -96,8 +96,9 @@ export function buildMarksTree<M extends PortableTextMarkDefinition = PortableTe
         markDefsByKey = new Map()
         for (const def of markDefs) {
           // Match Array.find's first-definition-wins behavior.
-          if (!markDefsByKey.has(def._key)) {
-            markDefsByKey.set(def._key, def)
+          const key = def._key
+          if (!markDefsByKey.has(key)) {
+            markDefsByKey.set(key, def)
           }
         }
       }

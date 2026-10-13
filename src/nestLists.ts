@@ -63,6 +63,10 @@ export function nestLists<T extends TypedObject = PortableTextBlock | TypedObjec
 ): ToolkitNestListsOutputNode<T>[] {
   const tree: ToolkitNestListsOutputNode<T>[] = []
   let currentList: ToolkitPortableTextList | undefined
+  // For generated lists, ancestors[k - 1] is the level-k list on the active branch,
+  // and ancestors.length is currentList.level. Undefined after matching an authored
+  // toolkit list, whose arbitrary levels require fallback traversal instead.
+  let ancestors: ToolkitPortableTextList[] | undefined = []
 
   for (let i = 0; i < blocks.length; i++) {
     const block = blocks[i]
@@ -73,12 +77,13 @@ export function nestLists<T extends TypedObject = PortableTextBlock | TypedObjec
     if (!isPortableTextListItemBlock(block)) {
       tree.push(block)
       currentList = undefined
+      ancestors = []
       continue
     }
 
     // Start of a new list?
     if (!currentList) {
-      const nestedLists = createNestedLists(block, i, mode, 0)
+      const nestedLists = createNestedLists(block, i, mode, 0, ancestors)
       currentList = nestedLists.current
       tree.push(nestedLists.root)
       continue
@@ -92,7 +97,7 @@ export function nestLists<T extends TypedObject = PortableTextBlock | TypedObjec
 
     // Different list props, are we going deeper?
     if ((block.level || 1) > currentList.level) {
-      const nestedLists = createNestedLists(block, i, mode, currentList.level)
+      const nestedLists = createNestedLists(block, i, mode, currentList.level, ancestors)
       appendNestedList(currentList, nestedLists.root)
       currentList = nestedLists.current
       continue
@@ -101,16 +106,28 @@ export function nestLists<T extends TypedObject = PortableTextBlock | TypedObjec
     // Different list props, are we going back up the tree?
     if ((block.level || 1) < currentList.level) {
       // Current list has ended, and we need to hook up with a parent of the same level and type
-      const matchingBranch = tree[tree.length - 1]
-      const match = matchingBranch && findListMatching(matchingBranch, block)
+      const level = block.level || 1
+      const ancestor = ancestors?.[level - 1]
+      const match =
+        ancestor && (ancestor.listItem || 'normal') === (block.listItem || 'normal')
+          ? ancestor
+          : findListMatching(ancestors ? currentList : tree[tree.length - 1], block)
       if (match) {
+        // Authored children can themselves contain toolkit lists with arbitrary levels.
+        // Only generated ancestors can be indexed directly by level.
+        if (ancestors && match === ancestor) {
+          ancestors.length = level
+        } else {
+          ancestors = undefined
+        }
         currentList = match
         currentList.children.push(block)
         continue
       }
 
       // Similar parent can't be found, assume new list
-      const nestedLists = createNestedLists(block, i, mode, 0)
+      ancestors = []
+      const nestedLists = createNestedLists(block, i, mode, 0, ancestors)
       currentList = nestedLists.current
       tree.push(nestedLists.root)
       continue
@@ -118,18 +135,12 @@ export function nestLists<T extends TypedObject = PortableTextBlock | TypedObjec
 
     // Different list props, different list style?
     if (block.listItem !== currentList.listItem) {
-      const matchingBranch = tree[tree.length - 1]
-      const match = matchingBranch && findListMatching(matchingBranch, {level: block.level || 1})
-      if (match && match.listItem === block.listItem) {
-        currentList = match
-        currentList.children.push(block)
-        continue
-      } else {
-        const nestedLists = createNestedLists(block, i, mode, 0)
-        currentList = nestedLists.current
-        tree.push(nestedLists.root)
-        continue
-      }
+      // A style change at the same level starts a new root.
+      ancestors = []
+      const nestedLists = createNestedLists(block, i, mode, 0, ancestors)
+      currentList = nestedLists.current
+      tree.push(nestedLists.root)
+      continue
     }
 
     // oxlint-disable-next-line no-console
@@ -162,6 +173,7 @@ function createNestedLists(
   index: number,
   mode: ToolkitListNestMode,
   startLevel: number,
+  ancestors: ToolkitPortableTextList[] | undefined,
 ): {root: ToolkitPortableTextList; current: ToolkitPortableTextList} {
   const level = block.level || 1
   const firstLevel = startLevel + 1
@@ -173,6 +185,7 @@ function createNestedLists(
     listChildren(block, index, mode, firstLevel, level),
   )
   let current = root
+  ancestors?.push(root)
 
   for (let listLevel = firstLevel + 1; listLevel <= level; listLevel++) {
     const list = listFromBlock(
@@ -183,6 +196,7 @@ function createNestedLists(
       listChildren(block, index, mode, listLevel, level),
     )
     appendNestedList(current, list)
+    ancestors?.push(list)
     current = list
   }
 
@@ -243,26 +257,30 @@ function appendNestedList(parentList: ToolkitPortableTextList, childList: Toolki
   }
 }
 
-function findListMatching<T extends TypedObject | PortableTextBlock>(
-  rootNode: T,
-  matching: Partial<PortableTextListItemBlock>,
+function findListMatching(
+  rootNode: TypedObject | undefined,
+  matching: PortableTextListItemBlock,
 ): ToolkitPortableTextList | undefined {
   const level = matching.level || 1
   const style = matching.listItem || 'normal'
-  const filterOnType = typeof matching.listItem === 'string'
-  if (
-    isPortableTextToolkitList(rootNode) &&
-    (rootNode.level || 1) === level &&
-    filterOnType &&
-    (rootNode.listItem || 'normal') === style
-  ) {
-    return rootNode
+  let node = rootNode
+  while (node) {
+    if (
+      isPortableTextToolkitList(node) &&
+      (node.level || 1) === level &&
+      (node.listItem || 'normal') === style
+    ) {
+      return node
+    }
+
+    if (!('children' in node) || !Array.isArray(node.children)) {
+      return undefined
+    }
+
+    const children = node.children
+    const child = children[children.length - 1]
+    node = child && !isPortableTextSpan(child) ? child : undefined
   }
 
-  if (!('children' in rootNode)) {
-    return undefined
-  }
-
-  const node = rootNode.children[rootNode.children.length - 1]
-  return node && !isPortableTextSpan(node) ? findListMatching(node, matching) : undefined
+  return undefined
 }

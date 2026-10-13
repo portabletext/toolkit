@@ -19,6 +19,14 @@ test('nestLists: returns non-list blocks verbatim', () => {
   expect(nestLists([block], LIST_NEST_MODE_HTML)).toEqual([block])
 })
 
+test.each([LIST_NEST_MODE_HTML, LIST_NEST_MODE_DIRECT] as const)(
+  'nestLists: preserves truthy primitive input in %s mode',
+  (mode) => {
+    const blocks = ['str', 42, true, Symbol('block'), 10n]
+    expect(nestLists(blocks as any, mode)).toEqual(blocks)
+  },
+)
+
 test('nestLists: wraps list items in toolkit list node', () => {
   const block = {
     _type: 'block',
@@ -143,6 +151,149 @@ test.each(listNestingFixtures)('nestLists: nesting depth matches level for $name
   expect(depthMismatches(nestLists(blocks, LIST_NEST_MODE_HTML))).toEqual([])
   expect(depthMismatches(nestLists(blocks, LIST_NEST_MODE_DIRECT))).toEqual([])
 })
+
+test.each([LIST_NEST_MODE_HTML, LIST_NEST_MODE_DIRECT] as const)(
+  'nestLists: ascends very deep lists without recursive searches in %s mode',
+  (mode) => {
+    const depth = 12_000
+    const blocks = Array.from({length: depth}, (_, index) => ({
+      _type: 'block',
+      _key: `item-${index}`,
+      listItem: 'bullet',
+      level: depth - index,
+      children: [{_type: 'span', text: `${index}`}],
+    }))
+    const tree = nestLists(blocks, mode)
+    expect(tree).toHaveLength(1)
+    let node: TypedObject | undefined = tree[0]
+    for (let level = 1; level <= depth; level++) {
+      if (!node || !isPortableTextToolkitList(node)) {
+        throw new Error(`Missing list at level ${level}`)
+      }
+      expect(node.level).toBe(level)
+      expect(node._key).toBe(level === depth ? 'item-0-parent' : `item-0-parent-${level}`)
+      expect(node.children.at(-1)).toBe(blocks[depth - level])
+      expect(node.children).toHaveLength(level === depth ? 1 : 2)
+      const firstChild = node.children[0]
+      node = mode === LIST_NEST_MODE_HTML ? firstChild?.children[0] : firstChild
+    }
+
+    const first = blocks[0]!
+    const changedStyle = nestLists([first, {...first, listItem: 'number'}], mode)
+    expect(changedStyle).toHaveLength(2)
+    expect(changedStyle.map((root) => root._key)).toEqual(['item-0-parent-1', 'item-0-parent-1'])
+  },
+)
+
+test.each([LIST_NEST_MODE_HTML, LIST_NEST_MODE_DIRECT] as const)(
+  'nestLists: preserves style transitions, active branches and frozen inputs in %s mode',
+  (mode) => {
+    const blocks = [
+      ...createBlocks(['root']),
+      ...createBlocks(['deep bullet'], {level: 64, startIndex: 1}),
+      ...createBlocks(['back to bullet ancestor'], {level: 32, startIndex: 2}),
+      ...createBlocks(['same-level number'], {level: 32, type: 'number', startIndex: 3}),
+      ...createBlocks(['number root'], {type: 'number', startIndex: 4}),
+      ...createBlocks(['new bullet branch'], {level: 4, startIndex: 5}),
+      ...createBlocks(['wrong-style ancestor'], {level: 2, type: 'number', startIndex: 6}),
+      {_type: 'custom', _key: 'separator'},
+      ...createBlocks(['after separator'], {level: 2, startIndex: 7}),
+    ]
+    const original = structuredClone(blocks)
+    for (const block of blocks) {
+      if ('children' in block) {
+        for (const child of block.children) Object.freeze(child)
+        Object.freeze(block.children)
+      }
+      Object.freeze(block)
+    }
+    Object.freeze(blocks)
+
+    const tree = nestLists(blocks, mode)
+    expect(blocks).toEqual(original)
+    expect(tree.map((node) => node._key)).toEqual([
+      'A0-parent',
+      'D0-parent-1',
+      'G0-parent-1',
+      'separator',
+      'H0-parent-1',
+    ])
+    expect(tree[3]).toBe(blocks[7])
+    expect(depthMismatches(tree)).toEqual([])
+    const numberRoot = tree[1]
+    if (!numberRoot || !isPortableTextToolkitList(numberRoot)) {
+      throw new Error('Missing number root')
+    }
+    expect(numberRoot.children).toHaveLength(mode === LIST_NEST_MODE_HTML ? 2 : 3)
+    expect(nestLists(blocks, mode)).toEqual(tree)
+  },
+)
+
+test.each([LIST_NEST_MODE_HTML, LIST_NEST_MODE_DIRECT] as const)(
+  'nestLists: retains empty-style normalization when ascending in %s mode',
+  (mode) => {
+    const blocks = [
+      ...createBlocks(['empty style'], {type: ''}),
+      ...createBlocks(['deep'], {level: 3}),
+      ...createBlocks(['normal style'], {type: 'normal'}),
+    ]
+    const tree = nestLists(blocks, mode)
+    expect(tree).toHaveLength(1)
+    const root = tree[0]
+    if (!root || !isPortableTextToolkitList(root)) {
+      throw new Error('Missing root')
+    }
+    expect(root.listItem).toBe('')
+    expect(root.children.at(-1)).toBe(blocks[2])
+  },
+)
+
+test.each([LIST_NEST_MODE_HTML, LIST_NEST_MODE_DIRECT] as const)(
+  'nestLists: refactor retains legacy authored toolkit-list mutation in %s mode',
+  (mode) => {
+    const embedded = {
+      _type: '@list',
+      _key: 'embedded',
+      mode,
+      level: 1,
+      listItem: 'number',
+      children: createBlocks(['embedded item'], {type: 'number'}),
+    }
+    const blocks = [
+      ...createBlocks(['root']),
+      {
+        ...createBlocks(['deep'], {level: 3})[0]!,
+        children: [{_type: 'custom', children: [embedded]}],
+      },
+      ...createBlocks(['return to embedded'], {type: 'number'}),
+      ...createBlocks(['deeper embedded'], {type: 'number', level: 2}),
+      ...createBlocks(['return again'], {type: 'number'}),
+    ]
+    const tree = nestLists(blocks, mode)
+    expect(tree).toHaveLength(1)
+    // Compatibility coverage only, not a recommended input shape or mutation contract.
+    // A future fix for authored toolkit-list mutation may change these expectations.
+    expect(embedded.children.at(-1)).toBe(blocks[4])
+    expect(embedded.children).toHaveLength(mode === LIST_NEST_MODE_HTML ? 3 : 4)
+  },
+)
+
+test.each([LIST_NEST_MODE_HTML, LIST_NEST_MODE_DIRECT] as const)(
+  'nestLists: stops fallback traversal at non-array authored children in %s mode',
+  (mode) => {
+    const blocks = [
+      ...createBlocks(['root']),
+      {
+        ...createBlocks(['deep'], {level: 3})[0]!,
+        children: [{_type: 'custom', children: 'text'}],
+      },
+      ...createBlocks(['new root'], {type: 'number'}),
+    ]
+    const tree = nestLists(blocks, mode)
+    expect(tree).toHaveLength(2)
+    expect(tree[1]).toMatchObject({listItem: 'number', children: [blocks[2]]})
+  },
+)
 
 function depthMismatches(nodes: TypedObject[]): string[] {
   const mismatches: string[] = []

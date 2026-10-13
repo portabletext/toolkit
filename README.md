@@ -24,6 +24,23 @@ import {toPlainText} from '@portabletext/toolkit'
 console.log(toPlainText(myPortableTextBlocks))
 ```
 
+## Rendering performance
+
+The toolkit functions do not cache. For reuse across rerenders, cache
+`buildMarksTree` by block object identity and `nestLists` by document array identity
+and nesting mode in the renderer. Replace the entire block on text, marks, or
+annotation edits, and the document array on any edit; `_key` is not a content
+version. Treat cached outputs and referenced inputs as immutable. Pass original
+Portable Text to `nestLists`, not trees containing generated `@list` nodes:
+legacy handling of those nodes can mutate them.
+
+Run preprocessing benchmarks with `pnpm exec vitest bench --run`. To compare
+revisions, save a baseline with `--outputJson /tmp/toolkit-bench.json`, then pass
+`--compare /tmp/toolkit-bench.json` on the next run. These measure preprocessing,
+not browser rendering. Annotation indexing has an upfront cost proportional to
+the number of definitions, so blocks with many definitions but few marked spans
+can be substantially slower than a linear search.
+
 ## License
 
 MIT © [Sanity.io](https://www.sanity.io/)

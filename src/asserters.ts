@@ -65,10 +65,12 @@ export function isPortableTextListItemBlock(
   block: PortableTextBlock | TypedObject,
 ): block is PortableTextListItemBlock {
   return (
-    isPortableTextBlock(block) &&
+    typeof block === 'object' &&
+    block !== null &&
     'listItem' in block &&
     typeof block.listItem === 'string' &&
-    (typeof block.level === 'undefined' || typeof block.level === 'number')
+    (typeof block.level === 'undefined' || typeof block.level === 'number') &&
+    isPortableTextBlock(block)
   )
 }
 

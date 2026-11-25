@@ -1,5 +1,19 @@
 # @portabletext/toolkit
 
+## 6.1.0
+
+### Minor Changes
+
+- [#205](https://github.com/portabletext/toolkit/pull/205) [`bf4c1c8`](https://github.com/portabletext/toolkit/commit/bf4c1c8fc6345d7a89a170d661d27bcc98def309) Thanks [@stipsan](https://github.com/stipsan)! - Add `uriLooksSafe()`, so renderers can share one check for whether a link `href` is safe to use. It allows `http`, `https`, `mailto`, `tel`, hash-links and relative URLs, and rejects other protocols such as `javascript:`, `data:` and `vbscript:`.
+
+### Patch Changes
+
+- [#208](https://github.com/portabletext/toolkit/pull/208) [`ae85c5d`](https://github.com/portabletext/toolkit/commit/ae85c5d688952b56cab6cde2fcf902e8c42055bc) Thanks [@stipsan](https://github.com/stipsan)! - Make `buildMarksTree` linear in the number of spans, newlines and annotations. Long runs of shared marks, newline-heavy text and blocks with many annotations no longer take quadratic time. The output is unchanged.
+
+- [#204](https://github.com/portabletext/toolkit/pull/204) [`1f3ede3`](https://github.com/portabletext/toolkit/commit/1f3ede3136cb8af6ced8b7d45006a66a9e31e716) Thanks [@christianhg](https://github.com/christianhg)! - fix: list `portable-text` in the npm keywords of @portabletext/toolkit
+
+  npm search and keyword filters now find it under `portable-text`.
+
 ## 6.0.0
 
 ### Major Changes

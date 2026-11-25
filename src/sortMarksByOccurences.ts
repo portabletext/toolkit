@@ -114,11 +114,7 @@ export function sortMarksOfChildren(blockChildren: (PortableTextSpan | TypedObje
   return sorted
 }
 
-function sortMarks<U extends string, T extends Record<U, number>>(
-  occurences: T,
-  markA: U,
-  markB: U,
-): number {
+function sortMarks<U extends string>(occurences: Record<U, number>, markA: U, markB: U): number {
   const aOccurences = occurences[markA]
   const bOccurences = occurences[markB]
 

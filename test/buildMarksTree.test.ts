@@ -169,16 +169,16 @@ test('buildMarksTree: keeps a long run of shared marks under a single node', () 
 })
 
 const textNodes = (...texts: string[]) => texts.map((text) => ({_type: '@text', text}))
+const treeOfText = (text: string) =>
+  buildMarksTree({_type: 'block', children: [{_type: 'span', text}]})
 
 test('buildMarksTree: splits newline-heavy text into lines and newline nodes', () => {
-  const tree = (text: string) => buildMarksTree({_type: 'block', children: [{_type: 'span', text}]})
+  expect(treeOfText('')).toEqual(textNodes(''))
+  expect(treeOfText('\n')).toEqual(textNodes('', '\n', ''))
+  expect(treeOfText('a\n\nb\n')).toEqual(textNodes('a', '\n', '', '\n', 'b', '\n', ''))
+  expect(treeOfText('a\r\nb')).toEqual(textNodes('a\r', '\n', 'b'))
 
-  expect(tree('')).toEqual(textNodes(''))
-  expect(tree('\n')).toEqual(textNodes('', '\n', ''))
-  expect(tree('a\n\nb\n')).toEqual(textNodes('a', '\n', '', '\n', 'b', '\n', ''))
-  expect(tree('a\r\nb')).toEqual(textNodes('a\r', '\n', 'b'))
-
-  const manyLines = tree('line\n'.repeat(5_000))
+  const manyLines = treeOfText('line\n'.repeat(5_000))
   expect(manyLines).toEqual([
     ...Array.from({length: 5_000}, () => textNodes('line', '\n')).flat(),
     {_type: '@text', text: ''},

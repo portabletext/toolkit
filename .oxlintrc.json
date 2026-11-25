@@ -9,6 +9,7 @@
   "rules": {
     "no-console": "error",
     "no-array-sort": "off",
+    "no-underscore-dangle": ["warn", {"allow": ["_key", "_type"]}],
     // @TODO these rules should be enabled, and the violations fixed
     "no-unsafe-type-assertion": "off"
   },

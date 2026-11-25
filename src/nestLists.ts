@@ -243,8 +243,8 @@ function appendNestedList(parentList: ToolkitPortableTextList, childList: Toolki
   }
 }
 
-function findListMatching<T extends TypedObject | PortableTextBlock>(
-  rootNode: T,
+function findListMatching(
+  rootNode: TypedObject | PortableTextBlock,
   matching: Partial<PortableTextListItemBlock>,
 ): ToolkitPortableTextList | undefined {
   const level = matching.level || 1

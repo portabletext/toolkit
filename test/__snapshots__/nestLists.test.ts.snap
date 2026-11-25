@@ -119,7 +119,7 @@ exports[`nestLists: ends lists when non-list item occurs 1`] = `
 ]
 `;
 
-exports[`nestLists: fills skipped levels for 'initial level' in direct mode 1`] = `
+exports[`nestLists: fills skipped levels for initial level in direct mode 1`] = `
 [
   {
     "_key": "level-3-parent-1",
@@ -175,7 +175,7 @@ exports[`nestLists: fills skipped levels for 'initial level' in direct mode 1`] 
 ]
 `;
 
-exports[`nestLists: fills skipped levels for 'initial level' in html mode 1`] = `
+exports[`nestLists: fills skipped levels for initial level in html mode 1`] = `
 [
   {
     "_key": "level-3-parent-1",
@@ -247,7 +247,7 @@ exports[`nestLists: fills skipped levels for 'initial level' in html mode 1`] = 
 ]
 `;
 
-exports[`nestLists: fills skipped levels for 'same level without a matching list st…' in direct mode 1`] = `
+exports[`nestLists: fills skipped levels for same level without a matching list style in direct mode 1`] = `
 [
   {
     "_key": "level-1-parent",
@@ -324,7 +324,7 @@ exports[`nestLists: fills skipped levels for 'same level without a matching list
 ]
 `;
 
-exports[`nestLists: fills skipped levels for 'same level without a matching list st…' in html mode 1`] = `
+exports[`nestLists: fills skipped levels for same level without a matching list style in html mode 1`] = `
 [
   {
     "_key": "level-1-parent",
@@ -409,7 +409,7 @@ exports[`nestLists: fills skipped levels for 'same level without a matching list
 ]
 `;
 
-exports[`nestLists: fills skipped levels for 'shallower level without a matching an…' in direct mode 1`] = `
+exports[`nestLists: fills skipped levels for shallower level without a matching ance… in direct mode 1`] = `
 [
   {
     "_key": "level-1-parent",
@@ -495,7 +495,7 @@ exports[`nestLists: fills skipped levels for 'shallower level without a matching
 ]
 `;
 
-exports[`nestLists: fills skipped levels for 'shallower level without a matching an…' in html mode 1`] = `
+exports[`nestLists: fills skipped levels for shallower level without a matching ance… in html mode 1`] = `
 [
   {
     "_key": "level-1-parent",
@@ -597,7 +597,7 @@ exports[`nestLists: fills skipped levels for 'shallower level without a matching
 ]
 `;
 
-exports[`nestLists: fills skipped levels for 'skipped level while nesting' in direct mode 1`] = `
+exports[`nestLists: fills skipped levels for skipped level while nesting in direct mode 1`] = `
 [
   {
     "_key": "level-1-parent",
@@ -665,7 +665,7 @@ exports[`nestLists: fills skipped levels for 'skipped level while nesting' in di
 ]
 `;
 
-exports[`nestLists: fills skipped levels for 'skipped level while nesting' in html mode 1`] = `
+exports[`nestLists: fills skipped levels for skipped level while nesting in html mode 1`] = `
 [
   {
     "_key": "level-1-parent",
@@ -741,7 +741,7 @@ exports[`nestLists: fills skipped levels for 'skipped level while nesting' in ht
 ]
 `;
 
-exports[`nestLists: fills skipped levels for 'skipped levels with a changed list st…' in direct mode 1`] = `
+exports[`nestLists: fills skipped levels for skipped levels with a changed list style in direct mode 1`] = `
 [
   {
     "_key": "level-3-bullet-parent-1",
@@ -917,7 +917,7 @@ exports[`nestLists: fills skipped levels for 'skipped levels with a changed list
 ]
 `;
 
-exports[`nestLists: fills skipped levels for 'skipped levels with a changed list st…' in html mode 1`] = `
+exports[`nestLists: fills skipped levels for skipped levels with a changed list style in html mode 1`] = `
 [
   {
     "_key": "level-3-bullet-parent-1",

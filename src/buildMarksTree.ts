@@ -5,7 +5,7 @@ import type {
 } from '@portabletext/types'
 
 import {isPortableTextSpan} from './asserters'
-import {sortMarksByOccurences} from './sortMarksByOccurences'
+import {sortMarksOfChildren} from './sortMarksByOccurences'
 import type {ToolkitNestedPortableTextSpan, ToolkitTextNode} from './types'
 
 /**
@@ -48,7 +48,8 @@ export function buildMarksTree<M extends PortableTextMarkDefinition = PortableTe
     return []
   }
 
-  const sortedMarks = children.map(sortMarksByOccurences)
+  const sortedMarks = sortMarksOfChildren(children)
+  let markDefsByKey: Map<string, M> | undefined
 
   const rootNode: ToolkitNestedPortableTextSpan<M> = {
     _type: '@span',
@@ -91,7 +92,8 @@ export function buildMarksTree<M extends PortableTextMarkDefinition = PortableTe
     }
 
     for (const markKey of marksNeeded) {
-      const markDef = markDefs?.find((def) => def._key === markKey)
+      markDefsByKey ??= indexMarkDefs(markDefs)
+      const markDef = markDefsByKey.get(markKey)
       const markType = markDef ? markDef._type : markKey
       const node: ToolkitNestedPortableTextSpan<M> = {
         _type: '@span',
@@ -112,18 +114,28 @@ export function buildMarksTree<M extends PortableTextMarkDefinition = PortableTe
     // in the span serializer to trigger hard-break rendering
     if (isPortableTextSpan(span)) {
       const lines = span.text.split('\n')
-      for (let line = lines.length; line-- > 1; ) {
-        lines.splice(line, 0, '\n')
-      }
-
-      currentNode.children = currentNode.children.concat(
-        lines.map((text) => ({_type: '@text', text})),
-      )
+      lines.forEach((text, line) => {
+        if (line > 0) {
+          currentNode.children.push({_type: '@text', text: '\n'})
+        }
+        currentNode.children.push({_type: '@text', text})
+      })
     } else {
       // This is some other inline object, not a text span
-      currentNode.children = currentNode.children.concat(span)
+      currentNode.children.push(span)
     }
   }
 
   return rootNode.children
+}
+
+function indexMarkDefs<M extends PortableTextMarkDefinition>(markDefs: M[]): Map<string, M> {
+  const byKey = new Map<string, M>()
+  for (const def of markDefs) {
+    // The first definition with a given key wins, like a linear search would
+    if (!byKey.has(def._key)) {
+      byKey.set(def._key, def)
+    }
+  }
+  return byKey
 }

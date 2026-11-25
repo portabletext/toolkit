@@ -144,6 +144,42 @@ test.each(listNestingFixtures)('nestLists: nesting depth matches level for $name
   expect(depthMismatches(nestLists(blocks, LIST_NEST_MODE_DIRECT))).toEqual([])
 })
 
+test.each([LIST_NEST_MODE_HTML, LIST_NEST_MODE_DIRECT] as const)(
+  'nestLists: handles deep and skipped levels in long lists in %s mode',
+  (mode) => {
+    const levels = [1, 8, 4, 4, 12, 2, 1, 6, 6, 3, 9, 1]
+    const blocks = Array.from({length: 24}, (_, i) => ({
+      _type: 'block',
+      _key: `item${i}`,
+      children: [{_type: 'span', text: `Item ${i}`}],
+      level: levels[i % levels.length],
+      listItem: i % 5 === 4 ? 'number' : 'bullet',
+    }))
+
+    const tree = nestLists(blocks, mode)
+    expect(depthMismatches(tree)).toEqual([])
+    expect(outline(tree).join('\n')).toMatchSnapshot()
+  },
+)
+
+// Compact view of a nested tree: one line per list or list item, indented by depth
+function outline(nodes: TypedObject[], depth = 0): string[] {
+  return nodes.flatMap((node) => {
+    const indent = '  '.repeat(depth)
+    if (isPortableTextToolkitList(node)) {
+      return [
+        `${indent}@list ${node._key} level=${node.level} ${node.listItem}`,
+        ...outline(node.children, depth + 1),
+      ]
+    }
+    if (isPortableTextListItemBlock(node)) {
+      const nested = node.children.filter((child) => isPortableTextToolkitList(child))
+      return [`${indent}${node._key} level=${node.level}`, ...outline(nested, depth + 1)]
+    }
+    return [`${indent}${node._type}`]
+  })
+}
+
 function depthMismatches(nodes: TypedObject[]): string[] {
   const mismatches: string[] = []
   for (const node of nodes) {

@@ -134,6 +134,550 @@ exports[`buildMarksTree: joins on adjacent spans with same annotation 1`] = `
 ]
 `;
 
+exports[`buildMarksTree: nests a mixed block of decorators, annotations and inline objects 1`] = `
+[
+  {
+    "_key": "s0",
+    "_type": "@span",
+    "children": [
+      {
+        "_type": "@text",
+        "text": "0",
+      },
+      {
+        "_key": "s1",
+        "_type": "@span",
+        "children": [
+          {
+            "_type": "@text",
+            "text": "1",
+          },
+        ],
+        "markDef": {
+          "_key": "comment",
+          "_type": "comment",
+        },
+        "markKey": "comment",
+        "markType": "comment",
+      },
+    ],
+    "markDef": {
+      "_key": "link1",
+      "_type": "link",
+      "href": "/one",
+    },
+    "markKey": "link1",
+    "markType": "link",
+  },
+  {
+    "_type": "@text",
+    "text": "2",
+  },
+  {
+    "_type": "@text",
+    "text": "3",
+  },
+  {
+    "_type": "@text",
+    "text": "4",
+  },
+  {
+    "_type": "@text",
+    "text": "
+",
+  },
+  {
+    "_type": "@text",
+    "text": "",
+  },
+  {
+    "_type": "@text",
+    "text": "5",
+  },
+  {
+    "_type": "@text",
+    "text": "6",
+  },
+  {
+    "_key": "img7",
+    "_type": "image",
+  },
+  {
+    "_key": "s8",
+    "_type": "@span",
+    "children": [
+      {
+        "_key": "s8",
+        "_type": "@span",
+        "children": [
+          {
+            "_key": "s8",
+            "_type": "@span",
+            "children": [
+              {
+                "_type": "@text",
+                "text": "8",
+              },
+            ],
+            "markDef": undefined,
+            "markKey": "strong",
+            "markType": "strong",
+          },
+        ],
+        "markDef": {
+          "_key": "link2",
+          "_type": "link",
+          "href": "/two",
+        },
+        "markKey": "link2",
+        "markType": "link",
+      },
+    ],
+    "markDef": {
+      "_key": "comment",
+      "_type": "comment",
+    },
+    "markKey": "comment",
+    "markType": "comment",
+  },
+  {
+    "_key": "s9",
+    "_type": "@span",
+    "children": [
+      {
+        "_type": "@text",
+        "text": "9",
+      },
+    ],
+    "markDef": undefined,
+    "markKey": "em",
+    "markType": "em",
+  },
+  {
+    "_type": "@text",
+    "text": "10",
+  },
+  {
+    "_type": "@text",
+    "text": "11",
+  },
+  {
+    "_key": "img12",
+    "_type": "image",
+  },
+  {
+    "_key": "s13",
+    "_type": "@span",
+    "children": [
+      {
+        "_key": "s13",
+        "_type": "@span",
+        "children": [
+          {
+            "_type": "@text",
+            "text": "13",
+          },
+        ],
+        "markDef": {
+          "_key": "comment",
+          "_type": "comment",
+        },
+        "markKey": "comment",
+        "markType": "comment",
+      },
+    ],
+    "markDef": {
+      "_key": "comment",
+      "_type": "comment",
+    },
+    "markKey": "comment",
+    "markType": "comment",
+  },
+  {
+    "_key": "s14",
+    "_type": "@span",
+    "children": [
+      {
+        "_key": "s14",
+        "_type": "@span",
+        "children": [
+          {
+            "_type": "@text",
+            "text": "14",
+          },
+        ],
+        "markDef": undefined,
+        "markKey": "code",
+        "markType": "code",
+      },
+    ],
+    "markDef": undefined,
+    "markKey": "strong",
+    "markType": "strong",
+  },
+  {
+    "_type": "@text",
+    "text": "15",
+  },
+  {
+    "_type": "@text",
+    "text": "
+",
+  },
+  {
+    "_type": "@text",
+    "text": "",
+  },
+  {
+    "_key": "s16",
+    "_type": "@span",
+    "children": [
+      {
+        "_type": "@text",
+        "text": "16",
+      },
+    ],
+    "markDef": undefined,
+    "markKey": "code",
+    "markType": "code",
+  },
+  {
+    "_key": "s17",
+    "_type": "@span",
+    "children": [
+      {
+        "_type": "@text",
+        "text": "17",
+      },
+    ],
+    "markDef": {
+      "_key": "comment",
+      "_type": "comment",
+    },
+    "markKey": "comment",
+    "markType": "comment",
+  },
+  {
+    "_type": "@text",
+    "text": "18",
+  },
+  {
+    "_key": "s19",
+    "_type": "@span",
+    "children": [
+      {
+        "_key": "s19",
+        "_type": "@span",
+        "children": [
+          {
+            "_type": "@text",
+            "text": "19",
+          },
+        ],
+        "markDef": undefined,
+        "markKey": "underline",
+        "markType": "underline",
+      },
+      {
+        "_key": "s20",
+        "_type": "@span",
+        "children": [
+          {
+            "_type": "@text",
+            "text": "20",
+          },
+        ],
+        "markDef": {
+          "_key": "link2",
+          "_type": "link",
+          "href": "/two",
+        },
+        "markKey": "link2",
+        "markType": "link",
+      },
+    ],
+    "markDef": undefined,
+    "markKey": "code",
+    "markType": "code",
+  },
+  {
+    "_key": "s21",
+    "_type": "@span",
+    "children": [
+      {
+        "_type": "@text",
+        "text": "21",
+      },
+    ],
+    "markDef": {
+      "_key": "link1",
+      "_type": "link",
+      "href": "/one",
+    },
+    "markKey": "link1",
+    "markType": "link",
+  },
+  {
+    "_type": "@text",
+    "text": "22",
+  },
+  {
+    "_key": "s23",
+    "_type": "@span",
+    "children": [
+      {
+        "_key": "s23",
+        "_type": "@span",
+        "children": [
+          {
+            "_type": "@text",
+            "text": "23",
+          },
+        ],
+        "markDef": undefined,
+        "markKey": "underline",
+        "markType": "underline",
+      },
+    ],
+    "markDef": undefined,
+    "markKey": "code",
+    "markType": "code",
+  },
+  {
+    "_type": "@text",
+    "text": "24",
+  },
+  {
+    "_type": "@text",
+    "text": "25",
+  },
+  {
+    "_type": "@text",
+    "text": "26",
+  },
+  {
+    "_type": "@text",
+    "text": "
+",
+  },
+  {
+    "_type": "@text",
+    "text": "",
+  },
+  {
+    "_key": "s27",
+    "_type": "@span",
+    "children": [
+      {
+        "_key": "s27",
+        "_type": "@span",
+        "children": [
+          {
+            "_type": "@text",
+            "text": "27",
+          },
+        ],
+        "markDef": undefined,
+        "markKey": "__proto__",
+        "markType": "__proto__",
+      },
+    ],
+    "markDef": {
+      "_key": "link1",
+      "_type": "link",
+      "href": "/one",
+    },
+    "markKey": "link1",
+    "markType": "link",
+  },
+  {
+    "_key": "s28",
+    "_type": "@span",
+    "children": [
+      {
+        "_type": "@text",
+        "text": "28",
+      },
+    ],
+    "markDef": undefined,
+    "markKey": "underline",
+    "markType": "underline",
+  },
+  {
+    "_key": "s29",
+    "_type": "@span",
+    "children": [
+      {
+        "_key": "s29",
+        "_type": "@span",
+        "children": [
+          {
+            "_type": "@text",
+            "text": "29",
+          },
+        ],
+        "markDef": undefined,
+        "markKey": "em",
+        "markType": "em",
+      },
+    ],
+    "markDef": undefined,
+    "markKey": "em",
+    "markType": "em",
+  },
+  {
+    "_type": "@text",
+    "text": "30",
+  },
+  {
+    "_key": "s31",
+    "_type": "@span",
+    "children": [
+      {
+        "_key": "s31",
+        "_type": "@span",
+        "children": [
+          {
+            "_key": "s31",
+            "_type": "@span",
+            "children": [
+              {
+                "_type": "@text",
+                "text": "31",
+              },
+            ],
+            "markDef": undefined,
+            "markKey": "underline",
+            "markType": "underline",
+          },
+        ],
+        "markDef": {
+          "_key": "comment",
+          "_type": "comment",
+        },
+        "markKey": "comment",
+        "markType": "comment",
+      },
+      {
+        "_type": "@text",
+        "text": "32",
+      },
+    ],
+    "markDef": undefined,
+    "markKey": "code",
+    "markType": "code",
+  },
+  {
+    "_key": "s33",
+    "_type": "@span",
+    "children": [
+      {
+        "_type": "@text",
+        "text": "33",
+      },
+    ],
+    "markDef": {
+      "_key": "link1",
+      "_type": "link",
+      "href": "/one",
+    },
+    "markKey": "link1",
+    "markType": "link",
+  },
+  {
+    "_key": "img34",
+    "_type": "image",
+  },
+  {
+    "_key": "s35",
+    "_type": "@span",
+    "children": [
+      {
+        "_key": "s35",
+        "_type": "@span",
+        "children": [
+          {
+            "_type": "@text",
+            "text": "35",
+          },
+        ],
+        "markDef": undefined,
+        "markKey": "underline",
+        "markType": "underline",
+      },
+      {
+        "_type": "@text",
+        "text": "36",
+      },
+    ],
+    "markDef": undefined,
+    "markKey": "em",
+    "markType": "em",
+  },
+  {
+    "_key": "s37",
+    "_type": "@span",
+    "children": [
+      {
+        "_key": "s37",
+        "_type": "@span",
+        "children": [
+          {
+            "_key": "s37",
+            "_type": "@span",
+            "children": [
+              {
+                "_type": "@text",
+                "text": "37",
+              },
+            ],
+            "markDef": undefined,
+            "markKey": "underline",
+            "markType": "underline",
+          },
+        ],
+        "markDef": undefined,
+        "markKey": "code",
+        "markType": "code",
+      },
+    ],
+    "markDef": undefined,
+    "markKey": "strong",
+    "markType": "strong",
+  },
+  {
+    "_type": "@text",
+    "text": "38",
+  },
+  {
+    "_type": "@text",
+    "text": "
+",
+  },
+  {
+    "_type": "@text",
+    "text": "",
+  },
+  {
+    "_key": "s39",
+    "_type": "@span",
+    "children": [
+      {
+        "_type": "@text",
+        "text": "39",
+      },
+    ],
+    "markDef": {
+      "_key": "link1",
+      "_type": "link",
+      "href": "/one",
+    },
+    "markKey": "link1",
+    "markType": "link",
+  },
+]
+`;
+
 exports[`buildMarksTree: nests correctly, extracts correct \`markDef\` 1`] = `
 [
   {

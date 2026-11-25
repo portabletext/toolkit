@@ -1,6 +1,8 @@
 import {sortMarksByOccurences} from '@portabletext/toolkit'
-import type {PortableTextBlock} from '@portabletext/types'
+import type {ArbitraryTypedObject, PortableTextBlock} from '@portabletext/types'
 import {expect, test} from 'vitest'
+
+import {sortMarksOfChildren} from '../src/sortMarksByOccurences'
 
 test('sortMarksByOccurences: sorts correctly', () => {
   const block: PortableTextBlock = {
@@ -68,4 +70,33 @@ test('sortMarksByOccurences: returns empty array on invalid marks', () => {
   }
 
   expect(block.children.map(sortMarksByOccurences)).toEqual([[], [], []])
+})
+
+test('sortMarksOfChildren: matches sortMarksByOccurences for every span', () => {
+  const variants: ArbitraryTypedObject[] = [
+    {_type: 'span', text: 'a', marks: ['em', 'strong']},
+    {_type: 'span', text: 'b', marks: ['strong', 'link']},
+    {_type: 'span', text: 'c', marks: ['link', 'em', 'em', 'b']},
+    {_type: 'span', text: 'd', marks: ['__proto__', 'constructor', 'strong']},
+    {_type: 'span', text: 'e', marks: []},
+    {_type: 'span', text: 'f'},
+    {_type: 'span', text: 'g', marks: ['strong', false]},
+    {_type: 'image', marks: ['strong']},
+  ]
+
+  for (const first of variants) {
+    for (const second of variants) {
+      for (const third of variants) {
+        const children = [first, second, third, first, second]
+        expect(sortMarksOfChildren(children)).toEqual(children.map(sortMarksByOccurences))
+      }
+    }
+  }
+
+  // A hole in the children ends a run of shared marks
+  const sparse: ArbitraryTypedObject[] = [{_type: 'span', text: 'a', marks: ['link', 'strong']}]
+  sparse[2] = {_type: 'span', text: 'b', marks: ['strong']}
+  sparse[3] = {_type: 'span', text: 'c', marks: ['strong']}
+  expect(sortMarksOfChildren(sparse)[0]).toEqual(['link', 'strong'])
+  expect(sortMarksOfChildren(sparse)[0]).toEqual(sortMarksByOccurences(sparse[0]!, 0, sparse))
 })

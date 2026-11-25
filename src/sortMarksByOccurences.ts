@@ -28,7 +28,7 @@ const knownDecorators = ['strong', 'em', 'code', 'underline', 'strike-through']
  * bolded/italicized.
  *
  * This function is meant to be used like: `block.children.map(sortMarksByOccurences)`,
- * and is used internally in {@link buildMarksTree | `buildMarksTree()`}.
+ * and gives the same order that {@link buildMarksTree | `buildMarksTree()`} uses internally.
  *
  * The marks are sorted in the following order:
  *
@@ -77,6 +77,41 @@ export function sortMarksByOccurences(
   })
 
   return marks.sort((markA, markB) => sortMarks(occurences, markA, markB))
+}
+
+/**
+ * Same result as `blockChildren.map(sortMarksByOccurences)`, but counts how many adjacent spans
+ * share each mark in a single backward pass, instead of rescanning the following siblings for
+ * every span - which is quadratic when a mark is shared by many spans.
+ *
+ * @internal
+ */
+export function sortMarksOfChildren(blockChildren: (PortableTextSpan | TypedObject)[]): string[][] {
+  const sorted: string[][] = []
+  // Number of consecutive spans, starting at the next child, that carry each mark
+  let runsAfter: Map<string, number> | undefined
+
+  for (let index = blockChildren.length - 1; index >= 0; index--) {
+    const child = blockChildren[index]
+    const marks = child && isPortableTextSpan(child) && child.marks ? child.marks : []
+    if (!marks.length) {
+      runsAfter = undefined
+      sorted[index] = []
+      continue
+    }
+
+    const runs = new Map<string, number>()
+    const occurences: Record<string, number> = {}
+    for (const mark of marks) {
+      const count = (runsAfter?.get(mark) ?? 0) + 1
+      runs.set(mark, count)
+      occurences[mark] = count
+    }
+    runsAfter = runs
+    sorted[index] = marks.slice().sort((markA, markB) => sortMarks(occurences, markA, markB))
+  }
+
+  return sorted
 }
 
 function sortMarks<U extends string, T extends Record<U, number>>(

@@ -1,5 +1,11 @@
 # @portabletext/toolkit
 
+## 6.1.1
+
+### Patch Changes
+
+- [#211](https://github.com/portabletext/toolkit/pull/211) [`bdc8621`](https://github.com/portabletext/toolkit/commit/bdc8621d5b1376e61b65af76fff00dcad99edd64) Thanks [@renovate](https://github.com/apps/renovate)! - Update @portabletext/types to ^4.0.3.
+
 ## 6.1.0
 
 ### Minor Changes
